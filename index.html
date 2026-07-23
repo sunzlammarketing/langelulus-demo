@@ -10,39 +10,39 @@
 <meta property="og:image" content="assets/brand/logo-full.png">
 <link rel="icon" type="image/png" href="assets/brand/favicon.png">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
-<meta name="theme-color" content="#1C2025">
+<meta name="theme-color" content="#0B2B47">
 <style>
 /* ═══════════════════════════════════════════════════════════
    L'ANGELULUS — Website Demo
    Design tokens theo Brand Guideline System v1.0
-   Gold #E7C561 · Navy #1C2025 · Times New Roman · Quiet luxury
+   Gold #1D9FD9 · Navy #0B2B47 · Times New Roman · Quiet luxury
    ═══════════════════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  /* Gold — accent / tín hiệu */
-  --gold-100:#FBF3D9; --gold-200:#F6E7B0; --gold-300:#F1D98A; --gold-400:#E7C561;
-  --gold-500:#D4AF37; --gold-600:#B8952A; --gold-700:#957523; --gold-800:#6E571B; --gold-900:#463713;
-  /* Ink — warm neutral */
-  --ink-50:#FAF8F4; --ink-100:#F1EDE6; --ink-200:#DED8CC; --ink-300:#BCB3A4; --ink-400:#8E8577;
-  --ink-500:#645C50; --ink-600:#463F36; --ink-700:#2E2A24; --ink-800:#1F1D19; --ink-900:#141310;
-  --navy:#1C2025; --navy-soft:#242830;
+  /* Blue — accent / tín hiệu (brand: #1D9FD9, #084D89) */
+  --blue-100:#D9EEFB; --blue-200:#AEDCF6; --blue-300:#6FC2EA; --blue-400:#1D9FD9;
+  --blue-500:#1489C4; --blue-600:#0C669F; --blue-700:#084D89; --blue-800:#063A69; --blue-900:#042745;
+  /* Ink — cool neutral */
+  --ink-50:#F7FAFD; --ink-100:#EDF3F8; --ink-200:#D7E1EA; --ink-300:#AFBFCC; --ink-400:#7F8F9D;
+  --ink-500:#566673; --ink-600:#3B4956; --ink-700:#25313C; --ink-800:#18212B; --ink-900:#0F161D;
+  --navy:#0B2B47; --navy-soft:#103A5C;
   /* Bộ sưu tập (chỉ dùng phân loại, không dùng cho UI) */
   --c-moss:#5B8A72; --c-sunwood:#C99A3F; --c-terra:#6B4A2F;
   /* Thông báo */
   --err:#B5271B; --err-bg:#FBEAE8; --ok:#3F7A56; --ok-bg:#EDF5F0; --warn:#8A6100; --warn-bg:#FBF3D9;
   /* Ngữ nghĩa — light */
-  --bg:var(--ink-50); --surface:#FFFFFF; --surface-2:#F7F4EE;
+  --bg:var(--ink-50); --surface:#FFFFFF; --surface-2:#F2F7FB;
   --text:var(--ink-900); --text-muted:var(--ink-500); --border:var(--ink-200);
-  --accent:var(--gold-700); --accent-line:var(--gold-500);
+  --accent:var(--blue-700); --accent-line:var(--blue-500);
   /* Spacing 8pt */
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
   /* Radius nhỏ — brand cổ điển */
   --r-sm:2px; --r-md:4px; --r-lg:8px;
-  /* Shadow warm-tint */
-  --sh-sm:0 1px 2px rgba(70,63,54,.06),0 1px 3px rgba(70,63,54,.05);
-  --sh-md:0 4px 12px rgba(70,63,54,.09),0 2px 4px rgba(70,63,54,.05);
-  --sh-lg:0 16px 48px rgba(20,19,16,.18);
+  /* Shadow cool-tint */
+  --sh-sm:0 1px 2px rgba(26,43,58,.06),0 1px 3px rgba(26,43,58,.05);
+  --sh-md:0 4px 12px rgba(26,43,58,.09),0 2px 4px rgba(26,43,58,.05);
+  --sh-lg:0 16px 48px rgba(8,22,35,.18);
   --font:'Times New Roman',Times,Georgia,serif;
   --maxw:1240px;
 }
@@ -87,25 +87,25 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   letter-spacing:.03em; transition:background .14s ease-out,color .14s ease-out,border-color .14s ease-out,transform .14s ease-out;
   border:1px solid transparent; white-space:nowrap}
 .btn:active{transform:translateY(1px)}
-.btn:focus-visible{outline:none; box-shadow:0 0 0 3px var(--gold-300)}
+.btn:focus-visible{outline:none; box-shadow:0 0 0 3px var(--blue-300)}
 .btn-lg{height:52px; padding:0 var(--s6); font-size:17px}
 .btn-sm{height:36px; padding:0 var(--s4); font-size:14px}
 /* Primary: chữ tối trên nền gold */
-.btn-primary{background:var(--gold-500); color:var(--ink-900); border-color:var(--gold-500)}
-.btn-primary:hover{background:var(--gold-400)}
+.btn-primary{background:var(--blue-500); color:var(--ink-900); border-color:var(--blue-500)}
+.btn-primary:hover{background:var(--blue-400)}
 .btn-primary:disabled{background:var(--ink-200); color:var(--ink-400); border-color:var(--ink-200); cursor:not-allowed}
 .btn-secondary{border-color:var(--ink-300); color:var(--text)}
-.btn-secondary:hover{border-color:var(--gold-600); color:var(--gold-800)}
+.btn-secondary:hover{border-color:var(--blue-600); color:var(--blue-800)}
 .btn-ghost{color:var(--text-muted)}
 .btn-ghost:hover{color:var(--text); background:var(--ink-100)}
-.on-dark .btn-secondary{border-color:rgba(231,197,97,.45); color:var(--gold-300)}
-.on-dark .btn-secondary:hover{border-color:var(--gold-400); background:rgba(231,197,97,.08)}
+.on-dark .btn-secondary{border-color:rgba(29,159,217,.45); color:var(--blue-300)}
+.on-dark .btn-secondary:hover{border-color:var(--blue-400); background:rgba(29,159,217,.08)}
 .btn-block{width:100%}
 
 /* ── Badges ── */
 .badge{display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:700; letter-spacing:.08em;
   text-transform:uppercase; padding:4px 11px; border-radius:999px; border:1px solid}
-.badge-gold{background:var(--gold-100); color:var(--gold-800); border-color:var(--gold-300)}
+.badge-gold{background:var(--blue-100); color:var(--blue-800); border-color:var(--blue-300)}
 .badge-ok{background:var(--ok-bg); color:var(--ok); border-color:#C5DCCE}
 .badge-out{background:var(--ink-100); color:var(--ink-500); border-color:var(--ink-200)}
 .badge-line{background:transparent; color:var(--text-muted); border-color:var(--border)}
@@ -114,7 +114,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .alert{display:flex; gap:var(--s3); padding:var(--s3) var(--s4); border-radius:var(--r-md); border:1px solid; font-size:15px; line-height:1.6}
 .alert-ok{background:var(--ok-bg); border-color:#C5DCCE; color:#245139}
 .alert-err{background:var(--err-bg); border-color:#F0C9C5; color:var(--err)}
-.alert-info{background:var(--gold-100); border-color:var(--gold-300); color:var(--gold-900)}
+.alert-info{background:var(--blue-100); border-color:var(--blue-300); color:var(--blue-900)}
 
 /* ── Forms ── */
 .field{margin-bottom:var(--s4)}
@@ -122,37 +122,37 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .input,.select,.textarea{width:100%; height:46px; padding:0 var(--s4); background:var(--surface);
   border:1px solid var(--border); border-radius:var(--r-md); transition:border-color .14s,box-shadow .14s}
 .textarea{height:auto; padding:var(--s3) var(--s4); resize:vertical; min-height:120px; line-height:1.6}
-.input:focus,.select:focus,.textarea:focus{outline:none; border-color:var(--accent-line); box-shadow:0 0 0 3px var(--gold-200)}
+.input:focus,.select:focus,.textarea:focus{outline:none; border-color:var(--accent-line); box-shadow:0 0 0 3px var(--blue-200)}
 .hint{font-size:13px; color:var(--text-muted); margin-top:5px}
 .hint.err{color:var(--err)}
 .check{display:flex; align-items:flex-start; gap:var(--s3); font-size:15px; cursor:pointer; margin-bottom:var(--s3)}
-.check input{margin-top:6px; accent-color:var(--gold-600); width:16px; height:16px}
+.check input{margin-top:6px; accent-color:var(--blue-600); width:16px; height:16px}
 
 /* ── Card ── */
 .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); box-shadow:var(--sh-sm)}
 .card-p{padding:var(--s5)}
 
 /* ═══════════ HEADER ═══════════ */
-.hdr{position:sticky; top:0; z-index:60; background:rgba(250,248,244,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border)}
+.hdr{position:sticky; top:0; z-index:60; background:rgba(247,250,253,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border)}
 .hdr-in{display:flex; align-items:center; gap:var(--s5); height:78px}
 .brandmark{display:flex; align-items:center; gap:var(--s3); flex-shrink:0}
 .logo-mark{height:46px; width:auto; display:block}
 .logo-word{height:19px; width:auto; display:block}
 .brandtag{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-muted); margin-top:6px}
 /* Fallback chữ khi chưa có file logo */
-.monogram{width:42px; height:42px; border:1px solid var(--gold-600); border-radius:var(--r-sm); display:grid; place-items:center;
-  color:var(--gold-700); font-size:19px; font-weight:700; letter-spacing:.02em; background:var(--surface)}
+.monogram{width:42px; height:42px; border:1px solid var(--blue-600); border-radius:var(--r-sm); display:grid; place-items:center;
+  color:var(--blue-700); font-size:19px; font-weight:700; letter-spacing:.02em; background:var(--surface)}
 .brandname{font-size:21px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; line-height:1}
 .nav{display:flex; align-items:center; gap:var(--s2); margin-left:auto}
 .nav-link{position:relative; padding:10px var(--s4); font-size:16px; letter-spacing:.04em; color:var(--ink-700); border-radius:var(--r-sm); transition:color .14s}
-.nav-link:hover,.nav-link.active{color:var(--gold-800)}
+.nav-link:hover,.nav-link.active{color:var(--blue-800)}
 .nav-link::after{content:''; position:absolute; left:var(--s4); right:var(--s4); bottom:4px; height:1px; background:var(--accent-line); transform:scaleX(0); transition:transform .16s ease-out}
 .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
 .hdr-actions{display:flex; align-items:center; gap:var(--s1); margin-left:var(--s3)}
 .icon-btn{width:42px; height:42px; display:grid; place-items:center; border-radius:var(--r-md); color:var(--ink-700); position:relative; transition:background .14s}
-.icon-btn:hover{background:var(--ink-100); color:var(--gold-800)}
+.icon-btn:hover{background:var(--ink-100); color:var(--blue-800)}
 .cart-count{position:absolute; top:4px; right:3px; min-width:18px; height:18px; padding:0 4px; border-radius:999px;
-  background:var(--gold-500); color:var(--ink-900); font-size:11px; font-weight:700; display:grid; place-items:center; line-height:1}
+  background:var(--blue-500); color:var(--ink-900); font-size:11px; font-weight:700; display:grid; place-items:center; line-height:1}
 .burger{display:none}
 
 /* Mega menu */
@@ -164,7 +164,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .mega-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s7)}
 .mega-col h4{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:var(--s4); padding-bottom:var(--s3); border-bottom:1px solid var(--border)}
 .mega-col a{display:block; padding:7px 0; font-size:16px; color:var(--ink-700); transition:color .14s,padding-left .14s}
-.mega-col a:hover{color:var(--gold-800); padding-left:6px}
+.mega-col a:hover{color:var(--blue-800); padding-left:6px}
 .mega-col a small{display:block; font-size:12px; color:var(--text-muted); letter-spacing:.04em}
 .mega-feature{background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s5); text-align:center}
 
@@ -172,7 +172,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .mnav{position:fixed; inset:0; z-index:80; background:var(--navy); color:var(--ink-50); transform:translateX(100%);
   transition:transform .28s cubic-bezier(.2,.8,.2,1); overflow-y:auto; padding:var(--s5)}
 .mnav.open{transform:translateX(0)}
-.mnav a{display:block; padding:var(--s4) 0; font-size:22px; border-bottom:1px solid rgba(231,197,97,.15); color:var(--ink-50)}
+.mnav a{display:block; padding:var(--s4) 0; font-size:22px; border-bottom:1px solid rgba(29,159,217,.15); color:var(--ink-50)}
 .mnav a.sub{font-size:17px; padding-left:var(--s4); color:var(--ink-300)}
 
 /* ═══════════ HERO ═══════════ */
@@ -182,16 +182,16 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   transition:opacity .5s cubic-bezier(.2,.8,.2,1),visibility .5s}
 .hero-slide.on{opacity:1; visibility:visible}
 .hero h1{margin:var(--s4) 0 var(--s5)}
-.hero p{color:rgba(250,248,244,.72); max-width:46ch}
+.hero p{color:rgba(247,250,253,.72); max-width:46ch}
 .hero-cta{display:flex; gap:var(--s3); flex-wrap:wrap; margin-top:var(--s7)}
 .hero-visual{display:grid; place-items:center; position:relative}
 .hero-dots{position:absolute; bottom:var(--s6); left:50%; transform:translateX(-50%); display:flex; gap:var(--s3); z-index:3}
-.hero-dot{width:34px; height:2px; background:rgba(231,197,97,.28); transition:background .2s}
-.hero-dot.on{background:var(--gold-400)}
+.hero-dot{width:34px; height:2px; background:rgba(29,159,217,.28); transition:background .2s}
+.hero-dot.on{background:var(--blue-400)}
 .hero::before{content:''; position:absolute; right:-140px; top:-160px; width:520px; height:520px; border-radius:50%;
-  border:1px solid rgba(231,197,97,.14); pointer-events:none}
+  border:1px solid rgba(29,159,217,.14); pointer-events:none}
 .hero::after{content:''; position:absolute; right:40px; bottom:-180px; width:360px; height:360px; border-radius:50%;
-  border:1px solid rgba(231,197,97,.10); pointer-events:none}
+  border:1px solid rgba(29,159,217,.10); pointer-events:none}
 
 /* ═══════════ BOTTLE (SVG placeholder / ảnh thật) ═══════════ */
 .bottle{width:100%; max-width:330px; aspect-ratio:1/1; display:grid; place-items:center; position:relative}
@@ -211,8 +211,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* Có ảnh thật thì ẩn hình vẽ SVG bên dưới */
 .pshot:has(.photo.ok) svg,.bottle:has(.photo.ok) svg,.thumb:has(.photo.ok) svg{visibility:hidden}
 /* Ảnh sản phẩm nền sáng đặt trên nền navy → lồng trong khung kem cho hài hoà */
-.bottle:has(.photo.ok){background:linear-gradient(155deg,#FDFCFA 0%,#F1EDE6 100%);
-  border-radius:var(--r-lg); box-shadow:0 26px 64px rgba(0,0,0,.34); border:1px solid rgba(231,197,97,.22)}
+.bottle:has(.photo.ok){background:linear-gradient(155deg,#FBFDFE 0%,#EDF3F8 100%);
+  border-radius:var(--r-lg); box-shadow:0 26px 64px rgba(0,0,0,.34); border:1px solid rgba(29,159,217,.22)}
 .bottle:has(.photo.ok) .photo{inset:14px}
 .bottle:has(.photo.ok) .photo.ok{filter:none}
 .pcard:hover .photo.ok{transform:scale(1.02); transition:transform .3s ease-out, opacity .24s}
@@ -226,7 +226,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .g2{grid-template-columns:repeat(2,1fr)}
 .pcard{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden;
   display:flex; flex-direction:column; transition:box-shadow .16s ease-out,transform .16s ease-out,border-color .16s}
-.pcard:hover{box-shadow:var(--sh-md); transform:translateY(-3px); border-color:var(--gold-300)}
+.pcard:hover{box-shadow:var(--sh-md); transform:translateY(-3px); border-color:var(--blue-300)}
 .pcard-body{padding:var(--s5); display:flex; flex-direction:column; gap:var(--s2); flex:1}
 .pcard-col{font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700}
 .pcard h3{font-size:22px; line-height:1.25}
@@ -234,13 +234,13 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .price{font-size:20px; font-weight:700; letter-spacing:.01em}
 .price s{font-size:15px; font-weight:400; color:var(--ink-400); margin-left:var(--s2)}
 .pcard-foot{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); margin-top:var(--s2)}
-.stars{color:var(--gold-600); font-size:14px; letter-spacing:1px}
+.stars{color:var(--blue-600); font-size:14px; letter-spacing:1px}
 
 /* ═══════════ SECTIONS ═══════════ */
 .on-dark{background:var(--navy); color:var(--ink-50)}
-.on-dark .muted,.on-dark .t-cap{color:rgba(250,248,244,.62)}
-.on-dark .eyebrow{color:var(--gold-400)}
-.on-dark .card{background:var(--navy-soft); border-color:rgba(231,197,97,.18); box-shadow:none}
+.on-dark .muted,.on-dark .t-cap{color:rgba(247,250,253,.62)}
+.on-dark .eyebrow{color:var(--blue-400)}
+.on-dark .card{background:var(--navy-soft); border-color:rgba(29,159,217,.18); box-shadow:none}
 .split{display:grid; grid-template-columns:1fr 1fr; gap:var(--s8); align-items:center}
 .sec-head{display:flex; align-items:flex-end; justify-content:space-between; gap:var(--s5); margin-bottom:var(--s7); flex-wrap:wrap}
 .sec-head .t-h2{margin-top:var(--s3)}
@@ -254,8 +254,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 
 /* Stats */
 .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s5); text-align:center}
-.stat-n{font-size:44px; font-weight:700; color:var(--gold-500); line-height:1}
-.stat-l{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:rgba(250,248,244,.6); margin-top:var(--s2)}
+.stat-n{font-size:44px; font-weight:700; color:var(--blue-500); line-height:1}
+.stat-l{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,250,253,.6); margin-top:var(--s2)}
 
 /* Testimonials */
 .quote{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s6)}
@@ -267,7 +267,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .tl::before{content:''; position:absolute; left:9px; top:8px; bottom:8px; width:1px; background:var(--border)}
 .tl-item{position:relative; padding-bottom:var(--s7)}
 .tl-item::before{content:''; position:absolute; left:-44px; top:9px; width:11px; height:11px; border-radius:50%;
-  background:var(--gold-500); box-shadow:0 0 0 4px var(--bg)}
+  background:var(--blue-500); box-shadow:0 0 0 4px var(--bg)}
 .tl-year{font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:700}
 
 /* Breadcrumb */
@@ -281,37 +281,37 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .toolbar{display:flex; align-items:center; justify-content:space-between; gap:var(--s4); margin-bottom:var(--s5); flex-wrap:wrap}
 .pagination{display:flex; gap:var(--s2); justify-content:center; margin-top:var(--s7)}
 .pg{width:40px; height:40px; display:grid; place-items:center; border:1px solid var(--border); border-radius:var(--r-md); font-size:15px}
-.pg.on{background:var(--gold-500); border-color:var(--gold-500); color:var(--ink-900); font-weight:700}
+.pg.on{background:var(--blue-500); border-color:var(--blue-500); color:var(--ink-900); font-weight:700}
 
 /* PDP */
 .pdp{display:grid; grid-template-columns:1.05fr 1fr; gap:var(--s8); align-items:start}
 .gallery-main{border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; background:var(--surface-2)}
 .thumbs{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s3); margin-top:var(--s3)}
 .thumb{border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; background:var(--surface-2); cursor:pointer; aspect-ratio:1}
-.thumb.on{border-color:var(--gold-500); box-shadow:0 0 0 2px var(--gold-200)}
+.thumb.on{border-color:var(--blue-500); box-shadow:0 0 0 2px var(--blue-200)}
 .thumb svg{width:100%; height:100%}
 .variants{display:flex; gap:var(--s3); flex-wrap:wrap}
 .variant{padding:var(--s3) var(--s5); border:1px solid var(--border); border-radius:var(--r-md); cursor:pointer; text-align:center; transition:.14s}
-.variant.on{border-color:var(--gold-500); background:var(--gold-100)}
+.variant.on{border-color:var(--blue-500); background:var(--blue-100)}
 .variant b{display:block; font-size:16px}
 .variant span{font-size:13px; color:var(--text-muted)}
 .qty{display:inline-flex; align-items:center; border:1px solid var(--border); border-radius:var(--r-md); height:52px}
 .qty button{width:44px; height:100%; font-size:20px; color:var(--ink-600)}
-.qty button:hover{color:var(--gold-800)}
+.qty button:hover{color:var(--blue-800)}
 .qty span{width:44px; text-align:center; font-weight:700}
 .notes-pyr{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s4)}
 .note-box{border:1px solid var(--border); border-radius:var(--r-md); padding:var(--s4); background:var(--surface); font-size:15px}
 .note-box .label{color:var(--accent); margin-bottom:6px; display:block}
 .tabs{display:flex; gap:var(--s5); border-bottom:1px solid var(--border); margin-bottom:var(--s5); flex-wrap:wrap}
 .tab{padding:var(--s3) 0; font-size:16px; letter-spacing:.04em; color:var(--text-muted); border-bottom:2px solid transparent; margin-bottom:-1px}
-.tab.on{color:var(--text); border-color:var(--gold-500); font-weight:700}
+.tab.on{color:var(--text); border-color:var(--blue-500); font-weight:700}
 .rvw{padding:var(--s5) 0; border-bottom:1px solid var(--border)}
 .rvw-head{display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s2); flex-wrap:wrap}
-.avatar{width:38px; height:38px; border-radius:50%; background:var(--gold-100); border:1px solid var(--gold-300);
-  display:grid; place-items:center; font-weight:700; color:var(--gold-800); font-size:15px}
+.avatar{width:38px; height:38px; border-radius:50%; background:var(--blue-100); border:1px solid var(--blue-300);
+  display:grid; place-items:center; font-weight:700; color:var(--blue-800); font-size:15px}
 .rating-big{display:flex; align-items:center; gap:var(--s5); padding:var(--s5); background:var(--surface-2); border-radius:var(--r-lg); margin-bottom:var(--s5); flex-wrap:wrap}
 .bar{height:6px; background:var(--ink-200); border-radius:999px; overflow:hidden; flex:1; min-width:120px}
-.bar i{display:block; height:100%; background:var(--gold-500)}
+.bar i{display:block; height:100%; background:var(--blue-500)}
 
 /* Cart / Checkout */
 .cart-row{display:grid; grid-template-columns:96px 1fr auto; gap:var(--s4); padding:var(--s4) 0; border-bottom:1px solid var(--border); align-items:center}
@@ -323,11 +323,11 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .step{display:flex; align-items:center; gap:var(--s3); font-size:15px; color:var(--text-muted)}
 .step i{width:28px; height:28px; border-radius:50%; border:1px solid var(--border); display:grid; place-items:center; font-style:normal; font-size:14px}
 .step.on{color:var(--text); font-weight:700}
-.step.on i{background:var(--gold-500); border-color:var(--gold-500); color:var(--ink-900)}
+.step.on i{background:var(--blue-500); border-color:var(--blue-500); color:var(--ink-900)}
 .step.done i{background:var(--ok); border-color:var(--ok); color:#fff}
 .pay-opt{display:flex; gap:var(--s3); align-items:center; padding:var(--s4); border:1px solid var(--border);
   border-radius:var(--r-md); cursor:pointer; margin-bottom:var(--s3); transition:.14s}
-.pay-opt.on{border-color:var(--gold-500); background:var(--gold-100)}
+.pay-opt.on{border-color:var(--blue-500); background:var(--blue-100)}
 .pay-logo{width:46px; height:32px; border:1px solid var(--border); border-radius:var(--r-sm); display:grid; place-items:center;
   font-size:10px; font-weight:700; letter-spacing:.04em; background:var(--surface); color:var(--ink-600); flex-shrink:0}
 
@@ -335,7 +335,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .drawer{position:fixed; top:0; right:0; bottom:0; width:min(430px,100%); background:var(--surface); z-index:90;
   transform:translateX(100%); transition:transform .28s cubic-bezier(.2,.8,.2,1); display:flex; flex-direction:column; box-shadow:var(--sh-lg)}
 .drawer.open{transform:translateX(0)}
-.scrim{position:fixed; inset:0; background:rgba(20,19,16,.5); z-index:85; opacity:0; visibility:hidden; transition:opacity .28s,visibility .28s}
+.scrim{position:fixed; inset:0; background:rgba(8,22,35,.5); z-index:85; opacity:0; visibility:hidden; transition:opacity .28s,visibility .28s}
 .scrim.open{opacity:1; visibility:visible}
 .drawer-head{display:flex; align-items:center; justify-content:space-between; padding:var(--s5); border-bottom:1px solid var(--border)}
 .drawer-body{flex:1; overflow-y:auto; padding:0 var(--s5)}
@@ -349,7 +349,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .acard h3{font-size:21px; line-height:1.3; margin:var(--s2) 0}
 .article-body p{margin-bottom:var(--s4)}
 .article-body h3{margin:var(--s6) 0 var(--s3)}
-.article-body blockquote{border-left:2px solid var(--gold-500); padding-left:var(--s5); font-style:italic; color:var(--ink-600); margin:var(--s5) 0}
+.article-body blockquote{border-left:2px solid var(--blue-500); padding-left:var(--s5); font-style:italic; color:var(--ink-600); margin:var(--s5) 0}
 
 /* Events */
 .evt{display:grid; grid-template-columns:104px 1fr auto; gap:var(--s5); align-items:center; padding:var(--s5);
@@ -361,7 +361,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* Account */
 .acct{display:grid; grid-template-columns:250px 1fr; gap:var(--s7); align-items:start}
 .acct-nav a{display:block; padding:var(--s3) var(--s4); border-radius:var(--r-md); color:var(--ink-600); font-size:16px}
-.acct-nav a.on{background:var(--gold-100); color:var(--gold-900); font-weight:700}
+.acct-nav a.on{background:var(--blue-100); color:var(--blue-900); font-weight:700}
 .acct-nav a:hover{background:var(--ink-100)}
 .otable{width:100%; border-collapse:collapse; font-size:15px}
 .otable th{text-align:left; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted);
@@ -370,7 +370,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 
 /* Trust strip */
 .trust{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s5); text-align:center}
-.trust-i{font-size:26px; color:var(--gold-600); margin-bottom:var(--s2)}
+.trust-i{font-size:26px; color:var(--blue-600); margin-bottom:var(--s2)}
 .trust h4{font-size:16px; margin-bottom:4px}
 .trust p{font-size:14px; color:var(--text-muted); line-height:1.55}
 
@@ -382,24 +382,24 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* ═══════════ FOOTER ═══════════ */
 .ftr{background:var(--navy); color:var(--ink-50); padding:var(--s9) 0 var(--s5)}
 .ftr-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1.4fr; gap:var(--s7)}
-.ftr h4{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-400); margin-bottom:var(--s4)}
-.ftr a{display:block; padding:5px 0; color:rgba(250,248,244,.7); font-size:15.5px; transition:color .14s}
-.ftr a:hover{color:var(--gold-300)}
-.ftr p{color:rgba(250,248,244,.7); font-size:15px}
+.ftr h4{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--blue-400); margin-bottom:var(--s4)}
+.ftr a{display:block; padding:5px 0; color:rgba(247,250,253,.7); font-size:15.5px; transition:color .14s}
+.ftr a:hover{color:var(--blue-300)}
+.ftr p{color:rgba(247,250,253,.7); font-size:15px}
 .channels{display:flex; gap:var(--s3); flex-wrap:wrap; margin-top:var(--s4)}
-.chan{display:flex; align-items:center; gap:var(--s2); padding:9px var(--s4); border:1px solid rgba(231,197,97,.3);
-  border-radius:var(--r-md); font-size:14px; color:var(--gold-300); transition:.14s}
-.chan:hover{background:rgba(231,197,97,.1); border-color:var(--gold-400); color:var(--gold-300)}
+.chan{display:flex; align-items:center; gap:var(--s2); padding:9px var(--s4); border:1px solid rgba(29,159,217,.3);
+  border-radius:var(--r-md); font-size:14px; color:var(--blue-300); transition:.14s}
+.chan:hover{background:rgba(29,159,217,.1); border-color:var(--blue-400); color:var(--blue-300)}
 .socials{display:flex; gap:var(--s3); margin-top:var(--s5)}
-.soc{width:40px; height:40px; border:1px solid rgba(231,197,97,.3); border-radius:var(--r-md); display:grid; place-items:center; color:var(--gold-300)}
-.soc:hover{background:rgba(231,197,97,.1)}
-.ftr-bottom{margin-top:var(--s8); padding-top:var(--s5); border-top:1px solid rgba(250,248,244,.1);
-  display:flex; justify-content:space-between; gap:var(--s4); font-size:13.5px; color:rgba(250,248,244,.5); flex-wrap:wrap}
+.soc{width:40px; height:40px; border:1px solid rgba(29,159,217,.3); border-radius:var(--r-md); display:grid; place-items:center; color:var(--blue-300)}
+.soc:hover{background:rgba(29,159,217,.1)}
+.ftr-bottom{margin-top:var(--s8); padding-top:var(--s5); border-top:1px solid rgba(247,250,253,.1);
+  display:flex; justify-content:space-between; gap:var(--s4); font-size:13.5px; color:rgba(247,250,253,.5); flex-wrap:wrap}
 .nl-form{display:flex; gap:var(--s2); margin-top:var(--s4)}
-.nl-form input{flex:1; height:44px; padding:0 var(--s4); background:rgba(250,248,244,.06); border:1px solid rgba(250,248,244,.18);
+.nl-form input{flex:1; height:44px; padding:0 var(--s4); background:rgba(247,250,253,.06); border:1px solid rgba(247,250,253,.18);
   border-radius:var(--r-md); color:var(--ink-50)}
-.nl-form input::placeholder{color:rgba(250,248,244,.4)}
-.nl-form input:focus{outline:none; border-color:var(--gold-400); box-shadow:0 0 0 3px rgba(231,197,97,.18)}
+.nl-form input::placeholder{color:rgba(247,250,253,.4)}
+.nl-form input:focus{outline:none; border-color:var(--blue-400); box-shadow:0 0 0 3px rgba(29,159,217,.18)}
 
 /* ═══════════ CHAT WIDGET ═══════════ */
 .chat{position:fixed; right:var(--s5); bottom:var(--s5); z-index:70; display:flex; flex-direction:column; align-items:flex-end; gap:var(--s3)}
@@ -408,23 +408,23 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .chat-panel.open{opacity:1; visibility:visible; transform:translateY(0)}
 .chat-opt{display:flex; align-items:center; gap:var(--s3); padding:var(--s3); border-radius:var(--r-md); font-size:15px}
 .chat-opt:hover{background:var(--ink-100)}
-.chat-fab{width:56px; height:56px; border-radius:50%; background:var(--gold-500); color:var(--ink-900);
+.chat-fab{width:56px; height:56px; border-radius:50%; background:var(--blue-500); color:var(--ink-900);
   display:grid; place-items:center; box-shadow:var(--sh-md); font-size:22px; transition:transform .16s}
-.chat-fab:hover{transform:scale(1.05); background:var(--gold-400)}
+.chat-fab:hover{transform:scale(1.05); background:var(--blue-400)}
 .qr{width:110px; height:110px; margin:var(--s3) auto; background:
   repeating-conic-gradient(var(--ink-900) 0 25%,#fff 0 50%) 50%/12px 12px; border:5px solid #fff; box-shadow:0 0 0 1px var(--border)}
 
 /* Toast */
 .toasts{position:fixed; left:50%; bottom:var(--s6); transform:translateX(-50%); z-index:100; display:flex; flex-direction:column; gap:var(--s2); align-items:center}
 .toast{background:var(--navy); color:var(--ink-50); padding:var(--s3) var(--s5); border-radius:var(--r-md);
-  box-shadow:var(--sh-lg); font-size:15px; animation:tin .2s cubic-bezier(.2,.8,.2,1); border:1px solid rgba(231,197,97,.3)}
+  box-shadow:var(--sh-lg); font-size:15px; animation:tin .2s cubic-bezier(.2,.8,.2,1); border:1px solid rgba(29,159,217,.3)}
 @keyframes tin{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
 
 /* Modal */
 .modal{position:fixed; inset:0; z-index:95; display:grid; place-items:center; padding:var(--s5);
   opacity:0; visibility:hidden; transition:.28s}
 .modal.open{opacity:1; visibility:visible}
-.modal-bg{position:absolute; inset:0; background:rgba(20,19,16,.55)}
+.modal-bg{position:absolute; inset:0; background:rgba(8,22,35,.55)}
 .modal-card{position:relative; background:var(--surface); border-radius:var(--r-lg); box-shadow:var(--sh-lg);
   width:min(430px,100%); padding:var(--s7); max-height:90vh; overflow-y:auto}
 
@@ -432,21 +432,21 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .lang-sw{display:flex; align-items:center; gap:var(--s2); padding:0 var(--s3); margin-right:var(--s1)}
 .lang-btn{font-size:13px; font-weight:700; letter-spacing:.1em; color:var(--ink-400); padding:5px 3px;
   border-bottom:1px solid transparent; transition:color .14s,border-color .14s}
-.lang-btn:hover{color:var(--gold-800)}
-.lang-btn.on{color:var(--gold-800); border-color:var(--accent-line)}
+.lang-btn:hover{color:var(--blue-800)}
+.lang-btn.on{color:var(--blue-800); border-color:var(--accent-line)}
 .lang-sep{width:1px; height:13px; background:var(--border)}
-.mnav .lang-btn{color:rgba(250,248,244,.55); font-size:16px; letter-spacing:.04em}
-.mnav .lang-btn.on{color:var(--gold-400); border-color:var(--gold-400)}
-.mnav .lang-sep{background:rgba(231,197,97,.3); height:16px}
+.mnav .lang-btn{color:rgba(247,250,253,.55); font-size:16px; letter-spacing:.04em}
+.mnav .lang-btn.on{color:var(--blue-400); border-color:var(--blue-400)}
+.mnav .lang-sep{background:rgba(29,159,217,.3); height:16px}
 
 /* ═══════════ ADMIN / CMS ═══════════ */
 .adm{display:grid; grid-template-columns:236px 1fr; gap:var(--s6); align-items:start}
 .adm-nav{background:var(--navy); border-radius:var(--r-lg); padding:var(--s4); position:sticky; top:104px}
 .adm-nav a{display:flex; align-items:center; gap:var(--s3); padding:var(--s3) var(--s4); border-radius:var(--r-md);
-  color:rgba(250,248,244,.68); font-size:15.5px; margin-bottom:2px; transition:.14s}
-.adm-nav a:hover{background:rgba(231,197,97,.1); color:var(--gold-300)}
-.adm-nav a.on{background:var(--gold-500); color:var(--ink-900); font-weight:700}
-.adm-nav .grp{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(231,197,97,.55);
+  color:rgba(247,250,253,.68); font-size:15.5px; margin-bottom:2px; transition:.14s}
+.adm-nav a:hover{background:rgba(29,159,217,.1); color:var(--blue-300)}
+.adm-nav a.on{background:var(--blue-500); color:var(--ink-900); font-weight:700}
+.adm-nav .grp{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(29,159,217,.55);
   padding:var(--s4) var(--s4) var(--s2)}
 .kpi{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); margin-bottom:var(--s5)}
 .kpi-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s5)}
@@ -456,14 +456,14 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .kpi-up{color:var(--ok)} .kpi-dn{color:var(--err)}
 .chart{display:flex; align-items:flex-end; gap:var(--s3); height:200px; padding-top:var(--s4)}
 .chart-col{flex:1; display:flex; flex-direction:column; align-items:center; gap:var(--s2); height:100%; justify-content:flex-end}
-.chart-bar{width:100%; max-width:44px; background:linear-gradient(180deg,var(--gold-400),var(--gold-600));
+.chart-bar{width:100%; max-width:44px; background:linear-gradient(180deg,var(--blue-400),var(--blue-600));
   border-radius:var(--r-sm) var(--r-sm) 0 0; transition:opacity .14s}
 .chart-col:hover .chart-bar{opacity:.78}
 .chart-x{font-size:11px; color:var(--text-muted); letter-spacing:.06em}
 .lang-tabs{display:flex; gap:var(--s2); margin-bottom:var(--s4); border-bottom:1px solid var(--border)}
 .lang-tab{padding:var(--s3) var(--s5); font-size:14px; font-weight:700; letter-spacing:.08em; color:var(--text-muted);
   border:1px solid transparent; border-bottom:2px solid transparent; margin-bottom:-1px; border-radius:var(--r-md) var(--r-md) 0 0}
-.lang-tab.on{color:var(--gold-900); background:var(--gold-100); border-color:var(--gold-300); border-bottom-color:var(--gold-500)}
+.lang-tab.on{color:var(--blue-900); background:var(--blue-100); border-color:var(--blue-300); border-bottom-color:var(--blue-500)}
 .lang-tab .flag{font-size:11px; opacity:.7; margin-left:6px}
 .adm-toolbar{display:flex; gap:var(--s3); flex-wrap:wrap; align-items:center; margin-bottom:var(--s4)}
 .adm-toolbar .input,.adm-toolbar .select{height:40px; width:auto; min-width:150px}
@@ -476,7 +476,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .editor-bar{display:flex; gap:var(--s1); flex-wrap:wrap; padding:var(--s2); border:1px solid var(--border);
   border-bottom:0; border-radius:var(--r-md) var(--r-md) 0 0; background:var(--surface-2)}
 .editor-bar button{width:32px; height:30px; border-radius:var(--r-sm); font-size:13px; color:var(--ink-600)}
-.editor-bar button:hover{background:var(--ink-100); color:var(--gold-800)}
+.editor-bar button:hover{background:var(--ink-100); color:var(--blue-800)}
 .editor-body{border-radius:0 0 var(--r-md) var(--r-md); min-height:170px}
 @media (max-width:1080px){ .adm{grid-template-columns:1fr} .adm-nav{position:static} .kpi{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:600px){ .kpi{grid-template-columns:1fr} .lang-sw{padding:0 var(--s2)} }
@@ -629,7 +629,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
           <img class="logo-mark" src="assets/brand/logo-mark-light.png" alt="">
           <div>
             <img class="logo-word" src="assets/brand/logo-word-light.png" alt="L'ANGELULUS">
-            <div class="brandtag" style="color:rgba(250,248,244,.45)">Botanical Perfume</div>
+            <div class="brandtag" style="color:rgba(247,250,253,.45)">Botanical Perfume</div>
           </div>
         </div>
         <p>Nước hoa botanical Việt — kể câu chuyện đất Việt bằng hương thơm. Sản xuất và thương mại bởi Công ty Cổ phần Mỹ phẩm Nam Phát.</p>
@@ -897,19 +897,19 @@ function bottleSVG(p){
         <stop offset="100%" stop-color="${c}" stop-opacity=".9"/>
       </linearGradient>
       <linearGradient id="cap${uid}" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#957523"/><stop offset="45%" stop-color="#E7C561"/><stop offset="100%" stop-color="#B8952A"/>
+        <stop offset="0%" stop-color="#084D89"/><stop offset="45%" stop-color="#1D9FD9"/><stop offset="100%" stop-color="#0C669F"/>
       </linearGradient>
     </defs>
-    <ellipse cx="150" cy="372" rx="74" ry="9" fill="#141310" opacity=".10"/>
+    <ellipse cx="150" cy="372" rx="74" ry="9" fill="#0F161D" opacity=".10"/>
     <rect x="128" y="42" width="44" height="40" rx="2" fill="url(#cap${uid})"/>
-    <rect x="136" y="82" width="28" height="26" fill="#BCB3A4" opacity=".55"/>
-    <rect x="72" y="106" width="156" height="252" rx="7" fill="url(#g${uid})" stroke="#FAF8F4" stroke-opacity=".35"/>
+    <rect x="136" y="82" width="28" height="26" fill="#AFBFCC" opacity=".55"/>
+    <rect x="72" y="106" width="156" height="252" rx="7" fill="url(#g${uid})" stroke="#F7FAFD" stroke-opacity=".35"/>
     <rect x="84" y="118" width="20" height="228" rx="10" fill="#FFFFFF" opacity=".18"/>
-    <rect x="96" y="186" width="108" height="92" rx="2" fill="#FAF8F4" opacity=".93"/>
-    <text x="150" y="216" text-anchor="middle" font-family="Times New Roman,serif" font-size="21" font-weight="700" fill="#141310" letter-spacing="1">LA</text>
-    <line x1="112" y1="226" x2="188" y2="226" stroke="#B8952A" stroke-width="1"/>
-    <text x="150" y="246" text-anchor="middle" font-family="Times New Roman,serif" font-size="13" fill="#2E2A24">${esc(p.name.toUpperCase()).slice(0,16)}</text>
-    <text x="150" y="266" text-anchor="middle" font-family="Times New Roman,serif" font-size="9" fill="#645C50" letter-spacing="2">${esc(COLLECTIONS[p.coll].name.toUpperCase())}</text>
+    <rect x="96" y="186" width="108" height="92" rx="2" fill="#F7FAFD" opacity=".93"/>
+    <text x="150" y="216" text-anchor="middle" font-family="Times New Roman,serif" font-size="21" font-weight="700" fill="#0F161D" letter-spacing="1">LA</text>
+    <line x1="112" y1="226" x2="188" y2="226" stroke="#0C669F" stroke-width="1"/>
+    <text x="150" y="246" text-anchor="middle" font-family="Times New Roman,serif" font-size="13" fill="#25313C">${esc(p.name.toUpperCase()).slice(0,16)}</text>
+    <text x="150" y="266" text-anchor="middle" font-family="Times New Roman,serif" font-size="9" fill="#566673" letter-spacing="2">${esc(COLLECTIONS[p.coll].name.toUpperCase())}</text>
   </svg>`;
 }
 function pshot(p, extra, n){
@@ -1017,7 +1017,7 @@ function viewHome(){
       </div>
       <div class="grid g3">
         ${Object.keys(COLLECTIONS).map(k => COLLECTIONS[k]).map(c => `
-          <a href="#/products?c=${c.id}" class="coll-card" style="background:linear-gradient(160deg,${c.color} 0%,${c.color}CC 45%,#1C2025 100%)">
+          <a href="#/products?c=${c.id}" class="coll-card" style="background:linear-gradient(160deg,${c.color} 0%,${c.color}CC 45%,#0B2B47 100%)">
             <div class="label" style="color:rgba(255,255,255,.75);margin-bottom:8px">${esc(c.theme)}</div>
             <h3>${esc(c.name)}</h3>
             <p>${esc(c.tagline)}</p>
@@ -1045,10 +1045,10 @@ function viewHome(){
       <div>
         <div class="eyebrow left">Câu chuyện thương hiệu</div>
         <h2 class="t-h2" style="margin:16px 0 24px">Bản giao hưởng<br>hương sắc đất Việt</h2>
-        <p class="t-lg" style="color:rgba(250,248,244,.75);margin-bottom:20px">
+        <p class="t-lg" style="color:rgba(247,250,253,.75);margin-bottom:20px">
           L'Angelulus ra đời từ một câu hỏi đơn giản: tại sao người Việt phải mượn mùi hương của xứ khác để kể câu chuyện của mình?
         </p>
-        <p style="color:rgba(250,248,244,.62);margin-bottom:32px">
+        <p style="color:rgba(247,250,253,.62);margin-bottom:32px">
           Chúng tôi đi tìm những nguyên liệu vốn đã ở đây — nhài ta miền Bắc, hoa hồng Đà Lạt hái sớm, rễ hương bài từng được ông bà dùng ướp áo trong rương gỗ — và dựng nên chín hương thơm mang tên những vùng đất thật.
         </p>
         <a href="#/about" class="btn btn-primary btn-lg">Đọc toàn bộ câu chuyện</a>
@@ -1095,7 +1095,7 @@ function viewHome(){
     <div class="wrap-narrow">
       <div class="eyebrow">Thư hương hàng tháng</div>
       <h2 class="t-h2" style="margin:16px 0 16px">Nhận ưu đãi riêng &amp; câu chuyện mùi hương</h2>
-      <p style="color:rgba(250,248,244,.65);margin-bottom:32px">Đăng ký để nhận mã giảm 10% cho đơn đầu tiên. Chúng tôi không spam.</p>
+      <p style="color:rgba(247,250,253,.65);margin-bottom:32px">Đăng ký để nhận mã giảm 10% cho đơn đầu tiên. Chúng tôi không spam.</p>
       <form class="nl-form" style="max-width:480px;margin:0 auto" onsubmit="return subscribeNL(event)">
         <input type="email" placeholder="Email của bạn" required>
         <button class="btn btn-primary" type="submit">Đăng ký</button>
@@ -1121,8 +1121,8 @@ function viewAbout(){
       <div>
         <div class="eyebrow left">Khởi nguồn</div>
         <h2 class="t-h2" style="margin:16px 0 24px">Một câu hỏi rất đơn giản</h2>
-        <p style="color:rgba(250,248,244,.72);margin-bottom:16px">Tại sao người Việt phải mượn mùi hương của xứ khác để kể câu chuyện của mình?</p>
-        <p style="color:rgba(250,248,244,.62)">Năm 2025, đội ngũ sáng lập bắt đầu đi dọc Việt Nam — từ rừng ngập mặn Cần Giờ, qua đồi thông Đà Lạt, tới đất đỏ Tây Nguyên — để ghi lại mùi của từng vùng đất. Chín hương thơm của L'Angelulus là kết quả của hành trình đó.</p>
+        <p style="color:rgba(247,250,253,.72);margin-bottom:16px">Tại sao người Việt phải mượn mùi hương của xứ khác để kể câu chuyện của mình?</p>
+        <p style="color:rgba(247,250,253,.62)">Năm 2025, đội ngũ sáng lập bắt đầu đi dọc Việt Nam — từ rừng ngập mặn Cần Giờ, qua đồi thông Đà Lạt, tới đất đỏ Tây Nguyên — để ghi lại mùi của từng vùng đất. Chín hương thơm của L'Angelulus là kết quả của hành trình đó.</p>
       </div>
       <div style="max-width:340px;margin:0 auto">${bottleBox(PRODUCTS[4])}</div>
     </div>
@@ -1211,7 +1211,7 @@ function pcard(p){
       <div class="price">${money(p.price)}${p.old ? '<s>' + money(p.old) + '</s>' : ''}</div>
       <div class="pcard-foot">
         <button class="btn btn-primary btn-sm" onclick="addToCart('${p.id}',50)">Thêm vào giỏ</button>
-        <button class="icon-btn" title="Yêu thích" onclick="toggleWish('${p.id}')" style="color:${wish?'var(--gold-700)':'var(--ink-400)'}">${wish?'♥':'♡'}</button>
+        <button class="icon-btn" title="Yêu thích" onclick="toggleWish('${p.id}')" style="color:${wish?'var(--blue-700)':'var(--ink-400)'}">${wish?'♥':'♡'}</button>
       </div>
     </div>
   </article>`;
@@ -1588,23 +1588,23 @@ function viewCheckout(){
 
         <div class="card card-p" style="margin-bottom:24px">
           <h3 class="t-h3" style="margin-bottom:20px">Phương thức vận chuyển</h3>
-          <label class="pay-opt on" onclick="pick(this)"><input type="radio" name="ship" checked style="accent-color:var(--gold-600)">
+          <label class="pay-opt on" onclick="pick(this)"><input type="radio" name="ship" checked style="accent-color:var(--blue-600)">
             <div style="flex:1"><b>Giao hàng tiêu chuẩn</b><div class="t-cap">2–5 ngày làm việc · GHN / GHTK</div></div>
             <b>${shipFee() ? money(shipFee()) : 'Miễn phí'}</b></label>
-          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="ship" style="accent-color:var(--gold-600)">
+          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="ship" style="accent-color:var(--blue-600)">
             <div style="flex:1"><b>Giao hàng nhanh</b><div class="t-cap">1–2 ngày làm việc · nội thành</div></div>
             <b>45.000đ</b></label>
         </div>
 
         <div class="card card-p">
           <h3 class="t-h3" style="margin-bottom:20px">Phương thức thanh toán</h3>
-          <label class="pay-opt on" onclick="pick(this)"><input type="radio" name="pay" checked style="accent-color:var(--gold-600)">
+          <label class="pay-opt on" onclick="pick(this)"><input type="radio" name="pay" checked style="accent-color:var(--blue-600)">
             <span class="pay-logo">VNPay</span><div style="flex:1"><b>Chuyển khoản QR / VNPay</b><div class="t-cap">Quét mã bằng app ngân hàng · xác nhận tự động</div></div></label>
-          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="pay" style="accent-color:var(--gold-600)">
+          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="pay" style="accent-color:var(--blue-600)">
             <span class="pay-logo">Momo</span><div style="flex:1"><b>Ví Momo / ZaloPay</b><div class="t-cap">Thanh toán qua ví điện tử</div></div></label>
-          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="pay" style="accent-color:var(--gold-600)">
+          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="pay" style="accent-color:var(--blue-600)">
             <span class="pay-logo">Thẻ</span><div style="flex:1"><b>Thẻ ATM / Visa / Mastercard</b><div class="t-cap">Bảo mật 3D-Secure, không lưu thông tin thẻ trên hệ thống</div></div></label>
-          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="pay" style="accent-color:var(--gold-600)">
+          <label class="pay-opt" onclick="pick(this)"><input type="radio" name="pay" style="accent-color:var(--blue-600)">
             <span class="pay-logo">COD</span><div style="flex:1"><b>Thanh toán khi nhận hàng</b><div class="t-cap">Kiểm tra hàng trước khi thanh toán</div></div></label>
           <div class="alert alert-info" style="margin-top:16px">ⓘ Thông tin thanh toán được xử lý trực tiếp bởi cổng thanh toán, không lưu trên máy chủ L'Angelulus.</div>
         </div>
@@ -1684,7 +1684,7 @@ function acard(a){
   const col = cols[ARTICLES.indexOf(a) % 3];
   return `<article class="acard">
     <a href="#/news/${a.id}">
-      <div class="acard-img" style="background:linear-gradient(150deg,${col} 0%,${col}AA 50%,#1C2025 100%)">
+      <div class="acard-img" style="background:linear-gradient(150deg,${col} 0%,${col}AA 50%,#0B2B47 100%)">
         <span style="color:rgba(255,255,255,.9);font-size:13px;letter-spacing:.2em;text-transform:uppercase">${esc(a.cat)}</span>
       </div>
     </a>
@@ -1789,7 +1789,7 @@ function viewArticle(id){
     <div class="eyebrow left">${esc(a.cat)}</div>
     <h1 class="t-h1" style="margin:16px 0">${esc(a.title)}</h1>
     <div class="t-cap" style="margin-bottom:32px">Đăng ngày ${esc(a.date)} · ${a.read} phút đọc · L'Angelulus Editorial</div>
-    <div style="aspect-ratio:16/7;border-radius:var(--r-lg);background:linear-gradient(150deg,#5B8A72,#1C2025);margin-bottom:40px"></div>
+    <div style="aspect-ratio:16/7;border-radius:var(--r-lg);background:linear-gradient(150deg,#5B8A72,#0B2B47);margin-bottom:40px"></div>
     <div class="article-body t-lg">
       <p><b>${esc(a.excerpt)}</b></p>
       ${a.body.map(x => '<p>' + esc(x) + '</p>').join('')}
@@ -1845,15 +1845,15 @@ function viewContact(){
           <div style="margin-bottom:20px"><div class="label muted">Email</div><div><a href="mailto:hello@langelulus.com" style="color:var(--accent)">hello@langelulus.com</a></div></div>
           <div><div class="label muted">Mua trên sàn</div>
             <div class="channels" style="margin-top:8px">
-              <a class="chan" style="color:var(--gold-800);border-color:var(--gold-400)" href="#" onclick="return false">Shopee Mall ↗</a>
-              <a class="chan" style="color:var(--gold-800);border-color:var(--gold-400)" href="#" onclick="return false">TikTok Shop ↗</a>
+              <a class="chan" style="color:var(--blue-800);border-color:var(--blue-400)" href="#" onclick="return false">Shopee Mall ↗</a>
+              <a class="chan" style="color:var(--blue-800);border-color:var(--blue-400)" href="#" onclick="return false">TikTok Shop ↗</a>
             </div>
           </div>
         </div>
         <div class="card" style="overflow:hidden">
           <div style="aspect-ratio:4/3;background:
-              linear-gradient(0deg,rgba(28,32,37,.06),rgba(28,32,37,.06)),
-              repeating-linear-gradient(45deg,#F1EDE6 0 22px,#FAF8F4 22px 44px);
+              linear-gradient(0deg,rgba(11,43,71,.06),rgba(11,43,71,.06)),
+              repeating-linear-gradient(45deg,#EDF3F8 0 22px,#F7FAFD 22px 44px);
               display:grid;place-items:center;position:relative">
             <div style="text-align:center">
               <div style="font-size:36px;color:var(--err)">📍</div>
@@ -2011,7 +2011,7 @@ function viewPolicy(){
 
 function view404(){
   return `<section class="sec"><div class="wrap-narrow center" style="padding:80px 0">
-    <div class="t-hero" style="color:var(--gold-300)">404</div>
+    <div class="t-hero" style="color:var(--blue-300)">404</div>
     <h1 class="t-h2" style="margin:16px 0 12px">Không tìm thấy trang</h1>
     <p class="muted" style="margin-bottom:32px">Trang bạn tìm không tồn tại hoặc đã được chuyển đi.</p>
     <a href="#/" class="btn btn-primary btn-lg">Về trang chủ</a>
@@ -2063,18 +2063,18 @@ function admWrap(tab, body){
       : 'Bản demo khu vực quản trị nội bộ (ADMIN-01…03 · CMS-01…04). Các màn hình nhập nội dung có tab VI / EN song song theo yêu cầu CMS-04.'}</div>
     <div class="adm">
       <aside class="adm-nav">
-        <div style="display:flex;align-items:center;gap:10px;padding:var(--s3) var(--s4) var(--s4);border-bottom:1px solid rgba(231,197,97,.18);margin-bottom:var(--s2)">
+        <div style="display:flex;align-items:center;gap:10px;padding:var(--s3) var(--s4) var(--s4);border-bottom:1px solid rgba(29,159,217,.18);margin-bottom:var(--s2)">
           <img src="assets/brand/logo-mark-light.png" alt="" style="height:32px;width:auto">
           <div><div style="color:var(--ink-50);font-size:14px;font-weight:700;letter-spacing:.1em">ADMIN</div>
-          <div style="font-size:11px;color:rgba(250,248,244,.45)">${en?'Internal panel':'Bảng điều khiển'}</div></div>
+          <div style="font-size:11px;color:rgba(247,250,253,.45)">${en?'Internal panel':'Bảng điều khiển'}</div></div>
         </div>
         ${ADM_NAV.map(n => n[0].indexOf('g') === 0 && n.length === 2
           ? `<div class="grp">${n[1][LI()]}</div>`
           : `<a href="#/admin?t=${n[0]}" class="${tab===n[0]?'on':''}"><span style="width:16px">${n[2]}</span>${n[1][LI()]}</a>`).join('')}
-        <div style="padding:var(--s4) var(--s4) var(--s2);border-top:1px solid rgba(231,197,97,.18);margin-top:var(--s3)">
-          <div style="font-size:12px;color:rgba(250,248,244,.5)">${en?'Signed in as':'Đang đăng nhập'}</div>
-          <div style="color:var(--gold-300);font-size:14px">admin@langelulus.com</div>
-          <div class="role-tag" style="margin-top:6px;background:rgba(231,197,97,.15);color:var(--gold-300)">Super Admin</div>
+        <div style="padding:var(--s4) var(--s4) var(--s2);border-top:1px solid rgba(29,159,217,.18);margin-top:var(--s3)">
+          <div style="font-size:12px;color:rgba(247,250,253,.5)">${en?'Signed in as':'Đang đăng nhập'}</div>
+          <div style="color:var(--blue-300);font-size:14px">admin@langelulus.com</div>
+          <div class="role-tag" style="margin-top:6px;background:rgba(29,159,217,.15);color:var(--blue-300)">Super Admin</div>
         </div>
       </aside>
       <div>${body}</div>
@@ -2109,7 +2109,7 @@ function admDashboard(){
     </div>
     <div class="chart">
       ${ADM_REV.map(r => `<div class="chart-col" title="${r.v} ${en?'million':'triệu'}">
-        <span style="font-size:12px;font-weight:700;color:var(--gold-800)">${r.v}</span>
+        <span style="font-size:12px;font-weight:700;color:var(--blue-800)">${r.v}</span>
         <div class="chart-bar" style="height:${Math.round(r.v / max * 100)}%"></div>
         <span class="chart-x">${en?'M':'T'}${r.m}</span></div>`).join('')}
     </div>
@@ -2126,7 +2126,7 @@ function admDashboard(){
     </div>
     <div class="card card-p">
       <h3 class="t-h3" style="margin-bottom:16px">${en?'Revenue by channel':'Doanh thu theo kênh'}</h3>
-      ${[['Website',46,'#B8952A'],['Shopee Mall',33,'#5B8A72'],['TikTok Shop',21,'#6B4A2F']].map(c => `
+      ${[['Website',46,'#0C669F'],['Shopee Mall',33,'#5B8A72'],['TikTok Shop',21,'#6B4A2F']].map(c => `
         <div style="margin-bottom:16px">
           <div style="display:flex;justify-content:space-between;margin-bottom:6px"><b>${c[0]}</b><span class="muted">${c[1]}%</span></div>
           <div class="bar"><i style="width:${c[1]}%;background:${c[2]}"></i></div>
@@ -3094,7 +3094,7 @@ function openReviewModal(){
   openModal(`<h3 class="t-h3" style="margin-bottom:20px">Viết đánh giá</h3>
     <form onsubmit="closeModal();toast('Cảm ơn bạn! Đánh giá đang chờ duyệt.');return false">
       <div class="field"><label>Chấm điểm *</label>
-        <div style="font-size:28px;color:var(--gold-500);letter-spacing:4px;cursor:pointer">★★★★★</div></div>
+        <div style="font-size:28px;color:var(--blue-500);letter-spacing:4px;cursor:pointer">★★★★★</div></div>
       <div class="field"><label>Nhận xét *</label><textarea class="textarea" required placeholder="Chia sẻ trải nghiệm của bạn về mùi hương, độ lưu và đóng gói…"></textarea></div>
       <div class="alert alert-info" style="margin-bottom:16px">ⓘ Chỉ khách hàng đã mua sản phẩm mới có thể đánh giá.</div>
       <button class="btn btn-primary btn-block" type="submit">Gửi đánh giá</button>
