@@ -1587,6 +1587,20 @@ function viewCheckout(){
         </div>
 
         <div class="card card-p" style="margin-bottom:24px">
+          <h3 class="t-h3" style="margin-bottom:16px">Hóa đơn</h3>
+          <label class="check"><input type="checkbox" id="invToggle" onchange="toggleInvoice(this)"><span>Xuất hóa đơn GTGT (VAT) cho đơn hàng này</span></label>
+          <div id="invFields" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">
+            <div class="field"><label>Tên công ty / Họ và tên người mua *</label><input class="input" data-inv placeholder="Công ty TNHH ABC hoặc Nguyễn Văn A"></div>
+            <div class="grid g2" style="gap:0 16px">
+              <div class="field"><label>Mã số thuế *</label><input class="input" data-inv placeholder="0312345678"></div>
+              <div class="field"><label>Số điện thoại *</label><input class="input" data-inv type="tel" placeholder="09xx xxx xxx"></div>
+            </div>
+            <div class="field"><label>Email nhận hóa đơn *</label><input class="input" data-inv type="email" placeholder="ketoan@example.com"><div class="hint">Hóa đơn điện tử sẽ được gửi tới email này.</div></div>
+            <div class="field"><label>Địa chỉ xuất hóa đơn *</label><input class="input" data-inv placeholder="Địa chỉ đăng ký kinh doanh trên GPKD"></div>
+          </div>
+        </div>
+
+        <div class="card card-p" style="margin-bottom:24px">
           <h3 class="t-h3" style="margin-bottom:20px">Phương thức vận chuyển</h3>
           <label class="pay-opt on" onclick="pick(this)"><input type="radio" name="ship" checked style="accent-color:var(--blue-600)">
             <div style="flex:1"><b>Giao hàng tiêu chuẩn</b><div class="t-cap">2–5 ngày làm việc · GHN / GHTK</div></div>
@@ -1626,6 +1640,11 @@ function pick(el){
   const name = el.querySelector('input').name;
   $$('input[name="' + name + '"]').forEach(i => i.closest('.pay-opt').classList.remove('on'));
   el.classList.add('on'); el.querySelector('input').checked = true;
+}
+function toggleInvoice(cb){
+  const box = $('#invFields'); if(!box) return;
+  box.style.display = cb.checked ? 'block' : 'none';
+  box.querySelectorAll('[data-inv]').forEach(i => { i.required = cb.checked; });
 }
 function placeOrder(e){
   e.preventDefault();
