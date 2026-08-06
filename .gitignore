@@ -1,1 +1,4 @@
 .DS_Store
+
+# Ảnh banner gốc chưa nén — chỉ dùng bản hero-*.jpg đã tối ưu
+assets/banners/Banner *.png
