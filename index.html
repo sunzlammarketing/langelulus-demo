@@ -151,6 +151,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .hdr-actions{display:flex; align-items:center; gap:var(--s1); margin-left:var(--s3)}
 .icon-btn{width:42px; height:42px; display:grid; place-items:center; border-radius:var(--r-md); color:var(--ink-700); position:relative; transition:background .14s}
 .icon-btn:hover{background:var(--ink-100); color:var(--blue-800)}
+.icon-btn svg{width:22px; height:22px; display:block}
 .cart-count{position:absolute; top:4px; right:3px; min-width:18px; height:18px; padding:0 4px; border-radius:999px;
   background:var(--blue-500); color:var(--ink-900); font-size:11px; font-weight:700; display:grid; place-items:center; line-height:1}
 .burger{display:none}
@@ -540,9 +541,9 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
         <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
       </div>
       <button class="icon-btn" id="searchBtn" title="Tìm kiếm" aria-label="Tìm kiếm">⌕</button>
-      <a href="#/account" class="icon-btn" title="Tài khoản" aria-label="Tài khoản">☺</a>
+      <a href="#/account" class="icon-btn" title="Tài khoản" aria-label="Tài khoản"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.2 8-6.2s8 2.2 8 6.2"/></svg></a>
       <button class="icon-btn" id="cartBtn" title="Giỏ hàng" aria-label="Giỏ hàng">
-        ⛬<span class="cart-count" id="cartCount">0</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8h11l-1 11.5a1 1 0 0 1-1 .9H8.5a1 1 0 0 1-1-.9L6.5 8z"/><path d="M9 8V6.3a3 3 0 0 1 6 0V8"/></svg><span class="cart-count" id="cartCount">0</span>
       </button>
       <button class="icon-btn burger" id="burger" aria-label="Menu">☰</button>
     </div>
