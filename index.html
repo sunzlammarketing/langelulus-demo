@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L'ANGELULUS — Nước hoa Botanical Việt</title>
 <meta name="description" content="L'ANGELULUS — nước hoa botanical Việt. 9 hương thơm kể câu chuyện đất Việt: biển và rêu, nắng và tre gỗ, đất và rừng.">
@@ -11,6 +12,15 @@
 <link rel="icon" type="image/png" href="assets/brand/favicon.png">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <meta name="theme-color" content="#0B2B47">
+<script>
+/* Khôi phục URL sạch sau khi 404.html chuyển hướng (SPA trên GitHub Pages) */
+(function(l){
+  if(l.search && l.search.charAt(1) === '/'){
+    var decoded = l.search.slice(1).split('&').map(function(s){ return s.replace(/~and~/g, '&'); }).join('?');
+    window.history.replaceState(null, null, l.pathname.replace(/\/$/, '') + decoded + l.hash);
+  }
+}(window.location));
+</script>
 <style>
 /* ═══════════════════════════════════════════════════════════
    L'ANGELULUS — Website Demo
@@ -937,11 +947,11 @@ function setQty(key, d){
   it.qty += d;
   if(it.qty <= 0) S.cart = S.cart.filter(i => i.key !== key);
   syncCart(); renderDrawer();
-  if(location.hash.indexOf('#/cart') === 0 || location.hash.indexOf('#/checkout') === 0) route();
+  if(CURRENT === 'cart' || CURRENT === 'checkout') route();
 }
 function rmCart(key){
   S.cart = S.cart.filter(i => i.key !== key); syncCart(); renderDrawer();
-  if(location.hash.indexOf('#/cart') === 0 || location.hash.indexOf('#/checkout') === 0) route();
+  if(CURRENT === 'cart' || CURRENT === 'checkout') route();
 }
 const subTotal = () => S.cart.reduce((s,i) => s + i.price * i.qty, 0);
 const discount = () => S.coupon ? Math.round(subTotal() * S.coupon.pct / 100) : 0;
@@ -1297,14 +1307,14 @@ function viewProducts(q){
 }
 function applyFilter(){
   const v = $('#fq').value.trim();
-  const q = new URLSearchParams(location.hash.split('?')[1] || '');
+  const q = new URLSearchParams(location.search.slice(1) || '');
   if(v) q.set('q', v); else q.delete('q');
-  location.hash = '#/products?' + q.toString();
+  navigate('#/products?' + q.toString());
 }
 function sortBy(v){
-  const q = new URLSearchParams(location.hash.split('?')[1] || '');
+  const q = new URLSearchParams(location.search.slice(1) || '');
   q.set('sort', v);
-  location.hash = '#/products?' + q.toString();
+  navigate('#/products?' + q.toString());
 }
 
 function viewProduct(id){
@@ -1463,7 +1473,7 @@ function selVariant(el, id, ml){
 }
 function pdpQty(d){ PDP.qty = Math.max(1, PDP.qty + d); $('#pdpQty').textContent = PDP.qty; }
 function pdpAdd(id){ addToCart(id, PDP.ml, PDP.qty); }
-function pdpBuy(id){ addToCart(id, PDP.ml, PDP.qty); closeDrawer(); location.hash = '#/checkout'; }
+function pdpBuy(id){ addToCart(id, PDP.ml, PDP.qty); closeDrawer(); navigate('#/checkout'); }
 function pdpTab(el, id){
   $$('.tab').forEach(t => t.classList.remove('on')); el.classList.add('on');
   $$('.tabpane').forEach(t => t.style.display = 'none'); $('#' + id).style.display = 'block';
@@ -1541,7 +1551,7 @@ function viewCart(){
 }
 
 function viewCheckout(){
-  if(!S.cart.length){ location.hash = '#/cart'; return ''; }
+  if(!S.cart.length){ navigate('#/cart'); return ''; }
   return `
   <div class="wrap"><div class="crumb"><a href="#/">Trang chủ</a> <span>/</span> <a href="#/cart">Giỏ hàng</a> <span>/</span> <span>Thanh toán</span></div></div>
   <section class="sec-sm" style="padding-top:0"><div class="wrap">
@@ -1640,7 +1650,7 @@ function placeOrder(e){
     date: new Date().toLocaleDateString('vi-VN')
   };
   S.cart = []; S.coupon = null; syncCart();
-  location.hash = '#/order-success';
+  navigate('#/order-success');
   return false;
 }
 
@@ -1992,7 +2002,7 @@ function viewLogin(){
 function loginGoogle(){
   S.user = {name:'Nguyễn Văn A', email:'nguyenvana@gmail.com'};
   toast('Đăng nhập thành công');
-  if(location.hash === '#/account?t=orders') route(); else location.hash = '#/account?t=orders';
+  navigate('#/account?t=orders');
 }
 
 function viewPolicy(){
@@ -2455,22 +2465,40 @@ function keyOfSlug(seg){
   for(const k in SLUGS){ if(SLUGS[k][0] === seg || SLUGS[k][1] === seg) return k; }
   return seg;
 }
-/* Chuyển link nội bộ dạng #/products?x sang #/<lang>/<slug>?x */
-function localizeHref(h){
-  if(!h || h.indexOf('#/') !== 0) return h;
-  const raw = h.slice(2);
-  const parts = raw.split('?');
+/* Chuyển link nội bộ dạng #/products?x sang path SẠCH: /san-pham?x (vi) · /en/products?x (en) */
+function hrefFor(h){
+  if(!h) return '/';
+  let s = h.replace(/^#/, '');
+  if(s.charAt(0) !== '/') s = '/' + s;
+  const parts = s.split('?');
   const segs = parts[0].split('/').filter(Boolean);
   if(segs[0] === 'vi' || segs[0] === 'en') segs.shift();
   const key = segs.shift() || '';
   const rest = segs.length ? '/' + segs.join('/') : '';
-  const s = slugOf(key);
-  return '#/' + L + (s ? '/' + s : '/') + rest + (parts[1] ? '?' + parts[1] : '');
+  const slug = slugOf(key);
+  const langPart = (L === 'en') ? '/en' : '';
+  let out = langPart + (slug ? '/' + slug : '') + rest;
+  if(!out) out = '/';
+  return out + (parts[1] ? '?' + parts[1] : '');
 }
+function localizeHref(h){ return hrefFor(h); }
+/* Ghi nhớ href gốc dạng #/... vào data-href để đổi ngôn ngữ luôn ánh xạ đúng */
 function relocalizeLinks(root){
-  (root || document).querySelectorAll('a[href^="#/"]').forEach(a => {
-    a.setAttribute('href', localizeHref(a.getAttribute('href')));
+  (root || document).querySelectorAll('a[href]').forEach(a => {
+    let key = a.getAttribute('data-href');
+    if(key == null){
+      const cur = a.getAttribute('href');
+      if(cur && cur.indexOf('#/') === 0){ key = cur; a.setAttribute('data-href', key); }
+      else return;
+    }
+    a.setAttribute('href', hrefFor(key));
   });
+}
+/* Điều hướng không tải lại trang (History API) */
+function navigate(h){
+  const url = h.charAt(0) === '#' ? hrefFor(h) : h;
+  if((location.pathname + location.search) !== url) history.pushState({}, '', url);
+  route();
 }
 function setLang(lang){
   if(lang === L) return;
@@ -2479,9 +2507,13 @@ function setLang(lang){
   try { localStorage.setItem('la_lang', L); } catch(e){}
   const rest = r.seg.slice(1).length ? '/' + r.seg.slice(1).join('/') : '';
   const qs = Object.keys(r.q).length ? '?' + new URLSearchParams(r.q).toString() : '';
-  const s = slugOf(r.seg[0] || '');
-  const target = '#/' + L + (s ? '/' + s : '/') + rest + qs;
-  if(location.hash === target) route(); else location.hash = target;
+  const slug = slugOf(r.seg[0] || '');
+  const langPart = (L === 'en') ? '/en' : '';
+  let target = langPart + (slug ? '/' + slug : '') + rest;
+  if(!target) target = '/';
+  target += qs;
+  history.pushState({}, '', target);
+  route();
 }
 </script>
 <script>
@@ -2912,7 +2944,7 @@ function applySEO(key, extra){
   setMeta('property', 'og:description', desc);
   setMeta('property', 'og:locale', L === 'vi' ? 'vi_VN' : 'en_US');
   const tail = (extra && extra.slug) ? '/' + extra.slug : '';
-  const path = k => SITE + '/' + k[0] + (SLUGS[key] ? (SLUGS[key][k[1]] ? '/' + SLUGS[key][k[1]] : '') : '') + tail;
+  const path = k => SITE + (k[0] === 'en' ? '/en' : '') + (SLUGS[key] && SLUGS[key][k[1]] ? '/' + SLUGS[key][k[1]] : '') + tail;
   setLink('canonical', null, path([L, LI()]));
   setLink('alternate', 'vi', path(['vi', 0]));
   setLink('alternate', 'en', path(['en', 1]));
@@ -2938,35 +2970,31 @@ function setLink(rel, hreflang, href){
 /* ═══════════════════════════════════════════
    ROUTER & TƯƠNG TÁC
    ═══════════════════════════════════════════ */
+let CURRENT = '';
 function parseHash(){
-  const rawHash = location.hash;
-  const raw = decodeURI(rawHash.replace(/^#/, '')) || '/';
-  const parts = raw.split('?');
+  const rawPath = decodeURI(location.pathname) || '/';
   const q = {};
-  new URLSearchParams(parts[1] || '').forEach((v,k) => q[k] = v);
-  const segs = (parts[0] || '/').split('/').filter(Boolean);
-  /* Tách tiền tố ngôn ngữ nếu có */
-  if(segs[0] === 'vi' || segs[0] === 'en'){
-    if(segs[0] !== L){ L = segs[0]; try{ localStorage.setItem('la_lang', L); }catch(e){} }
-    segs.shift();
-  }
+  new URLSearchParams(location.search || '').forEach((v,k) => q[k] = v);
+  const segs = rawPath.split('/').filter(Boolean);
+  /* Ngôn ngữ theo URL: /en/... = English; còn lại = Tiếng Việt (mặc định, không tiền tố) */
+  let lang = 'vi';
+  if(segs[0] === 'en'){ lang = 'en'; segs.shift(); }
+  else if(segs[0] === 'vi'){ lang = 'vi'; segs.shift(); }
+  if(lang !== L){ L = lang; try{ localStorage.setItem('la_lang', L); }catch(e){} }
   /* Slug → khoá route chuẩn */
   if(segs.length) segs[0] = keyOfSlug(segs[0]);
   /* /san-pham/BT002 → route 'product' */
   if(segs[0] === 'products' && segs[1]) segs[0] = 'product';
-  return {rawHash:rawHash, path:'/' + segs.join('/'), q:q, seg:segs};
+  return {rawPath:rawPath, path:'/' + segs.join('/'), q:q, seg:segs};
 }
 function route(){
   const r = parseHash(), q = r.q, seg = r.seg;
   const path = seg.length ? '/' + seg.join('/') : '/';
-  /* Chuẩn hoá URL: luôn có tiền tố ngôn ngữ */
-  const first = decodeURI(location.hash).split('/')[1];
-  if(first !== 'vi' && first !== 'en'){
-    const s = slugOf(seg[0] || '');
-    const rest = seg.slice(1).length ? '/' + seg.slice(1).join('/') : '';
-    const qs = Object.keys(q).length ? '?' + new URLSearchParams(q).toString() : '';
-    const target = '#/' + L + (s ? '/' + s : '/') + rest + qs;
-    if(location.hash !== target){ location.replace(target); route(); return; }
+  CURRENT = seg[0] || '';
+  /* Chuẩn hoá: Tiếng Việt là mặc định → bỏ tiền tố /vi thừa khỏi URL */
+  if(r.rawPath === '/vi' || r.rawPath.indexOf('/vi/') === 0){
+    const stripped = r.rawPath.replace(/^\/vi(\/|$)/, '/');
+    history.replaceState({}, '', stripped + location.search);
   }
   applyDataLang();
   let html = '';
@@ -3006,7 +3034,17 @@ function route(){
   } : null);
   window.scrollTo(0, 0);
 }
-window.addEventListener('hashchange', route);
+window.addEventListener('popstate', route);
+/* Chặn click link nội bộ → điều hướng bằng History API (không tải lại) */
+document.addEventListener('click', function(e){
+  if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest ? e.target.closest('a[href]') : null;
+  if(!a || a.target === '_blank' || a.hasAttribute('download')) return;
+  const href = a.getAttribute('href');
+  if(!href) return;
+  if(href.charAt(0) === '#' && href.charAt(1) === '/'){ e.preventDefault(); navigate(href); return; }
+  if(href.charAt(0) === '/' && href.charAt(1) !== '/'){ e.preventDefault(); navigate(href); return; }
+});
 
 /* Hero slider */
 let heroTimer = null;
@@ -3066,7 +3104,7 @@ function renderDrawer(){
 $('#searchBtn').onclick = () => {
   openModal('<h3 class="t-h3" style="margin-bottom:16px">Tìm kiếm sản phẩm</h3>' +
     '<input class="input" id="mSearch" placeholder="Tên hương, nốt hương, bộ sưu tập…" autofocus ' +
-    'onkeydown="if(event.key===\'Enter\'){location.hash=\'#/products?q=\'+encodeURIComponent(this.value);closeModal()}">' +
+    'onkeydown="if(event.key===\'Enter\'){navigate(\'#/products?q=\'+encodeURIComponent(this.value));closeModal()}">' +
     '<div class="t-cap" style="margin:16px 0 8px">Gợi ý tìm kiếm</div><div>' +
     ['gỗ','hoa nhài','vetiver','unisex','hổ phách'].map(k =>
       '<a href="#/products?q=' + encodeURIComponent(k) + '" class="badge badge-line" style="margin:0 6px 6px 0" onclick="closeModal()">' + k + '</a>').join('') +
