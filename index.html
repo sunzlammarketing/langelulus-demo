@@ -566,32 +566,26 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   <div class="mega" id="mega">
     <div class="wrap mega-grid">
       <div class="mega-col">
-        <h4>Bộ sưu tập</h4>
-        <a href="#/products?c=moss">Miss and Moss<small>Biển &amp; rêu · Cần Giờ</small></a>
-        <a href="#/products?c=sunwood">Sunwood<small>Nắng &amp; tre gỗ · Đà Lạt</small></a>
-        <a href="#/products?c=terra">Terarascent<small>Đất &amp; rừng · Tây Nguyên</small></a>
+        <h4><a href="#/products?cat=nuoc-hoa" style="color:inherit">Nước hoa</a></h4>
+        <a href="#/products?cat=nuoc-hoa&amp;sub=nam">Nước hoa nam</a>
+        <a href="#/products?cat=nuoc-hoa&amp;sub=nu">Nước hoa nữ</a>
+        <a href="#/products?cat=nuoc-hoa&amp;sub=unisex">Nước hoa unisex</a>
       </div>
       <div class="mega-col">
-        <h4>Theo dòng</h4>
-        <a href="#/products?g=Nam">Nước hoa Nam</a>
-        <a href="#/products?g=Nữ">Nước hoa Nữ</a>
-        <a href="#/products?g=Unisex">Nước hoa Unisex</a>
-        <a href="#/products">Xem tất cả 9 sản phẩm</a>
+        <h4><a href="#/products?cat=dau-goi-xa" style="color:inherit">Dầu gội &amp; xả</a></h4>
+        <a href="#/products?cat=dau-goi-xa&amp;sub=thuan-chay">Dầu gội xả thuần chay</a>
+        <a href="#/products?cat=dau-goi-xa&amp;sub=suon-muot">Dầu gội xả suôn mượt tóc</a>
+        <a href="#/products?cat=dau-goi-xa&amp;sub=2in1">Dầu gội xả 2 in 1</a>
       </div>
       <div class="mega-col">
-        <h4>Khám phá</h4>
-        <a href="#/products?s=best">Bán chạy nhất</a>
-        <a href="#/products?s=new">Ra mắt mới</a>
-        <a href="#/news">Cẩm nang mùi hương</a>
-        <a href="#/about">Câu chuyện thương hiệu</a>
+        <h4><a href="#/products?cat=sua-tam" style="color:inherit">Sữa tắm</a></h4>
+        <a href="#/products?cat=sua-tam&amp;sub=sen">Sữa tắm thuần chay chiết xuất sen</a>
+        <a href="#/products?cat=sua-tam&amp;sub=vitamin">Sữa tắm Vitamin</a>
       </div>
       <div class="mega-col">
-        <div class="mega-feature">
-          <div class="eyebrow" style="margin-bottom:12px">Gợi ý</div>
-          <div class="t-h3" style="margin-bottom:8px">Bộ khám phá 3 BST</div>
-          <p class="t-cap" style="margin-bottom:16px">3 chai mini 10ml — thử trọn ba câu chuyện trước khi chọn full-size.</p>
-          <a href="#/products" class="btn btn-secondary btn-sm">Khám phá</a>
-        </div>
+        <h4><a href="#/products?cat=bot-giat" style="color:inherit">Bột giặt</a></h4>
+        <a href="#/products?cat=bot-giat&amp;sub=huong-nuoc-hoa">Bột giặt hương nước hoa</a>
+        <a href="#/products?cat=bot-giat&amp;sub=trang-vuot-bac">Bột giặt trắng vượt bậc</a>
       </div>
     </div>
   </div>
@@ -605,9 +599,10 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   <a href="#/" data-close>Trang chủ</a>
   <a href="#/about" data-close>Về chúng tôi</a>
   <a href="#/products" data-close>Sản phẩm</a>
-  <a href="#/products?c=moss" class="sub" data-close>— Miss and Moss</a>
-  <a href="#/products?c=sunwood" class="sub" data-close>— Sunwood</a>
-  <a href="#/products?c=terra" class="sub" data-close>— Terarascent</a>
+  <a href="#/products?cat=nuoc-hoa" class="sub" data-close>— Nước hoa</a>
+  <a href="#/products?cat=dau-goi-xa" class="sub" data-close>— Dầu gội &amp; xả</a>
+  <a href="#/products?cat=sua-tam" class="sub" data-close>— Sữa tắm</a>
+  <a href="#/products?cat=bot-giat" class="sub" data-close>— Bột giặt</a>
   <a href="#/news" data-close>Tin tức &amp; Sự kiện</a>
   <a href="#/news?tab=posts" class="sub" data-close>— Bài viết</a>
   <a href="#/news?tab=events" class="sub" data-close>— Sự kiện</a>
@@ -1213,7 +1208,58 @@ function pcard(p){
   </article>`;
 }
 
+/* Danh mục sản phẩm (menu 4 nhóm) */
+const CATS = [
+  { id:'nuoc-hoa',   name:'Nước hoa',     subs:[
+      {id:'nam',    name:'Nước hoa nam'},
+      {id:'nu',     name:'Nước hoa nữ'},
+      {id:'unisex', name:'Nước hoa unisex'} ] },
+  { id:'dau-goi-xa', name:'Dầu gội & xả', subs:[
+      {id:'thuan-chay', name:'Dầu gội xả thuần chay'},
+      {id:'suon-muot',  name:'Dầu gội xả suôn mượt tóc'},
+      {id:'2in1',       name:'Dầu gội xả 2 in 1'} ] },
+  { id:'sua-tam',    name:'Sữa tắm',      subs:[
+      {id:'sen',     name:'Sữa tắm thuần chay chiết xuất sen'},
+      {id:'vitamin', name:'Sữa tắm Vitamin'} ] },
+  { id:'bot-giat',   name:'Bột giặt',     subs:[
+      {id:'huong-nuoc-hoa', name:'Bột giặt hương nước hoa'},
+      {id:'trang-vuot-bac', name:'Bột giặt trắng vượt bậc'} ] }
+];
+/* Trang danh mục (dùng cho các nhóm ngoài nước hoa; nước hoa dùng viewProducts đầy đủ) */
+function viewCategory(cat, q){
+  const subObj = q.sub ? cat.subs.find(s => s.id === q.sub) : null;
+  const title = subObj ? subObj.name : cat.name;
+  const list = PRODUCTS.filter(p => p.cat === cat.id && (!q.sub || p.sub === q.sub));
+  const chip = (label, href, on) => `<a href="${href}" class="badge ${on ? 'badge-gold' : 'badge-line'}" style="margin:0 6px 6px 0">${esc(label)}</a>`;
+  return `
+  <div class="wrap"><div class="crumb"><a href="#/">Trang chủ</a> <span>/</span> <a href="#/products">Sản phẩm</a> <span>/</span> <span>${esc(title)}</span></div></div>
+  <section class="sec-sm" style="padding-top:0"><div class="wrap">
+    <div style="max-width:660px;margin-bottom:28px">
+      <div class="eyebrow left">Danh mục</div>
+      <h1 class="t-h1" style="margin:14px 0 12px">${esc(title)}</h1>
+    </div>
+    <div style="margin-bottom:36px">
+      ${chip('Tất cả', '#/products?cat=' + cat.id, !q.sub)}
+      ${cat.subs.map(s => chip(s.name, '#/products?cat=' + cat.id + '&sub=' + s.id, q.sub === s.id)).join('')}
+    </div>
+    ${list.length
+      ? '<div class="grid g3">' + list.map(pcard).join('') + '</div>'
+      : `<div class="card card-p center" style="padding:64px 24px">
+           <div class="t-h3" style="margin-bottom:8px">Sản phẩm đang được cập nhật</div>
+           <p class="muted" style="margin-bottom:24px">Danh mục «${esc(title)}» sẽ sớm có sản phẩm. Vui lòng quay lại sau nhé.</p>
+           <a href="#/products?cat=nuoc-hoa" class="btn btn-primary">Xem nước hoa hiện có</a>
+         </div>`}
+  </div></section>`;
+}
 function viewProducts(q){
+  /* Nước hoa: ánh xạ sang bộ lọc dòng (Nam/Nữ/Unisex) hiện có */
+  if(q.cat === 'nuoc-hoa'){
+    const g = {nam:'Nam', nu:'Nữ', unisex:'Unisex'}[q.sub];
+    q = Object.assign({}, q); delete q.cat; delete q.sub; if(g) q.g = g;
+  } else if(q.cat){
+    const cat = CATS.find(c => c.id === q.cat);
+    if(cat) return viewCategory(cat, q);
+  }
   let list = PRODUCTS.slice();
   if(q.c) list = list.filter(p => p.coll === q.c);
   if(q.g) list = list.filter(p => p.gender === q.g);
