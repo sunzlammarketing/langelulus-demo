@@ -173,10 +173,14 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   transform:translateY(-6px); transition:opacity .2s cubic-bezier(.2,.8,.2,1),transform .2s,visibility .2s; z-index:59}
 .mega.open{opacity:1; visibility:visible; transform:translateY(0)}
 .mega-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s7)}
-.mega-col h4{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:var(--s4); padding-bottom:var(--s3); border-bottom:1px solid var(--border)}
-.mega-col a{display:block; padding:7px 0; font-size:16px; color:var(--ink-700); transition:color .14s,padding-left .14s}
-.mega-col a:hover{color:var(--blue-800); padding-left:6px}
+.mega-col h4{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:var(--s3); padding:0 14px var(--s3); border-bottom:1px solid var(--border)}
+.mega-col h4 a{color:inherit; transition:color .16s}
+.mega-col h4 a:hover{color:var(--blue-900)}
+.mega-col > a{display:block; padding:10px 14px; font-size:16px; color:var(--ink-700); border-radius:999px;
+  transition:background .18s cubic-bezier(.2,.8,.2,1),color .18s}
+.mega-col > a:hover{background:linear-gradient(135deg,var(--blue-500),var(--blue-700)); color:#fff}
 .mega-col a small{display:block; font-size:12px; color:var(--text-muted); letter-spacing:.04em}
+.mega-col > a:hover small{color:rgba(255,255,255,.82)}
 .mega-feature{background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s5); text-align:center}
 
 /* Mobile drawer nav */
