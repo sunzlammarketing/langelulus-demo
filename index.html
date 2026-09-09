@@ -282,7 +282,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .pdp{display:grid; grid-template-columns:1.05fr 1fr; gap:var(--s8); align-items:start}
 .gallery-main{border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; background:var(--surface-2)}
 .thumbs{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s3); margin-top:var(--s3)}
-.thumb{border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; background:var(--surface-2); cursor:pointer; aspect-ratio:1}
+.thumb{position:relative; border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; background:var(--surface-2); cursor:pointer; aspect-ratio:1}
 .thumb.on{border-color:var(--blue-500); box-shadow:0 0 0 2px var(--blue-200)}
 .thumb svg{width:100%; height:100%}
 .variants{display:flex; gap:var(--s3); flex-wrap:wrap}
@@ -504,7 +504,12 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   .g3,.g4,.g2{grid-template-columns:1fr}
   .ftr-grid{grid-template-columns:1fr; gap:var(--s6)}
   .brandtag{display:none}
-  .hdr-in{height:66px}
+  .hdr-in{height:66px; gap:var(--s3)}
+  .logo-mark{height:38px}
+  .logo-word{height:15px}
+  .hdr-actions{margin-left:auto; gap:2px}
+  .hdr-actions > a.icon-btn{display:none}
+  .hdr-actions > .lang-sw{display:none}
   .cart-row{grid-template-columns:72px 1fr; row-gap:var(--s2)}
   .cart-row .pshot{width:72px}
   .stats{grid-template-columns:1fr 1fr; gap:var(--s5)}
