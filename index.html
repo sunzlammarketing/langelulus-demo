@@ -815,7 +815,13 @@ const PRODUCTS = [
    {id:'BG02', slug:'bot-giat-trang-vuot-bac', name:'Bột giặt trắng vượt bậc', cat:'bot-giat', sub:'trang-vuot-bac',
     short:'Công nghệ làm trắng vượt bậc — trả lại độ trắng sáng cho quần áo.',
     desc:'Bột giặt với công nghệ làm trắng vượt bậc đánh bật vết ố vàng và giữ quần áo trắng sáng như mới. An toàn cho sợi vải, hương thơm mát.',
-    price:79000, old:0, rating:0, reviews:0, sold:0, badges:[], stock:100}
+    price:79000, old:0, rating:0, reviews:0, sold:0, badges:[], stock:100},
+
+   /* ── Gift set (bộ 3 chai mini 10ml — chọn 1 bộ sưu tập) ── */
+   {id:'GS01', slug:'gift-set-30ml', name:'Gift set 30ml', giftset:true,
+    short:'Bộ quà 3 chai mini 10ml — trải nghiệm trọn một bộ sưu tập.',
+    desc:'Gift set 30ml gồm 3 chai nước hoa mini 10ml trong cùng một bộ sưu tập, đóng hộp quà sang trọng. Lựa chọn lý tưởng để làm quà tặng hoặc thử trọn một câu chuyện hương trước khi chọn bản full-size.',
+    price:279000, old:0, rating:0, reviews:0, sold:0, badges:[], stock:100}
 ];
 
 const VARIANTS = [
@@ -891,7 +897,7 @@ const isPerfume = p => !p.cat;
 const catOf = p => CATS.find(c => c.id === p.cat);
 const subNameOf = p => { const c = catOf(p); if(!c) return ''; const s = c.subs.find(x => x.id === p.sub); return s ? s.name : c.name; };
 const collColor = p => (isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].color : 'var(--blue-500)';
-const collLabel = p => (isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].name : (catOf(p) ? catOf(p).name : 'Sản phẩm');
+const collLabel = p => p.giftset ? 'Gift set' : ((isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].name : (catOf(p) ? catOf(p).name : 'Sản phẩm'));
 const priceOf = (p, ml) => !isPerfume(p) ? p.price : (p.giftset ? p.price : vari(ml).price);
 
 function toast(msg){
@@ -1242,7 +1248,7 @@ function pcard(p){
     <div class="pcard-body">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
         <span class="pcard-col" style="color:${c.color}">${esc(c.name)}</span>
-        ${isPerfume(p) ? '<span class="badge badge-line">' + esc(p.gender) + '</span>' : (p.sub ? '<span class="badge badge-line">' + esc(subNameOf(p)) + '</span>' : '')}
+        ${p.giftset ? '<span class="badge badge-line">3 × 10ml</span>' : (isPerfume(p) ? '<span class="badge badge-line">' + esc(p.gender) + '</span>' : (p.sub ? '<span class="badge badge-line">' + esc(subNameOf(p)) + '</span>' : ''))}
       </div>
       <h3><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
       ${p.reviews ? '<div class="stars">' + stars(p.rating) + ' <span class="t-cap">(' + p.reviews + ')</span></div>' : ''}
@@ -1273,6 +1279,63 @@ const CATS = [
       {id:'huong-nuoc-hoa', name:'Bột giặt hương nước hoa'},
       {id:'trang-vuot-bac', name:'Bột giặt trắng vượt bậc'} ] }
 ];
+/* Gift set — chọn 1 trong 3 bộ sưu tập, giá cố định */
+let GIFT = {coll:'moss'};
+function selGift(el, coll){
+  GIFT.coll = coll;
+  document.querySelectorAll('.giftopt').forEach(x => x.classList.remove('on'));
+  el.classList.add('on');
+}
+function giftAdd(id, buy){
+  const p = prod(id); if(!p) return;
+  const collName = COLLECTIONS[GIFT.coll].name;
+  const qty = PDP.qty || 1;
+  const key = id + '-' + GIFT.coll;
+  const hit = S.cart.find(i => i.key === key);
+  if(hit) hit.qty += qty;
+  else S.cart.push({key:key, id:id, ml:0, variant:'BST ' + collName, qty:qty, name:p.name, price:p.price});
+  syncCart(); toast('Đã thêm ' + p.name + ' — BST ' + collName + ' vào giỏ');
+  if(buy){ closeDrawer(); navigate('#/checkout'); } else openDrawer();
+}
+function viewGiftset(p){
+  GIFT = {coll:'moss'};
+  const opts = [['moss', COLLECTIONS.moss.name], ['sunwood', COLLECTIONS.sunwood.name], ['terra', COLLECTIONS.terra.name]];
+  const wish = S.wishlist.indexOf(p.id) > -1;
+  return `
+  <div class="wrap"><div class="crumb"><a href="#/">Trang chủ</a> <span>/</span> <a href="#/products">Sản phẩm</a> <span>/</span> <span>${esc(p.name)}</span></div></div>
+  <section style="padding-bottom:var(--s9)"><div class="wrap pdp">
+    <div>
+      <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
+      <div class="thumbs">${[1,2,3,4].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}</div>
+    </div>
+    <div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+        <span class="badge" style="background:var(--blue-100);color:var(--blue-800);border-color:var(--blue-300)">Gift set · 3 chai 10ml</span>
+        <span class="badge badge-ok">Còn hàng</span>
+      </div>
+      <h1 class="t-h1">${esc(p.name)}</h1>
+      <p class="t-lg muted" style="margin:12px 0 24px">${esc(p.short || '')}</p>
+      <div class="rule" style="margin:0 0 24px"></div>
+      <div class="label muted" style="margin-bottom:12px">Chọn bộ sưu tập</div>
+      <div class="variants" style="margin-bottom:24px">
+        ${opts.map((o, idx) => `<label class="variant giftopt ${idx===0?'on':''}" onclick="selGift(this,'${o[0]}')"><b>BST ${esc(o[1])}</b><span>3 × 10ml</span></label>`).join('')}
+      </div>
+      <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}</div>
+      <p class="t-cap" style="margin-bottom:28px">279.000đ cho 1 bộ sưu tập gồm 3 chai 10ml · Đã bao gồm VAT</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
+        <div class="qty"><button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button></div>
+        <button class="btn btn-primary btn-lg" style="flex:1;min-width:200px" onclick="giftAdd('${p.id}',false)">Thêm vào giỏ hàng</button>
+        <button class="btn btn-secondary btn-lg" onclick="giftAdd('${p.id}',true)">Mua ngay</button>
+      </div>
+      <button class="btn btn-ghost" onclick="toggleWish('${p.id}')">${wish ? '♥ Đã lưu yêu thích' : '♡ Lưu vào yêu thích'}</button>
+      ${p.desc ? '<div class="card card-p" style="margin-top:28px;background:var(--surface-2)"><div class="label muted" style="margin-bottom:10px">Mô tả</div><p>' + esc(p.desc) + '</p></div>' : ''}
+      <div class="card card-p" style="margin-top:16px">
+        <p style="margin-bottom:10px"><b>Vận chuyển:</b> Giao toàn quốc 2–5 ngày làm việc. Miễn phí cho đơn từ 500.000đ.</p>
+        <p><b>Đổi trả:</b> Trong 7 ngày nếu sản phẩm lỗi hoặc không đúng mô tả (còn nguyên seal).</p>
+      </div>
+    </div>
+  </div></section>`;
+}
 /* PDP đơn giản cho sản phẩm thường (dầu gội / sữa tắm / bột giặt) */
 function viewProductOther(p){
   const cat = catOf(p);
@@ -1365,13 +1428,13 @@ function viewProducts(q){
   }
   let list = PRODUCTS.filter(p => isPerfume(p));
   if(q.c) list = list.filter(p => p.coll === q.c);
-  if(q.g) list = list.filter(p => p.gender === q.g);
+  if(q.g) list = list.filter(p => p.gender === q.g || p.giftset);
   if(q.s === 'best') list = list.filter(p => p.badges.indexOf('best') > -1);
   if(q.s === 'new')  list = list.filter(p => p.badges.indexOf('new') > -1);
   if(q.max) list = list.filter(p => p.price <= +q.max);
   if(q.q){
     const k = q.q.toLowerCase();
-    list = list.filter(p => (p.name+p.short+p.top+p.mid+p.base+COLLECTIONS[p.coll].name).toLowerCase().indexOf(k) > -1);
+    list = list.filter(p => (p.name+p.short+(p.top||'')+(p.mid||'')+(p.base||'')+collLabel(p)).toLowerCase().indexOf(k) > -1);
   }
   const sort = q.sort || 'pop';
   if(sort === 'asc')  list.sort((a,b) => a.price - b.price);
@@ -1463,6 +1526,7 @@ function sortBy(v){
 function viewProduct(id){
   const p = prod(id);
   if(!p) return view404();
+  if(p.giftset) return viewGiftset(p);
   if(!isPerfume(p)) return viewProductOther(p);
   const c = COLLECTIONS[p.coll];
   const rel = PRODUCTS.filter(x => x.id !== p.id && (x.coll === p.coll || x.gender === p.gender)).slice(0,4);
@@ -1633,7 +1697,7 @@ function cartRow(i){
     ${pshot(p)}
     <div>
       <a href="#/product/${p.id}"><b>${esc(p.name)}</b></a>
-      <div class="t-cap">${esc(collLabel(p))}${i.ml ? ' · ' + i.ml + 'ml' : (p.sub ? ' · ' + esc(subNameOf(p)) : '')}</div>
+      <div class="t-cap">${esc(collLabel(p))}${i.variant ? ' · ' + esc(i.variant) : (i.ml ? ' · ' + i.ml + 'ml' : (p.sub ? ' · ' + esc(subNameOf(p)) : ''))}</div>
       <div style="display:flex;align-items:center;gap:12px;margin-top:8px">
         <div class="qty" style="height:34px">
           <button style="width:32px" onclick="setQty('${i.key}',-1)">−</button>
@@ -1766,7 +1830,7 @@ function viewCheckout(){
 
       <div class="card card-p summary">
         <h3 class="t-h3" style="margin-bottom:16px">Đơn hàng của bạn</h3>
-        ${S.cart.map(i => '<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:15px"><span>' + esc(i.name) + ' <span class="muted">' + (i.ml ? i.ml + 'ml × ' : '× ') + i.qty + '</span></span><b>' + money(i.price*i.qty) + '</b></div>').join('')}
+        ${S.cart.map(i => '<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:15px"><span>' + esc(i.name) + ' <span class="muted">' + (i.variant ? esc(i.variant) + ' × ' : (i.ml ? i.ml + 'ml × ' : '× ')) + i.qty + '</span></span><b>' + money(i.price*i.qty) + '</b></div>').join('')}
         <div style="height:1px;background:var(--border);margin:12px 0"></div>
         ${sumBox(true)}
         <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:24px">Xác nhận &amp; thanh toán</button>
@@ -1816,7 +1880,7 @@ function viewSuccess(){
 
       <div style="text-align:left;background:var(--surface-2);border-radius:var(--r-lg);padding:24px;margin-bottom:32px">
         <div class="label muted" style="margin-bottom:14px">Chi tiết đơn hàng · ${o.date}</div>
-        ${o.items.map(i => '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + esc(i.name) + ' <span class="muted">' + (i.ml ? i.ml + 'ml × ' : '× ') + i.qty + '</span></span><b>' + money(i.price*i.qty) + '</b></div>').join('')}
+        ${o.items.map(i => '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + esc(i.name) + ' <span class="muted">' + (i.variant ? esc(i.variant) + ' × ' : (i.ml ? i.ml + 'ml × ' : '× ')) + i.qty + '</span></span><b>' + money(i.price*i.qty) + '</b></div>').join('')}
         <div style="height:1px;background:var(--border);margin:12px 0"></div>
         <div class="sum-line"><span class="muted">Tạm tính</span><b>${money(o.sub)}</b></div>
         ${o.disc ? '<div class="sum-line"><span style="color:var(--ok)">Giảm giá</span><b style="color:var(--ok)">− ' + money(o.disc) + '</b></div>' : ''}
@@ -3173,7 +3237,7 @@ function route(){
   $$('.lang-btn').forEach(b => b.classList.toggle('on', b.dataset.lang === L));
   const p = seg[0] === 'product' ? prod(seg[1]) : null;
   applySEO(seg[0] || '', p ? {
-    title: isPerfume(p) ? (p.name + (L === 'vi' ? ' — Nước hoa ' + p.gender + " | L'ANGELULUS" : " — " + p.gender + "'s Fragrance | L'ANGELULUS")) : (p.name + " | L'ANGELULUS"),
+    title: (isPerfume(p) && !p.giftset) ? (p.name + (L === 'vi' ? ' — Nước hoa ' + p.gender + " | L'ANGELULUS" : " — " + p.gender + "'s Fragrance | L'ANGELULUS")) : (p.name + " | L'ANGELULUS"),
     desc: p.short, slug: p.slug
   } : null);
   window.scrollTo(0, 0);
