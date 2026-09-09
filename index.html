@@ -819,9 +819,8 @@ const PRODUCTS = [
 ];
 
 const VARIANTS = [
-  {ml:10, label:'10ml · Mini', mult:0.22},
-  {ml:50, label:'50ml', mult:1},
-  {ml:100,label:'100ml', mult:1.72}
+  {ml:10, label:'10ml', price:99000},
+  {ml:100,label:'100ml', price:899000}
 ];
 
 const ARTICLES = [
@@ -893,7 +892,7 @@ const catOf = p => CATS.find(c => c.id === p.cat);
 const subNameOf = p => { const c = catOf(p); if(!c) return ''; const s = c.subs.find(x => x.id === p.sub); return s ? s.name : c.name; };
 const collColor = p => (isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].color : 'var(--blue-500)';
 const collLabel = p => (isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].name : (catOf(p) ? catOf(p).name : 'Sản phẩm');
-const priceOf = (p, ml) => isPerfume(p) ? Math.round(p.price * vari(ml).mult / 1000) * 1000 : p.price;
+const priceOf = (p, ml) => !isPerfume(p) ? p.price : (p.giftset ? p.price : vari(ml).price);
 
 function toast(msg){
   const el = document.createElement('div');
@@ -979,7 +978,7 @@ function bottleBox(p, cls){
 function addToCart(id, ml, qty){
   qty = qty || 1;
   const p = prod(id); if(!p) return;
-  ml = isPerfume(p) ? (ml || 50) : 0;
+  ml = isPerfume(p) ? (p.giftset ? 30 : (ml || 100)) : 0;
   const key = id + '-' + ml;
   const hit = S.cart.find(i => i.key === key);
   if(hit) hit.qty += qty;
@@ -1248,9 +1247,9 @@ function pcard(p){
       <h3><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
       ${p.reviews ? '<div class="stars">' + stars(p.rating) + ' <span class="t-cap">(' + p.reviews + ')</span></div>' : ''}
       <p class="notes">${esc(p.short)}</p>
-      <div class="price">${money(p.price)}${p.old ? '<s>' + money(p.old) + '</s>' : ''}</div>
+      <div class="price">${isPerfume(p) ? (p.giftset ? money(p.price) : 'từ ' + money(Math.min(...VARIANTS.map(v => v.price)))) : money(p.price)}${(!isPerfume(p) && p.old) ? '<s>' + money(p.old) + '</s>' : ''}</div>
       <div class="pcard-foot">
-        <button class="btn btn-primary btn-sm" onclick="addToCart('${p.id}',50)">Thêm vào giỏ</button>
+        <button class="btn btn-primary btn-sm" onclick="addToCart('${p.id}')">Thêm vào giỏ</button>
         <button class="icon-btn" title="Yêu thích" onclick="toggleWish('${p.id}')" style="color:${wish?'var(--blue-700)':'var(--ink-400)'}">${wish?'♥':'♡'}</button>
       </div>
     </div>
@@ -1418,15 +1417,9 @@ function viewProducts(q){
             ${chip('Tất cả', '#/products' + (q.c ? '?c=' + q.c : ''), !q.g)}
             ${['Nam','Nữ','Unisex'].map(g => chip(g, base({g:g}), q.g === g)).join('')}
           </div>
-          <div class="filter-grp">
-            <h4>Khoảng giá</h4>
-            ${chip('Tất cả', base({max:''}), !q.max)}
-            ${chip('Dưới 850k', base({max:850000}), q.max == 850000)}
-            ${chip('Dưới 900k', base({max:900000}), q.max == 900000)}
-          </div>
           <div class="filter-grp" style="border:0">
             <h4>Dung tích</h4>
-            ${VARIANTS.map(v => `<div class="check"><input type="checkbox" ${v.ml===50?'checked':''}><span>${v.label}</span></div>`).join('')}
+            ${VARIANTS.map(v => `<div class="check"><input type="checkbox" ${v.ml===100?'checked':''}><span>${v.label}</span></div>`).join('')}
           </div>
         </aside>
 
@@ -1512,12 +1505,12 @@ function viewProduct(id){
         <div class="label muted" style="margin-bottom:12px">Chọn dung tích</div>
         <div class="variants" style="margin-bottom:28px">
           ${VARIANTS.map(v => `
-            <label class="variant ${v.ml===50?'on':''}" onclick="selVariant(this,'${p.id}',${v.ml})">
+            <label class="variant ${v.ml===100?'on':''}" onclick="selVariant(this,'${p.id}',${v.ml})">
               <b>${v.label}</b><span>${money(priceOf(p,v.ml))}</span>
             </label>`).join('')}
         </div>
 
-        <div class="price t-h2" id="pdpPrice" style="margin-bottom:8px">${money(priceOf(p,50))}${p.old ? '<s>' + money(p.old) + '</s>' : ''}</div>
+        <div class="price t-h2" id="pdpPrice" style="margin-bottom:8px">${money(priceOf(p,100))}</div>
         <p class="t-cap" style="margin-bottom:28px">Đã bao gồm VAT · Miễn phí vận chuyển cho đơn từ 500.000đ</p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
@@ -1611,7 +1604,7 @@ function viewProduct(id){
   </section>`;
 }
 
-let PDP = {ml:50, qty:1};
+let PDP = {ml:100, qty:1};
 function pickThumb(el, id, n){
   $$('.thumb').forEach(t => t.classList.remove('on'));
   el.classList.add('on');
@@ -3167,7 +3160,7 @@ function route(){
   else html = view404();
 
   $('#app').innerHTML = html;
-  PDP = {ml:50, qty:1};
+  PDP = {ml:100, qty:1};
   $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === '/' + (seg[0] || '')));
   closeMega(); closeMnav();
   if(path === '/' || path === '') initHero();
