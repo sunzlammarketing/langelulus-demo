@@ -670,7 +670,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
       </div>
       <div>
         <h4>Sản phẩm</h4>
-        <a href="#/products?c=moss">Miss and Moss</a>
+        <a href="#/products?c=moss">Mist and Moss</a>
         <a href="#/products?c=sunwood">Sunwood</a>
         <a href="#/products?c=terra">Terrascent</a>
         <a href="#/products?g=Nam">Nước hoa Nam</a>
@@ -743,7 +743,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
    DỮ LIỆU (demo — thay bằng API/CMS thật)
    ═══════════════════════════════════════════ */
 const COLLECTIONS = {
-  moss:   {id:'moss',   name:"Miss and Moss", color:'#5B8A72', theme:'Biển & rêu',
+  moss:   {id:'moss',   name:"Mist and Moss", color:'#5B8A72', theme:'Biển & rêu',
            tagline:'Cần Giờ lúc thuỷ triều rút — muối biển, rêu đá và hơi nước.',
            story:'Lấy cảm hứng từ rừng ngập mặn Cần Giờ: vị mặn của gió biển quyện cùng rêu ẩm bám trên rễ đước. Một bộ sưu tập trong trẻo, mát và tĩnh.'},
   sunwood:{id:'sunwood',name:'Sunwood', color:'#C99A3F', theme:'Nắng & tre gỗ',
@@ -894,7 +894,7 @@ const EVENTS = [
   {d:'20', m:'Thg 06', y:2026, title:'Ngày hội mùi hương Việt', place:'TP. Hồ Chí Minh · Nhà văn hoá Thanh Niên', status:'past',
    desc:"Sự kiện đã diễn ra với hơn 1.200 lượt khách tham quan gian hàng L'Angelulus."},
   {d:'15', m:'Thg 05', y:2026, title:"Ra mắt thương hiệu L'Angelulus", place:'TP. Hồ Chí Minh', status:'past',
-   desc:'Buổi giới thiệu chính thức thương hiệu và bộ sưu tập đầu tiên Miss and Moss.'}
+   desc:'Buổi giới thiệu chính thức thương hiệu và bộ sưu tập đầu tiên Mist and Moss.'}
 ];
 
 const REVIEWS = [
@@ -1052,7 +1052,7 @@ function toggleWish(id){
    ═══════════════════════════════════════════ */
 function viewHome(){
   const slides = [
-    {img:'hero-1', alt:'Bộ sưu tập Miss and Moss', cta:'#/products?c=moss'},
+    {img:'hero-1', alt:'Bộ sưu tập Mist and Moss', cta:'#/products?c=moss'},
     {img:'hero-2', alt:'Bộ sưu tập Sunwood', cta:'#/products?c=sunwood'},
     {img:'hero-3', alt:'Bộ sưu tập Terrascent', cta:'#/products?c=terra'}
   ];
@@ -1217,7 +1217,7 @@ function viewAbout(sub){
     <div class="tl">
       <div class="tl-item"><div class="tl-year">2025 · Quý IV</div><h3 class="t-h3" style="margin:8px 0">Hình thành ý tưởng</h3><p class="muted">Nam Phát khởi động dự án nước hoa botanical Việt. Khảo sát nguyên liệu bản địa tại 6 tỉnh thành.</p></div>
       <div class="tl-item"><div class="tl-year">2026 · Quý I</div><h3 class="t-h3" style="margin:8px 0">Điều chế 9 mẫu hương</h3><p class="muted">Mỗi mẫu trải qua 12–18 phiên bản thử, kiểm định độ toả, độ bám và độ ổn định trong khí hậu nóng ẩm.</p></div>
-      <div class="tl-item"><div class="tl-year">2026 · Tháng 5</div><h3 class="t-h3" style="margin:8px 0">Ra mắt Miss and Moss</h3><p class="muted">Bộ sưu tập đầu tiên chính thức lên kệ, mở màn cho hệ sinh thái ba bộ sưu tập.</p></div>
+      <div class="tl-item"><div class="tl-year">2026 · Tháng 5</div><h3 class="t-h3" style="margin:8px 0">Ra mắt Mist and Moss</h3><p class="muted">Bộ sưu tập đầu tiên chính thức lên kệ, mở màn cho hệ sinh thái ba bộ sưu tập.</p></div>
       <div class="tl-item"><div class="tl-year">2026 · Tháng 6</div><h3 class="t-h3" style="margin:8px 0">Hoàn thiện 3 bộ sưu tập</h3><p class="muted">Sunwood và Terrascent lần lượt ra mắt. Danh mục đạt đủ 9 sản phẩm, phủ cả ba dòng Nam · Nữ · Unisex.</p></div>
       <div class="tl-item" style="padding-bottom:0"><div class="tl-year">2026 · Hôm nay</div><h3 class="t-h3" style="margin:8px 0">Ba kênh song song</h3><p class="muted">Website chính thức, Shopee Mall và TikTok Shop Mall cùng vận hành — website là điểm neo thương hiệu.</p></div>
     </div>
@@ -2536,7 +2536,7 @@ function admBanners(){
   const en = L === 'en';
   const B = [
     ['Đất kể chuyện bằng mùi hương','Earth tells its story in scent','Terrascent','#/products?c=terra', true],
-    ['Biển Cần Giờ lúc thuỷ triều rút','Can Gio at low tide','Miss and Moss','#/products?c=moss', true],
+    ['Biển Cần Giờ lúc thuỷ triều rút','Can Gio at low tide','Mist and Moss','#/products?c=moss', true],
     ['Nắng cao nguyên đọng lại trên gỗ','Highland sun settled into wood','Sunwood','#/products?c=sunwood', false]
   ];
   return `
@@ -2968,7 +2968,7 @@ Object.assign(DICT, {
 '2025 · Quý IV':'2025 · Q4','2026 · Quý I':'2026 · Q1','2026 · Tháng 5':'2026 · May',
 '2026 · Tháng 6':'2026 · June','2026 · Hôm nay':'2026 · Today',
 'Hình thành ý tưởng':'The idea takes shape','Điều chế 9 mẫu hương':'Nine fragrances developed',
-'Ra mắt Miss and Moss':'Miss and Moss launches','Hoàn thiện 3 bộ sưu tập':'All three collections complete',
+'Ra mắt Mist and Moss':'Mist and Moss launches','Hoàn thiện 3 bộ sưu tập':'All three collections complete',
 'Ba kênh song song':'Three channels in parallel',
 'Nam Phát khởi động dự án nước hoa botanical Việt. Khảo sát nguyên liệu bản địa tại 6 tỉnh thành.':
   'Nam Phat starts the Vietnamese botanical perfume project, surveying local materials across six provinces.',
@@ -3103,7 +3103,7 @@ const EN_EVENTS = [
  {title:'Vietnamese Fragrance Festival', place:'Ho Chi Minh City · Youth Cultural House', m:'Jun',
   desc:"The event drew over 1,200 visitors to the L'Angelulus stand."},
  {title:"L'Angelulus brand launch", place:'Ho Chi Minh City', m:'May',
-  desc:'The official brand introduction and debut of the Miss and Moss collection.'}
+  desc:'The official brand introduction and debut of the Mist and Moss collection.'}
 ];
 const EN_REVIEWS = [
  'Very clean and refined — works well for the office. It was still on my shirt the next day. Carefully packed, with a free sample.',
@@ -3174,8 +3174,8 @@ function translateDOM(root){
 const SEO = {
   '':            [['L\'ANGELULUS — Nước hoa Botanical Việt','Chín hương thơm kể câu chuyện đất Việt. Mua chính hãng tại website L\'Angelulus.'],
                   ['L\'ANGELULUS — Vietnamese Botanical Perfume','Nine fragrances telling the story of Vietnam. Shop authentic at the official L\'Angelulus site.']],
-  'products':    [['Tất cả sản phẩm — L\'ANGELULUS','9 chai nước hoa thuộc 3 bộ sưu tập Miss and Moss, Sunwood, Terrascent.'],
-                  ['All Products — L\'ANGELULUS','Nine fragrances across the Miss and Moss, Sunwood and Terrascent collections.']],
+  'products':    [['Tất cả sản phẩm — L\'ANGELULUS','9 chai nước hoa thuộc 3 bộ sưu tập Mist and Moss, Sunwood, Terrascent.'],
+                  ['All Products — L\'ANGELULUS','Nine fragrances across the Mist and Moss, Sunwood and Terrascent collections.']],
   'about':       [['Về chúng tôi — L\'ANGELULUS','Câu chuyện thương hiệu, giá trị cốt lõi và năng lực sản xuất của L\'Angelulus.'],
                   ['About Us — L\'ANGELULUS','The brand story, core values and production capability behind L\'Angelulus.']],
   'news':        [['Tin tức & Sự kiện — L\'ANGELULUS','Kiến thức về nước hoa, câu chuyện thương hiệu và lịch sự kiện của L\'Angelulus.'],
