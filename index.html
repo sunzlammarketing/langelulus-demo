@@ -672,7 +672,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
         <h4>Sản phẩm</h4>
         <a href="#/products?c=moss">Miss and Moss</a>
         <a href="#/products?c=sunwood">Sunwood</a>
-        <a href="#/products?c=terra">Terarascent</a>
+        <a href="#/products?c=terra">Terrascent</a>
         <a href="#/products?g=Nam">Nước hoa Nam</a>
         <a href="#/products?g=Nữ">Nước hoa Nữ</a>
         <a href="#/products?g=Unisex">Nước hoa Unisex</a>
@@ -749,7 +749,7 @@ const COLLECTIONS = {
   sunwood:{id:'sunwood',name:'Sunwood', color:'#C99A3F', theme:'Nắng & tre gỗ',
            tagline:'Nắng Đà Lạt xuyên qua rừng thông và bụi tre non.',
            story:'Ấm, vàng, có ánh sáng. Gỗ thông Đà Lạt, tre non và hổ phách — bộ sưu tập của những buổi chiều muộn còn vương hơi ấm.'},
-  terra:  {id:'terra',  name:'Terarascent', color:'#6B4A2F', theme:'Đất & rừng',
+  terra:  {id:'terra',  name:'Terrascent', color:'#6B4A2F', theme:'Đất & rừng',
            tagline:'Đất đỏ bazan sau cơn mưa, rễ vetiver và trầm hương.',
            story:'Sâu, trầm và rất Việt. Hương của đất Tây Nguyên sau mưa, rễ hương bài và trầm — dành cho người đã biết mình muốn gì.'}
 };
@@ -870,9 +870,9 @@ const ARTICLES = [
    excerpt:'Sáu thói quen nhỏ giúp chai nước hoa của bạn bền hơn gấp đôi — không tốn thêm đồng nào.', date:'02/07/2026', read:4,
    body:['Xịt lên da ẩm. Da khô hút và "ăn" hương rất nhanh. Thoa một lớp dưỡng thể không mùi trước khi xịt sẽ tăng thời gian lưu hương đáng kể.','Nhắm vào điểm mạch: cổ tay, sau tai, hõm cổ, khuỷu tay trong. Đây là nơi thân nhiệt cao, giúp hương toả đều.','Đừng chà xát cổ tay vào nhau. Ma sát phá vỡ cấu trúc phân tử của hương đầu và làm chai nước hoa "cụt" đi.','Bảo quản tránh nắng và nhiệt. Phòng tắm là nơi tệ nhất để cất nước hoa — độ ẩm và nhiệt độ thay đổi liên tục.'],
    quote:'Một chai nước hoa được bảo quản đúng có thể giữ chất lượng 3–5 năm.'},
-  {id:'a4', cat:'Sự kiện', title:"L'Angelulus ra mắt bộ sưu tập Terarascent",
+  {id:'a4', cat:'Sự kiện', title:"L'Angelulus ra mắt bộ sưu tập Terrascent",
    excerpt:'Ba hương thơm lấy cảm hứng từ đất đỏ Tây Nguyên chính thức có mặt trên toàn hệ thống.', date:'25/06/2026', read:3,
-   body:["Terarascent là bộ sưu tập thứ ba của L'Angelulus, gồm Root Man, Mist Theory và Lily's Secret. Đây cũng là bộ sưu tập có tầng hương cuối sâu nhất trong toàn bộ danh mục.",'Bộ sưu tập chính thức lên kệ tại website, Shopee Mall và TikTok Shop từ ngày 25/06/2026.'],
+   body:["Terrascent là bộ sưu tập thứ ba của L'Angelulus, gồm Root Man, Mist Theory và Lily's Secret. Đây cũng là bộ sưu tập có tầng hương cuối sâu nhất trong toàn bộ danh mục.",'Bộ sưu tập chính thức lên kệ tại website, Shopee Mall và TikTok Shop từ ngày 25/06/2026.'],
    quote:'Đất là thứ giữ lại tất cả. Kể cả mùi hương.'},
   {id:'a5', cat:'Cẩm nang', title:'Chọn nước hoa cho khí hậu nhiệt đới Việt Nam',
    excerpt:'Nóng ẩm làm hương toả nhanh và gắt hơn. Đây là cách chọn để không bị "quá tay".', date:'14/06/2026', read:6,
@@ -889,7 +889,7 @@ const EVENTS = [
    desc:'Trải nghiệm trọn 9 hương thơm, tư vấn 1-1 cùng chuyên gia mùi hương. Miễn phí vào cửa.'},
   {d:'28', m:'Thg 08', y:2026, title:'Workshop "Đọc hiểu tháp hương"', place:'Hà Nội · The Coffee House Thái Hà', status:'up',
    desc:'Buổi workshop 90 phút dành cho người mới bắt đầu. Số lượng giới hạn 30 người.'},
-  {d:'05', m:'Thg 08', y:2026, title:'Livestream ra mắt Terarascent', place:"TikTok Shop L'Angelulus", status:'up',
+  {d:'05', m:'Thg 08', y:2026, title:'Livestream ra mắt Terrascent', place:"TikTok Shop L'Angelulus", status:'up',
    desc:'Ưu đãi độc quyền trong livestream: giảm đến 30% và tặng bộ mini 3 chai 10ml.'},
   {d:'20', m:'Thg 06', y:2026, title:'Ngày hội mùi hương Việt', place:'TP. Hồ Chí Minh · Nhà văn hoá Thanh Niên', status:'past',
    desc:"Sự kiện đã diễn ra với hơn 1.200 lượt khách tham quan gian hàng L'Angelulus."},
@@ -1054,7 +1054,7 @@ function viewHome(){
   const slides = [
     {img:'hero-1', alt:'Bộ sưu tập Miss and Moss', cta:'#/products?c=moss'},
     {img:'hero-2', alt:'Bộ sưu tập Sunwood', cta:'#/products?c=sunwood'},
-    {img:'hero-3', alt:'Bộ sưu tập Terarascent', cta:'#/products?c=terra'}
+    {img:'hero-3', alt:'Bộ sưu tập Terrascent', cta:'#/products?c=terra'}
   ];
   const best = PRODUCTS.filter(p => p.badges.indexOf('best') > -1);
   const news = ARTICLES.slice(0,3);
@@ -1218,7 +1218,7 @@ function viewAbout(sub){
       <div class="tl-item"><div class="tl-year">2025 · Quý IV</div><h3 class="t-h3" style="margin:8px 0">Hình thành ý tưởng</h3><p class="muted">Nam Phát khởi động dự án nước hoa botanical Việt. Khảo sát nguyên liệu bản địa tại 6 tỉnh thành.</p></div>
       <div class="tl-item"><div class="tl-year">2026 · Quý I</div><h3 class="t-h3" style="margin:8px 0">Điều chế 9 mẫu hương</h3><p class="muted">Mỗi mẫu trải qua 12–18 phiên bản thử, kiểm định độ toả, độ bám và độ ổn định trong khí hậu nóng ẩm.</p></div>
       <div class="tl-item"><div class="tl-year">2026 · Tháng 5</div><h3 class="t-h3" style="margin:8px 0">Ra mắt Miss and Moss</h3><p class="muted">Bộ sưu tập đầu tiên chính thức lên kệ, mở màn cho hệ sinh thái ba bộ sưu tập.</p></div>
-      <div class="tl-item"><div class="tl-year">2026 · Tháng 6</div><h3 class="t-h3" style="margin:8px 0">Hoàn thiện 3 bộ sưu tập</h3><p class="muted">Sunwood và Terarascent lần lượt ra mắt. Danh mục đạt đủ 9 sản phẩm, phủ cả ba dòng Nam · Nữ · Unisex.</p></div>
+      <div class="tl-item"><div class="tl-year">2026 · Tháng 6</div><h3 class="t-h3" style="margin:8px 0">Hoàn thiện 3 bộ sưu tập</h3><p class="muted">Sunwood và Terrascent lần lượt ra mắt. Danh mục đạt đủ 9 sản phẩm, phủ cả ba dòng Nam · Nữ · Unisex.</p></div>
       <div class="tl-item" style="padding-bottom:0"><div class="tl-year">2026 · Hôm nay</div><h3 class="t-h3" style="margin:8px 0">Ba kênh song song</h3><p class="muted">Website chính thức, Shopee Mall và TikTok Shop Mall cùng vận hành — website là điểm neo thương hiệu.</p></div>
     </div>
   </div></section>`;
@@ -2535,7 +2535,7 @@ function admProducts(){
 function admBanners(){
   const en = L === 'en';
   const B = [
-    ['Đất kể chuyện bằng mùi hương','Earth tells its story in scent','Terarascent','#/products?c=terra', true],
+    ['Đất kể chuyện bằng mùi hương','Earth tells its story in scent','Terrascent','#/products?c=terra', true],
     ['Biển Cần Giờ lúc thuỷ triều rút','Can Gio at low tide','Miss and Moss','#/products?c=moss', true],
     ['Nắng cao nguyên đọng lại trên gỗ','Highland sun settled into wood','Sunwood','#/products?c=sunwood', false]
   ];
@@ -2557,7 +2557,7 @@ function admBanners(){
     </table>
   </div>
   <div class="card card-p" id="cmsBan">
-    <h3 class="t-h3" style="margin-bottom:16px">${en?'Edit banner':'Sửa banner'} · Terarascent</h3>
+    <h3 class="t-h3" style="margin-bottom:16px">${en?'Edit banner':'Sửa banner'} · Terrascent</h3>
     ${cmsTabs('cmsBan')}
     ${fieldPair('h', en?'Heading':'Tiêu đề', 'Đất kể chuyện bằng mùi hương', 'Earth tells its story in scent')}
     ${fieldPair('sub', en?'Sub-heading':'Mô tả phụ',
@@ -2940,7 +2940,7 @@ Object.assign(DICT, {
 'Nhập email để chúng tôi gửi file PDF đầy đủ.':'Enter your email and we\'ll send the full PDF.',
 'Nhận catalogue & chứng nhận':'Get catalogue & certifications','Tên công ty (nếu có)':'Company name (optional)',
 'Tuỳ chọn':'Optional','Một câu hỏi rất đơn giản':'One very simple question',
-'Quản trị (demo)':'Admin (demo)','Quản trị':'Admin','Bộ sưu tập mới · Terarascent':'New collection · Terarascent',
+'Quản trị (demo)':'Admin (demo)','Quản trị':'Admin','Bộ sưu tập mới · Terrascent':'New collection · Terrascent',
 'Đã bán':'Sold','đánh giá':'reviews','sản phẩm':'products','Hiển thị':'Showing',
 'Toàn quyền':'Full access','Vận hành':'Operations','Nội dung (CMS)':'Content (CMS)','Hệ thống':'System',
 'Đang đăng nhập':'Signed in as','Bảng điều khiển':'Internal panel',
@@ -2976,8 +2976,8 @@ Object.assign(DICT, {
   'Each fragrance went through 12–18 trial versions, tested for projection, longevity and stability in heat and humidity.',
 'Bộ sưu tập đầu tiên chính thức lên kệ, mở màn cho hệ sinh thái ba bộ sưu tập.':
   'The first collection goes on sale, opening the three-collection range.',
-'Sunwood và Terarascent lần lượt ra mắt. Danh mục đạt đủ 9 sản phẩm, phủ cả ba dòng Nam · Nữ · Unisex.':
-  'Sunwood and Terarascent follow. The range reaches nine products across men\'s, women\'s and unisex lines.',
+'Sunwood và Terrascent lần lượt ra mắt. Danh mục đạt đủ 9 sản phẩm, phủ cả ba dòng Nam · Nữ · Unisex.':
+  'Sunwood and Terrascent follow. The range reaches nine products across men\'s, women\'s and unisex lines.',
 'Website chính thức, Shopee Mall và TikTok Shop Mall cùng vận hành — website là điểm neo thương hiệu.':
   'The official website, Shopee Mall and TikTok Shop Mall run in parallel — the website is the brand anchor.',
 'Mỗi chai phải kể được một câu chuyện có thật về một vùng đất Việt Nam. Không mượn, không sao chép.':
@@ -3080,9 +3080,9 @@ const EN_ARTICLES = {
    excerpt:'Six small habits that double the life of your bottle — at no extra cost.',
    body:['Spray on moisturised skin. Dry skin drinks fragrance fast. An unscented body lotion first will noticeably extend wear.','Target pulse points: wrists, behind the ears, the hollow of the throat, inner elbows. Body heat there helps the scent bloom evenly.','Don\'t rub your wrists together. Friction breaks the molecular structure of the top notes and cuts the opening short.','Store away from heat and sunlight. The bathroom is the worst place to keep perfume — humidity and temperature swing constantly.'],
    quote:'A properly stored bottle can hold its quality for three to five years.'},
- a4:{cat:'Events', title:'L\'Angelulus launches the Terarascent collection',
+ a4:{cat:'Events', title:'L\'Angelulus launches the Terrascent collection',
    excerpt:'Three fragrances inspired by Central Highlands red soil are now available across all channels.',
-   body:['Terarascent is the third L\'Angelulus collection, comprising Root Man, Mist Theory and Lily\'s Secret. It also carries the deepest base of anything in the range.','The collection went on sale via the website, Shopee Mall and TikTok Shop on 25 June 2026.'],
+   body:['Terrascent is the third L\'Angelulus collection, comprising Root Man, Mist Theory and Lily\'s Secret. It also carries the deepest base of anything in the range.','The collection went on sale via the website, Shopee Mall and TikTok Shop on 25 June 2026.'],
    quote:'Earth keeps everything. Scent included.'},
  a5:{cat:'Guide', title:'Choosing fragrance for Vietnam\'s tropical climate',
    excerpt:'Heat and humidity make scent project faster and sharper. Here\'s how to avoid overdoing it.',
@@ -3098,7 +3098,7 @@ const EN_EVENTS = [
   desc:'Experience all nine fragrances with one-to-one guidance from our scent specialists. Free entry.'},
  {title:'Workshop: Reading the Fragrance Pyramid', place:'Hanoi · The Coffee House Thai Ha', m:'Aug',
   desc:'A 90-minute beginner workshop. Limited to 30 attendees.'},
- {title:'Terarascent launch livestream', place:"TikTok Shop L'Angelulus", m:'Aug',
+ {title:'Terrascent launch livestream', place:"TikTok Shop L'Angelulus", m:'Aug',
   desc:'Livestream-exclusive offers: up to 30% off plus a free 3 × 10ml mini set.'},
  {title:'Vietnamese Fragrance Festival', place:'Ho Chi Minh City · Youth Cultural House', m:'Jun',
   desc:"The event drew over 1,200 visitors to the L'Angelulus stand."},
@@ -3174,8 +3174,8 @@ function translateDOM(root){
 const SEO = {
   '':            [['L\'ANGELULUS — Nước hoa Botanical Việt','Chín hương thơm kể câu chuyện đất Việt. Mua chính hãng tại website L\'Angelulus.'],
                   ['L\'ANGELULUS — Vietnamese Botanical Perfume','Nine fragrances telling the story of Vietnam. Shop authentic at the official L\'Angelulus site.']],
-  'products':    [['Tất cả sản phẩm — L\'ANGELULUS','9 chai nước hoa thuộc 3 bộ sưu tập Miss and Moss, Sunwood, Terarascent.'],
-                  ['All Products — L\'ANGELULUS','Nine fragrances across the Miss and Moss, Sunwood and Terarascent collections.']],
+  'products':    [['Tất cả sản phẩm — L\'ANGELULUS','9 chai nước hoa thuộc 3 bộ sưu tập Miss and Moss, Sunwood, Terrascent.'],
+                  ['All Products — L\'ANGELULUS','Nine fragrances across the Miss and Moss, Sunwood and Terrascent collections.']],
   'about':       [['Về chúng tôi — L\'ANGELULUS','Câu chuyện thương hiệu, giá trị cốt lõi và năng lực sản xuất của L\'Angelulus.'],
                   ['About Us — L\'ANGELULUS','The brand story, core values and production capability behind L\'Angelulus.']],
   'news':        [['Tin tức & Sự kiện — L\'ANGELULUS','Kiến thức về nước hoa, câu chuyện thương hiệu và lịch sự kiện của L\'Angelulus.'],
