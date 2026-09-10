@@ -242,6 +242,9 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .bottle:has(.photo.ok) .photo{inset:14px}
 .bottle:has(.photo.ok) .photo.ok{filter:none}
 .pcard:hover .photo.ok{transform:scale(1.02); transition:transform .3s ease-out, opacity .24s}
+/* Ảnh thứ 2 hiện khi rê chuột vào thẻ (crossfade) */
+.pshot .hover-img.ok{opacity:0; transition:opacity .5s cubic-bezier(.2,.8,.2,1), transform .3s ease-out}
+.pcard:hover .pshot .hover-img.ok{opacity:1}
 .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; z-index:0}
 .hero-bg.ok{opacity:.34}
 
@@ -1013,13 +1016,14 @@ function bottleSVG(p){
     <text x="150" y="266" text-anchor="middle" font-family="Times New Roman,serif" font-size="9" fill="#566673" letter-spacing="2">${esc(collLabel(p).toUpperCase())}</text>
   </svg>`;
 }
-function pshot(p, extra, n){
+function pshot(p, extra, n, hover){
   const c = {color: collColor(p), name: collLabel(p)};
   const base = n && n > 1 ? p.id + '-' + n : p.id;
   return `<div class="pshot ${extra||''}">
     <span class="col-tag" style="background:${c.color}">${esc(c.name)}</span>
     ${bottleSVG(p)}
     ${photoLayer(base, p.name)}
+    ${hover ? photoLayer(p.id + '-2', p.name, IMG_BASE, 'hover-img') : ''}
   </div>`;
 }
 /* Chai lớn ở hero / trang giới thiệu */
@@ -1311,7 +1315,7 @@ function pcard(p){
   const c = {color: collColor(p), name: collLabel(p)};
   const wish = S.wishlist.indexOf(p.id) > -1;
   return `<article class="pcard">
-    <a href="#/product/${p.id}">${pshot(p)}</a>
+    <a href="#/product/${p.id}">${pshot(p, '', 0, true)}</a>
     <div class="pcard-body">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
         <span class="pcard-col" style="color:${c.color}">${esc(c.name)}</span>
