@@ -181,15 +181,19 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   border-bottom:1px solid var(--border); box-shadow:var(--sh-md); padding:var(--s7) 0; opacity:0; visibility:hidden;
   transform:translateY(-6px); transition:opacity .2s cubic-bezier(.2,.8,.2,1),transform .2s,visibility .2s; z-index:59}
 .mega.open{opacity:1; visibility:visible; transform:translateY(0)}
-.mega-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s7)}
+.mega-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s7)}
 .mega-col h4{font-size:16px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--blue-800); margin-bottom:var(--s3); padding:0 14px var(--s3); border-bottom:2px solid var(--blue-400)}
 .mega-col h4 a{color:inherit; transition:color .16s}
 .mega-col h4 a:hover{color:var(--blue-900)}
-.mega-col > a{display:block; position:relative; padding:10px 14px; font-size:16px; color:var(--ink-700); border-radius:999px; transform-origin:left center;
-  transition:background .18s cubic-bezier(.2,.8,.2,1),color .18s,transform .18s cubic-bezier(.2,.8,.2,1)}
-.mega-col > a:hover{background:linear-gradient(135deg,var(--blue-500),var(--blue-700)); color:#fff; transform:scale(1.3); z-index:2}
+.mega-sub{margin-bottom:var(--s4)}
+.mega-sub h5{font-size:13px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; color:var(--blue-700); padding:0 14px; margin:var(--s3) 0 2px}
+.mega-sub h5 a{color:inherit; transition:color .16s}
+.mega-sub h5 a:hover{color:var(--blue-900)}
+.mega-col > a, .mega-sub > a{display:block; padding:9px 14px; font-size:15px; color:var(--ink-700); border-radius:999px;
+  transition:background .18s cubic-bezier(.2,.8,.2,1),color .18s}
+.mega-col > a:hover, .mega-sub > a:hover{background:linear-gradient(135deg,var(--blue-500),var(--blue-700)); color:#fff}
 .mega-col a small{display:block; font-size:12px; color:var(--text-muted); letter-spacing:.04em}
-.mega-col > a:hover small{color:rgba(255,255,255,.82)}
+.mega-col a:hover small{color:rgba(255,255,255,.82)}
 .mega-feature{background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s5); text-align:center}
 
 /* Mobile drawer nav */
@@ -198,6 +202,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .mnav.open{transform:translateX(0)}
 .mnav a{display:block; padding:var(--s4); font-size:22px; border-bottom:1px solid rgba(29,159,217,.15); color:var(--ink-50); border-radius:var(--r-lg); transition:background .16s,color .16s}
 .mnav a.sub{font-size:17px; padding-left:var(--s6); color:var(--ink-300)}
+.mnav a.sub2{font-size:16px; padding-left:var(--s8); color:var(--ink-400)}
+.mnav a.sub2:hover,.mnav a.sub2:active{color:#fff}
 .mnav a:hover,.mnav a:active{background:linear-gradient(135deg,var(--blue-500),var(--blue-700)); color:#fff; border-bottom-color:transparent}
 .mnav a.sub:hover,.mnav a.sub:active{color:#fff}
 
@@ -595,20 +601,28 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
         <a href="#/products?cat=nuoc-hoa&amp;sub=unisex">Nước hoa unisex</a>
       </div>
       <div class="mega-col">
-        <h4><a href="#/products?cat=dau-goi-xa" style="color:inherit">Dầu gội &amp; xả</a></h4>
-        <a href="#/products?cat=dau-goi-xa&amp;sub=thuan-chay">Dầu gội xả thuần chay</a>
-        <a href="#/products?cat=dau-goi-xa&amp;sub=suon-muot">Dầu gội xả suôn mượt tóc</a>
-        <a href="#/products?cat=dau-goi-xa&amp;sub=2in1">Dầu gội 2 in 1 (cho nam)</a>
+        <h4><a href="#/products?group=my-pham" style="color:inherit">Mỹ phẩm &amp; chăm sóc</a></h4>
+        <div class="mega-sub">
+          <h5><a href="#/products?cat=dau-goi-xa">Dầu gội &amp; xả</a></h5>
+          <a href="#/products?cat=dau-goi-xa&amp;sub=thuan-chay">Dầu gội xả thuần chay</a>
+          <a href="#/products?cat=dau-goi-xa&amp;sub=suon-muot">Dầu gội xả suôn mượt tóc</a>
+          <a href="#/products?cat=dau-goi-xa&amp;sub=2in1">Dầu gội 2 in 1 (cho nam)</a>
+        </div>
+        <div class="mega-sub">
+          <h5><a href="#/products?cat=sua-tam">Sữa tắm</a></h5>
+          <a href="#/products?cat=sua-tam&amp;sub=sen">Sữa tắm thuần chay chiết xuất sen</a>
+          <a href="#/products?cat=sua-tam&amp;sub=vitamin">Sữa tắm Vitamin</a>
+        </div>
       </div>
       <div class="mega-col">
-        <h4><a href="#/products?cat=sua-tam" style="color:inherit">Sữa tắm</a></h4>
-        <a href="#/products?cat=sua-tam&amp;sub=sen">Sữa tắm thuần chay chiết xuất sen</a>
-        <a href="#/products?cat=sua-tam&amp;sub=vitamin">Sữa tắm Vitamin</a>
-      </div>
-      <div class="mega-col">
-        <h4><a href="#/products?cat=bot-giat" style="color:inherit">Bột giặt</a></h4>
-        <a href="#/products?cat=bot-giat&amp;sub=huong-nuoc-hoa">Bột giặt hương nước hoa</a>
-        <a href="#/products?cat=bot-giat&amp;sub=trang-vuot-bac">Bột giặt trắng vượt bậc</a>
+        <h4><a href="#/products?group=hoa-pham-xanh" style="color:inherit">Hoá phẩm xanh</a></h4>
+        <div class="mega-sub">
+          <h5><a href="#/products?cat=bot-giat">Bột giặt</a></h5>
+          <a href="#/products?cat=bot-giat&amp;sub=huong-nuoc-hoa">Bột giặt hương nước hoa</a>
+          <a href="#/products?cat=bot-giat&amp;sub=trang-vuot-bac">Bột giặt trắng vượt bậc</a>
+        </div>
+        <a href="#/products?cat=nuoc-rua-chen">Nước rửa chén</a>
+        <a href="#/products?cat=nuoc-lau-san">Nước lau sàn</a>
       </div>
     </div>
   </div>
@@ -628,9 +642,13 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   <a href="#/about/catalogue" class="sub" data-close>— Catalogue</a>
   <a href="#/products" data-close>Sản phẩm</a>
   <a href="#/products?cat=nuoc-hoa" class="sub" data-close>— Nước hoa</a>
-  <a href="#/products?cat=dau-goi-xa" class="sub" data-close>— Dầu gội &amp; xả</a>
-  <a href="#/products?cat=sua-tam" class="sub" data-close>— Sữa tắm</a>
-  <a href="#/products?cat=bot-giat" class="sub" data-close>— Bột giặt</a>
+  <a href="#/products?group=my-pham" class="sub" data-close>— Mỹ phẩm &amp; chăm sóc</a>
+  <a href="#/products?cat=dau-goi-xa" class="sub2" data-close>· Dầu gội &amp; xả</a>
+  <a href="#/products?cat=sua-tam" class="sub2" data-close>· Sữa tắm</a>
+  <a href="#/products?group=hoa-pham-xanh" class="sub" data-close>— Hoá phẩm xanh</a>
+  <a href="#/products?cat=bot-giat" class="sub2" data-close>· Bột giặt</a>
+  <a href="#/products?cat=nuoc-rua-chen" class="sub2" data-close>· Nước rửa chén</a>
+  <a href="#/products?cat=nuoc-lau-san" class="sub2" data-close>· Nước lau sàn</a>
   <a href="#/news" data-close>Tin tức &amp; Sự kiện</a>
   <a href="#/news?tab=posts" class="sub" data-close>— Bài viết</a>
   <a href="#/news?tab=events" class="sub" data-close>— Sự kiện</a>
@@ -1325,7 +1343,15 @@ const CATS = [
       {id:'vitamin', name:'Sữa tắm Vitamin'} ] },
   { id:'bot-giat',   name:'Bột giặt',     subs:[
       {id:'huong-nuoc-hoa', name:'Bột giặt hương nước hoa'},
-      {id:'trang-vuot-bac', name:'Bột giặt trắng vượt bậc'} ] }
+      {id:'trang-vuot-bac', name:'Bột giặt trắng vượt bậc'} ] },
+  { id:'nuoc-rua-chen', name:'Nước rửa chén', subs:[] },
+  { id:'nuoc-lau-san',  name:'Nước lau sàn',  subs:[] }
+];
+/* Nhóm lớn của menu Sản phẩm (3 nhóm) */
+const GROUPS = [
+  { id:'nuoc-hoa',      name:'Nước hoa',            cats:['nuoc-hoa'] },
+  { id:'my-pham',       name:'Mỹ phẩm & chăm sóc',  cats:['dau-goi-xa','sua-tam'] },
+  { id:'hoa-pham-xanh', name:'Hoá phẩm xanh',       cats:['bot-giat','nuoc-rua-chen','nuoc-lau-san'] }
 ];
 /* Gift set — chọn 1 trong 3 bộ sưu tập, giá cố định */
 let GIFT = {coll:'moss'};
@@ -1438,6 +1464,29 @@ function viewProductOther(p){
   </section>`;
 }
 /* Trang danh mục (dùng cho các nhóm ngoài nước hoa; nước hoa dùng viewProducts đầy đủ) */
+/* Trang nhóm lớn: liệt kê sản phẩm của tất cả danh mục trong nhóm + chip danh mục */
+function viewGroup(g){
+  const cats = g.cats.map(id => CATS.find(c => c.id === id)).filter(Boolean);
+  const list = PRODUCTS.filter(p => g.cats.indexOf(p.cat) > -1);
+  const chip = (label, href) => `<a href="${href}" class="badge badge-line" style="margin:0 6px 6px 0">${esc(label)}</a>`;
+  return `
+  <div class="wrap"><div class="crumb"><a href="#/">Trang chủ</a> <span>/</span> <a href="#/products">Sản phẩm</a> <span>/</span> <span>${esc(g.name)}</span></div></div>
+  <section class="sec-sm" style="padding-top:0"><div class="wrap">
+    <div style="max-width:660px;margin-bottom:28px">
+      <div class="eyebrow left">Danh mục</div>
+      <h1 class="t-h1" style="margin:14px 0 12px">${esc(g.name)}</h1>
+    </div>
+    <div style="margin-bottom:36px">
+      ${cats.map(c => chip(c.name, '#/products?cat=' + c.id)).join('')}
+    </div>
+    ${list.length
+      ? '<div class="grid g3">' + list.map(pcard).join('') + '</div>'
+      : `<div class="card card-p center" style="padding:64px 24px">
+           <div class="t-h3" style="margin-bottom:8px">Sản phẩm đang được cập nhật</div>
+           <p class="muted">Nhóm «${esc(g.name)}» sẽ sớm có sản phẩm. Vui lòng quay lại sau nhé.</p>
+         </div>`}
+  </div></section>`;
+}
 function viewCategory(cat, q){
   const subObj = q.sub ? cat.subs.find(s => s.id === q.sub) : null;
   const title = subObj ? subObj.name : cat.name;
@@ -1466,6 +1515,11 @@ function viewCategory(cat, q){
   </div></section>`;
 }
 function viewProducts(q){
+  /* Nhóm lớn (Mỹ phẩm & chăm sóc, Hoá phẩm xanh) → trang nhóm */
+  if(q.group){
+    if(q.group === 'nuoc-hoa'){ q = Object.assign({}, q); delete q.group; q.cat = 'nuoc-hoa'; }
+    else { const g = GROUPS.find(x => x.id === q.group); if(g) return viewGroup(g); }
+  }
   /* Nước hoa: ánh xạ sang bộ lọc dòng (Nam/Nữ/Unisex) hiện có */
   if(q.cat === 'nuoc-hoa'){
     const g = {nam:'Nam', nu:'Nữ', unisex:'Unisex'}[q.sub];
