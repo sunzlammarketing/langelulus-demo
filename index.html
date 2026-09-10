@@ -1786,6 +1786,12 @@ function pickThumb(el, id, n){
 function selVariant(el, id, ml){
   $$('.variant').forEach(v => v.classList.remove('on')); el.classList.add('on');
   PDP.ml = ml; $('#pdpPrice').innerHTML = money(priceOf(prod(id), ml));
+  /* Đổi ảnh gallery theo dung tích: 10ml → ảnh chai nhỏ (mã-2), 100ml → ảnh chai lớn (mã) */
+  const n = (ml === 10) ? 2 : 1;
+  const main = $('#galMain');
+  if(main && id){ main.innerHTML = pshot(prod(id), '', n); translateDOM(main); }
+  const thumbs = $$('.thumb'); thumbs.forEach(t => t.classList.remove('on'));
+  const ti = (n === 2) ? 1 : 0; if(thumbs[ti]) thumbs[ti].classList.add('on');
 }
 function pdpQty(d){ PDP.qty = Math.max(1, PDP.qty + d); $('#pdpQty').textContent = PDP.qty; }
 function pdpAdd(id){ addToCart(id, PDP.ml, PDP.qty); }
