@@ -334,6 +334,21 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .tabs{display:flex; gap:var(--s5); border-bottom:1px solid var(--border); margin-bottom:var(--s5); flex-wrap:wrap}
 .tab{padding:var(--s3) 0; font-size:16px; letter-spacing:.04em; color:var(--text-muted); border-bottom:2px solid transparent; margin-bottom:-1px}
 .tab.on{color:var(--text); border-color:var(--blue-500); font-weight:700}
+/* PDP: menu dọc mô tả + nội dung liền mạch */
+.pdp-info{display:grid; grid-template-columns:230px 1fr; gap:var(--s8); align-items:start}
+.pdp-info-nav{position:sticky; top:100px; display:flex; flex-direction:column; gap:6px}
+.pdp-info-link{display:block; padding:11px 18px; border-radius:999px; font-weight:600; font-size:15px; color:var(--ink-600); transition:background .16s,color .16s}
+.pdp-info-link:hover{color:var(--blue-800); background:var(--ink-100)}
+.pdp-info-link.on{background:linear-gradient(135deg,var(--blue-500),var(--blue-700)); color:#fff}
+.pdp-info-body{max-width:820px}
+.pdp-info-sec{scroll-margin-top:100px; padding-bottom:var(--s6); margin-bottom:var(--s6); border-bottom:1px solid var(--border)}
+.pdp-info-sec:last-child{border-bottom:0; margin-bottom:0}
+@media (max-width:900px){
+  .pdp-info{grid-template-columns:1fr; gap:var(--s5)}
+  .pdp-info-nav{position:sticky; top:64px; z-index:5; flex-direction:row; flex-wrap:nowrap; overflow-x:auto; gap:8px; background:var(--surface); padding:10px 0; margin:0 -4px; -webkit-overflow-scrolling:touch}
+  .pdp-info-link{white-space:nowrap; flex:0 0 auto; padding:9px 16px; font-size:14px}
+  .pdp-info-sec{scroll-margin-top:130px}
+}
 .rvw{padding:var(--s5) 0; border-bottom:1px solid var(--border)}
 .rvw-head{display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s2); flex-wrap:wrap}
 .avatar{width:38px; height:38px; border-radius:50%; background:var(--blue-100); border:1px solid var(--blue-300);
@@ -1708,32 +1723,39 @@ function viewProduct(id){
 
   <section style="background:var(--surface);border-top:1px solid var(--border);padding:var(--s8) 0">
     <div class="wrap">
-      <div class="tabs">
-        <button class="tab on" onclick="pdpTab(this,'t1')">Mô tả chi tiết</button>
-        <button class="tab" onclick="pdpTab(this,'t2')">Thành phần</button>
-        <button class="tab" onclick="pdpTab(this,'t3')">Hướng dẫn sử dụng</button>
-        <button class="tab" onclick="pdpTab(this,'t4')">Vận chuyển &amp; đổi trả</button>
-      </div>
-      <div id="t1" class="tabpane" style="max-width:760px">
-        <h3 class="t-h3" style="margin-bottom:12px">${esc(p.name)} — ${esc(c.theme)}</h3>
-        <p style="margin-bottom:16px">${esc(p.desc)}</p>
-        <p class="muted" style="margin-bottom:16px">${esc(c.story)}</p>
-        <p class="muted">Nồng độ: Eau de Parfum (EDP) · Thời gian lưu hương: 5–6 giờ ở tầng rõ nét, sau đó thoang thoảng thêm vài giờ · Độ toả: vừa đến mạnh, phù hợp khí hậu nhiệt đới.</p>
-      </div>
-      <div id="t2" class="tabpane" style="display:none;max-width:760px">
-        <p style="margin-bottom:16px">Alcohol Denat., Parfum (Fragrance), Aqua, Ethylhexyl Methoxycinnamate, Butyl Methoxydibenzoylmethane, Tocopheryl Acetate, Limonene, Linalool, Citral, Geraniol, Coumarin.</p>
-        <div class="alert alert-info">ⓘ Sản phẩm đã được công bố mỹ phẩm theo quy định của Bộ Y tế. Không chứa paraben và phthalate.</div>
-      </div>
-      <div id="t3" class="tabpane" style="display:none;max-width:760px">
-        <p style="margin-bottom:12px">1. Xịt cách da 15–20cm vào các điểm mạch: cổ tay, sau tai, hõm cổ, khuỷu tay trong.</p>
-        <p style="margin-bottom:12px">2. Không chà xát cổ tay vào nhau — ma sát làm vỡ cấu trúc hương đầu.</p>
-        <p style="margin-bottom:12px">3. Xịt lên da đã dưỡng ẩm để tăng thời gian lưu hương.</p>
-        <p class="muted">Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp và nhiệt độ cao. Không để trong phòng tắm.</p>
-      </div>
-      <div id="t4" class="tabpane" style="display:none;max-width:760px">
-        <p style="margin-bottom:12px"><b>Vận chuyển:</b> Giao toàn quốc 2–5 ngày làm việc. Miễn phí cho đơn từ 500.000đ, dưới mức này phí cố định 30.000đ.</p>
-        <p style="margin-bottom:12px"><b>Đổi trả:</b> Trong 7 ngày kể từ khi nhận hàng nếu sản phẩm lỗi, vỡ hoặc không đúng mô tả. Sản phẩm phải còn nguyên seal.</p>
-        <p class="muted">Mọi thắc mắc vui lòng liên hệ hotline 1900 0000 hoặc Zalo OA L'Angelulus.</p>
+      <div class="pdp-info">
+        <aside class="pdp-info-nav">
+          <a href="#sec-desc"        onclick="return pdpScrollTo('sec-desc')"        data-sec="sec-desc"        class="pdp-info-link on">Mô tả chi tiết</a>
+          <a href="#sec-ingredients" onclick="return pdpScrollTo('sec-ingredients')" data-sec="sec-ingredients" class="pdp-info-link">Thành phần</a>
+          <a href="#sec-usage"       onclick="return pdpScrollTo('sec-usage')"       data-sec="sec-usage"       class="pdp-info-link">Hướng dẫn sử dụng</a>
+          <a href="#sec-shipping"    onclick="return pdpScrollTo('sec-shipping')"    data-sec="sec-shipping"    class="pdp-info-link">Vận chuyển &amp; đổi trả</a>
+        </aside>
+        <div class="pdp-info-body">
+          <div class="pdp-info-sec" id="sec-desc">
+            <h3 class="t-h3" style="margin-bottom:12px">${esc(p.name)} — ${esc(c.theme)}</h3>
+            <p style="margin-bottom:16px">${esc(p.desc)}</p>
+            <p class="muted" style="margin-bottom:16px">${esc(c.story)}</p>
+            <p class="muted">Nồng độ: Eau de Parfum (EDP) · Thời gian lưu hương: 5–6 giờ ở tầng rõ nét, sau đó thoang thoảng thêm vài giờ · Độ toả: vừa đến mạnh, phù hợp khí hậu nhiệt đới.</p>
+          </div>
+          <div class="pdp-info-sec" id="sec-ingredients">
+            <h3 class="t-h3" style="margin-bottom:12px">Thành phần</h3>
+            <p style="margin-bottom:16px">Alcohol Denat., Parfum (Fragrance), Aqua, Ethylhexyl Methoxycinnamate, Butyl Methoxydibenzoylmethane, Tocopheryl Acetate, Limonene, Linalool, Citral, Geraniol, Coumarin.</p>
+            <div class="alert alert-info">ⓘ Sản phẩm đã được công bố mỹ phẩm theo quy định của Bộ Y tế. Không chứa paraben và phthalate.</div>
+          </div>
+          <div class="pdp-info-sec" id="sec-usage">
+            <h3 class="t-h3" style="margin-bottom:12px">Hướng dẫn sử dụng</h3>
+            <p style="margin-bottom:12px">1. Xịt cách da 15–20cm vào các điểm mạch: cổ tay, sau tai, hõm cổ, khuỷu tay trong.</p>
+            <p style="margin-bottom:12px">2. Không chà xát cổ tay vào nhau — ma sát làm vỡ cấu trúc hương đầu.</p>
+            <p style="margin-bottom:12px">3. Xịt lên da đã dưỡng ẩm để tăng thời gian lưu hương.</p>
+            <p class="muted">Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp và nhiệt độ cao. Không để trong phòng tắm.</p>
+          </div>
+          <div class="pdp-info-sec" id="sec-shipping">
+            <h3 class="t-h3" style="margin-bottom:12px">Vận chuyển &amp; đổi trả</h3>
+            <p style="margin-bottom:12px"><b>Vận chuyển:</b> Giao toàn quốc 2–5 ngày làm việc. Miễn phí cho đơn từ 500.000đ, dưới mức này phí cố định 30.000đ.</p>
+            <p style="margin-bottom:12px"><b>Đổi trả:</b> Trong 7 ngày kể từ khi nhận hàng nếu sản phẩm lỗi, vỡ hoặc không đúng mô tả. Sản phẩm phải còn nguyên seal.</p>
+            <p class="muted">Mọi thắc mắc vui lòng liên hệ hotline 1900 0000 hoặc Zalo OA L'Angelulus.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1794,6 +1816,19 @@ function selVariant(el, id, ml){
   const ti = (n === 2) ? 1 : 0; if(thumbs[ti]) thumbs[ti].classList.add('on');
 }
 function pdpQty(d){ PDP.qty = Math.max(1, PDP.qty + d); $('#pdpQty').textContent = PDP.qty; }
+/* Menu dọc mô tả sản phẩm: cuộn mượt tới phần + tự sáng mục đang xem */
+function pdpScrollTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  $$('.pdp-info-link').forEach(a => a.classList.toggle('on', a.dataset.sec === id));
+  return false;
+}
+function pdpSpy(){
+  const links = $$('.pdp-info-link'); if(!links.length) return;
+  const y = window.scrollY + 130; let idx = 0;
+  links.forEach((a, i) => { const s = document.getElementById(a.dataset.sec); if(s && (s.getBoundingClientRect().top + window.scrollY) <= y) idx = i; });
+  links.forEach((a, i) => a.classList.toggle('on', i === idx));
+}
 function pdpAdd(id){ addToCart(id, PDP.ml, PDP.qty); }
 function pdpBuy(id){ addToCart(id, PDP.ml, PDP.qty); closeDrawer(); navigate('#/checkout'); }
 function pdpTab(el, id){
@@ -3357,6 +3392,7 @@ function route(){
   window.scrollTo(0, 0);
 }
 window.addEventListener('popstate', route);
+window.addEventListener('scroll', pdpSpy, {passive:true});
 /* Chặn click link nội bộ → điều hướng bằng History API (không tải lại) */
 document.addEventListener('click', function(e){
   if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
