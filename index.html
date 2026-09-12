@@ -969,7 +969,7 @@ const collColor = p => (isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.col
 const collLabel = p => p.giftset ? 'Gift set' : ((isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].name : (catOf(p) ? catOf(p).name : 'Sản phẩm'));
 const priceOf = (p, ml) => !isPerfume(p) ? p.price : (p.giftset ? p.price : vari(ml).price);
 /* Nhãn "Chính hãng" đặt phía trên tên sản phẩm ở trang chi tiết */
-const genuineBadge = () => '<div style="margin-bottom:12px"><span class="badge-genuine"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/></svg>Chính hãng</span></div>';
+const genuineBadge = () => '<span class="badge-genuine"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/></svg>Chính hãng</span>';
 
 function toast(msg){
   const el = document.createElement('div');
@@ -1410,7 +1410,7 @@ function viewGiftset(p){
       <div class="thumbs">${[1,2,3,4].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}</div>
     </div>
     <div>
-      ${genuineBadge()}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">${genuineBadge()}
         <span class="badge" style="background:var(--blue-100);color:var(--blue-800);border-color:var(--blue-300)">Gift set · 3 chai 10ml</span>
         <span class="badge badge-ok">Còn hàng</span>
       </div>
@@ -1458,7 +1458,7 @@ function viewProductOther(p){
       </div>
 
       <div>
-        ${genuineBadge()}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">${genuineBadge()}
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
         <h1 class="t-h1">${esc(p.name)}</h1>
@@ -1676,7 +1676,7 @@ function viewProduct(id){
       </div>
 
       <div>
-        ${genuineBadge()}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">${genuineBadge()}
           <span class="badge badge-line">${esc(p.gender)}</span>
           ${p.badges.indexOf('best')>-1 ? '<span class="badge badge-gold">★ Best seller</span>' : ''}
           ${p.badges.indexOf('new')>-1 ? '<span class="badge badge-gold">Mới</span>' : ''}
