@@ -102,6 +102,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .btn-sm{height:36px; padding:0 var(--s4); font-size:14px}
 /* Primary: chữ tối trên nền gold */
 .btn-primary{background:var(--blue-500); color:var(--ink-900); border-color:var(--blue-500)}
+/* Nút "Thêm vào giỏ hàng" — chữ trắng cho nổi trên nền xanh */
+.btn-cart, .btn-cart:hover{color:#fff}
 .btn-primary:hover{background:var(--blue-400)}
 .btn-primary:disabled{background:var(--ink-200); color:var(--ink-400); border-color:var(--ink-200); cursor:not-allowed}
 .btn-secondary{border-color:var(--ink-300); color:var(--text)}
@@ -1455,7 +1457,7 @@ function dealCard(p, maxSold){
       <div class="deal-price"><span class="deal-now">${money(p.price)}</span><s class="deal-old">${money(ANCHOR_PRICE)}</s></div>
       <div class="deal-sold"><span class="deal-flame">🔥 HOT DEAL</span><span>Đã bán ${(p.sold || 0).toLocaleString('vi-VN')}</span></div>
       <div class="deal-bar"><i style="width:${pct}%"></i></div>
-      <button class="btn btn-primary btn-sm deal-add" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
+      <button class="btn btn-primary btn-sm deal-add btn-cart" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
     </div>
   </article>`;
 }
@@ -1475,7 +1477,7 @@ function pcard(p){
       <p class="notes">${esc(p.short)}</p>
       <div class="price">${isPerfume(p) ? (p.giftset ? money(p.price) : 'từ ' + money(Math.min(...VARIANTS.map(v => v.price)))) : money(p.price)}${(!isPerfume(p) && p.old) ? '<s>' + money(p.old) + '</s>' : ''}</div>
       <div class="pcard-foot">
-        <button class="btn btn-primary btn-sm" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
+        <button class="btn btn-primary btn-sm btn-cart" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
         <button class="icon-btn" title="Yêu thích" onclick="toggleWish('${p.id}')" style="color:${wish?'var(--blue-700)':'var(--ink-400)'}">${wish?'♥':'♡'}</button>
       </div>
     </div>
@@ -1553,7 +1555,7 @@ function viewGiftset(p){
       <p class="t-cap" style="margin-bottom:28px">279.000đ cho 1 bộ sưu tập gồm 3 chai 10ml · Đã bao gồm VAT</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
         <div class="qty"><button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button></div>
-        <button class="btn btn-primary btn-lg" style="flex:1;min-width:200px" onclick="giftAdd('${p.id}',false)">Thêm vào giỏ hàng</button>
+        <button class="btn btn-primary btn-lg btn-cart" style="flex:1;min-width:200px" onclick="giftAdd('${p.id}',false)">Thêm vào giỏ hàng</button>
         <button class="btn btn-secondary btn-lg" onclick="giftAdd('${p.id}',true)">Mua ngay</button>
       </div>
       <button class="btn btn-ghost" onclick="toggleWish('${p.id}')">${wish ? '♥ Đã lưu yêu thích' : '♡ Lưu vào yêu thích'}</button>
@@ -1602,7 +1604,7 @@ function viewProductOther(p){
           <div class="qty">
             <button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button>
           </div>
-          <button class="btn btn-primary btn-lg" style="flex:1;min-width:200px" onclick="pdpAdd('${p.id}')">Thêm vào giỏ hàng</button>
+          <button class="btn btn-primary btn-lg btn-cart" style="flex:1;min-width:200px" onclick="pdpAdd('${p.id}')">Thêm vào giỏ hàng</button>
           <button class="btn btn-secondary btn-lg" onclick="pdpBuy('${p.id}')">Mua ngay</button>
         </div>
         <button class="btn btn-ghost" onclick="toggleWish('${p.id}')">${wish?'♥ Đã lưu yêu thích':'♡ Lưu vào yêu thích'}</button>
@@ -1836,7 +1838,7 @@ function viewProduct(id){
           <div class="qty">
             <button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button>
           </div>
-          <button class="btn btn-primary btn-lg" style="flex:1;min-width:200px" onclick="pdpAdd('${p.id}')">Thêm vào giỏ hàng</button>
+          <button class="btn btn-primary btn-lg btn-cart" style="flex:1;min-width:200px" onclick="pdpAdd('${p.id}')">Thêm vào giỏ hàng</button>
           <button class="btn btn-secondary btn-lg" onclick="pdpBuy('${p.id}')">Mua ngay</button>
         </div>
         <button class="btn btn-ghost" onclick="toggleWish('${p.id}')">${S.wishlist.indexOf(p.id)>-1?'♥ Đã lưu yêu thích':'♡ Lưu vào yêu thích'}</button>
