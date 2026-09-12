@@ -183,7 +183,9 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   border-bottom:1px solid var(--border); box-shadow:var(--sh-md); padding:var(--s7) 0; opacity:0; visibility:hidden;
   transform:translateY(-6px); transition:opacity .2s cubic-bezier(.2,.8,.2,1),transform .2s,visibility .2s; z-index:59}
 .mega.open{opacity:1; visibility:visible; transform:translateY(0)}
-.mega-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s7)}
+.mega-grid{display:grid; grid-template-columns:0.85fr 2.3fr 1.25fr; gap:var(--s7)}
+/* Cột "Mỹ phẩm & chăm sóc": xếp 2 nhóm con (Dầu gội & xả, Sữa tắm) ngang hàng */
+.mega-subrow{display:grid; grid-template-columns:1fr 1fr; gap:0 var(--s6)}
 .mega-col h4{font-size:16px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--blue-800); margin-bottom:var(--s3); padding:0 14px var(--s3); border-bottom:2px solid var(--blue-400)}
 .mega-col h4 a{color:inherit; transition:color .16s}
 .mega-col h4 a:hover{color:var(--blue-900)}
@@ -533,7 +535,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* ═══════════ RESPONSIVE ═══════════ */
 @media (max-width:1080px){
   .g4{grid-template-columns:repeat(3,1fr)}
-  .mega-grid{grid-template-columns:repeat(3,1fr)}
+  .mega-grid{grid-template-columns:0.85fr 2.3fr 1.25fr}
   .ftr-grid{grid-template-columns:1fr 1fr}
   .shop{grid-template-columns:1fr}
   .acct{grid-template-columns:1fr}
@@ -665,17 +667,19 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
       </div>
       <div class="mega-col">
         <h4><a href="#/products?group=my-pham" style="color:inherit">Mỹ phẩm &amp; chăm sóc</a></h4>
-        <div class="mega-sub">
-          <h5><a href="#/products?cat=dau-goi-xa">Dầu gội &amp; xả</a></h5>
-          <a href="#/products?cat=dau-goi-xa&amp;sub=thuan-chay">Dầu gội xả thuần chay</a>
-          <a href="#/products?cat=dau-goi-xa&amp;sub=suon-muot">Dầu gội xả suôn mượt tóc</a>
-          <a href="#/products?cat=dau-goi-xa&amp;sub=2in1">Dầu gội 2 in 1 (cho nam)</a>
-        </div>
-        <div class="mega-sub">
-          <h5><a href="#/products?cat=sua-tam">Sữa tắm</a></h5>
-          <a href="#/products?cat=sua-tam&amp;sub=sen">Sữa tắm thuần chay chiết xuất sen</a>
-          <a href="#/products?cat=sua-tam&amp;sub=huong-nuoc-hoa">Sữa tắm hương nước hoa</a>
-          <a href="#/products?cat=sua-tam&amp;sub=vitamin">Sữa tắm Vitamin</a>
+        <div class="mega-subrow">
+          <div class="mega-sub">
+            <h5><a href="#/products?cat=dau-goi-xa">Dầu gội &amp; xả</a></h5>
+            <a href="#/products?cat=dau-goi-xa&amp;sub=thuan-chay">Dầu gội xả thuần chay</a>
+            <a href="#/products?cat=dau-goi-xa&amp;sub=suon-muot">Dầu gội xả suôn mượt tóc</a>
+            <a href="#/products?cat=dau-goi-xa&amp;sub=2in1">Dầu gội 2 in 1 (cho nam)</a>
+          </div>
+          <div class="mega-sub">
+            <h5><a href="#/products?cat=sua-tam">Sữa tắm</a></h5>
+            <a href="#/products?cat=sua-tam&amp;sub=sen">Sữa tắm thuần chay chiết xuất sen</a>
+            <a href="#/products?cat=sua-tam&amp;sub=huong-nuoc-hoa">Sữa tắm hương nước hoa</a>
+            <a href="#/products?cat=sua-tam&amp;sub=vitamin">Sữa tắm Vitamin</a>
+          </div>
         </div>
       </div>
       <div class="mega-col">
