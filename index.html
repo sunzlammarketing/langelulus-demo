@@ -1459,7 +1459,6 @@ function viewProductOther(p){
 
       <div>
         ${genuineBadge()}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-          <span class="badge" style="background:var(--blue-100);color:var(--blue-800);border-color:var(--blue-300)">${esc(subNameOf(p) || (cat ? cat.name : ''))}</span>
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
         <h1 class="t-h1">${esc(p.name)}</h1>
@@ -1678,7 +1677,6 @@ function viewProduct(id){
 
       <div>
         ${genuineBadge()}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-          <span class="badge" style="background:${c.color}1A;color:${c.color};border-color:${c.color}55">${esc(c.name)}</span>
           <span class="badge badge-line">${esc(p.gender)}</span>
           ${p.badges.indexOf('best')>-1 ? '<span class="badge badge-gold">★ Best seller</span>' : ''}
           ${p.badges.indexOf('new')>-1 ? '<span class="badge badge-gold">Mới</span>' : ''}
