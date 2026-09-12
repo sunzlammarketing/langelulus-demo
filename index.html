@@ -1106,6 +1106,20 @@ function bottleBox(p, cls){
 }
 
 /* ── Giỏ hàng ── */
+/* Thêm nhanh vào giỏ: nước hoa thì cho chọn dung tích 10ml/100ml trước,
+   sản phẩm khác (gift set, mỹ phẩm...) thêm thẳng như cũ */
+function quickAdd(id){
+  const p = prod(id); if(!p) return;
+  if(!isPerfume(p) || p.giftset){ addToCart(id); return; }
+  const btns = VARIANTS.map(v => `
+    <button class="btn btn-secondary btn-block" style="justify-content:space-between;margin-bottom:10px" onclick="pickVariant('${id}',${v.ml})">
+      <span>${v.label}</span><b>${money(priceOf(p, v.ml))}</b>
+    </button>`).join('');
+  openModal('<div class="label muted" style="margin-bottom:6px">Chọn dung tích</div>'
+    + '<h3 class="t-h3" style="margin-bottom:16px">' + esc(p.name) + '</h3>' + btns);
+}
+function pickVariant(id, ml){ closeModal(); addToCart(id, ml); }
+
 function addToCart(id, ml, qty){
   qty = qty || 1;
   const p = prod(id); if(!p) return;
@@ -1409,7 +1423,7 @@ function dealCard(p, maxSold){
       <div class="deal-price"><span class="deal-now">${money(p.price)}</span><s class="deal-old">${money(ANCHOR_PRICE)}</s></div>
       <div class="deal-sold"><span class="deal-flame">🔥 HOT DEAL</span><span>Đã bán ${(p.sold || 0).toLocaleString('vi-VN')}</span></div>
       <div class="deal-bar"><i style="width:${pct}%"></i></div>
-      <button class="btn btn-primary btn-sm deal-add" onclick="addToCart('${p.id}')">Thêm vào giỏ</button>
+      <button class="btn btn-primary btn-sm deal-add" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
     </div>
   </article>`;
 }
@@ -1429,7 +1443,7 @@ function pcard(p){
       <p class="notes">${esc(p.short)}</p>
       <div class="price">${isPerfume(p) ? (p.giftset ? money(p.price) : 'từ ' + money(Math.min(...VARIANTS.map(v => v.price)))) : money(p.price)}${(!isPerfume(p) && p.old) ? '<s>' + money(p.old) + '</s>' : ''}</div>
       <div class="pcard-foot">
-        <button class="btn btn-primary btn-sm" onclick="addToCart('${p.id}')">Thêm vào giỏ</button>
+        <button class="btn btn-primary btn-sm" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
         <button class="icon-btn" title="Yêu thích" onclick="toggleWish('${p.id}')" style="color:${wish?'var(--blue-700)':'var(--ink-400)'}">${wish?'♥':'♡'}</button>
       </div>
     </div>
