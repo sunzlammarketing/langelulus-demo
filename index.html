@@ -995,8 +995,14 @@ const S = {cart:[], wishlist:[], user:null, coupon:null, lastOrder:null};
 const money = n => (typeof L !== 'undefined' && L === 'en')
   ? new Intl.NumberFormat('en-US').format(Math.round(n)) + ' VND'
   : new Intl.NumberFormat('vi-VN').format(Math.round(n)) + 'đ';
-/* Giá gốc (giá gạch) chung cho mọi sản phẩm — hiển thị ở Hot Deal & trang chi tiết */
+/* Giá gốc (giá gạch) hiển thị ở Hot Deal & trang chi tiết
+   - Nước hoa 100ml & sản phẩm thường: 1.299.000đ
+   - Nước hoa 10ml: 179.000đ
+   - Gift set 30ml (3 BST): 499.000đ */
 const ANCHOR_PRICE = 1299000;
+const ANCHOR_10ML = 179000;
+const ANCHOR_GIFTSET = 499000;
+const anchorOf = (p, ml) => p.giftset ? ANCHOR_GIFTSET : ((isPerfume(p) && ml === 10) ? ANCHOR_10ML : ANCHOR_PRICE);
 const $  = (s,r=document) => r.querySelector(s);
 const $$ = (s,r=document) => [...r.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1492,7 +1498,7 @@ function viewGiftset(p){
       <div class="variants" style="margin-bottom:24px">
         ${opts.map((o, idx) => `<label class="variant giftopt ${idx===0?'on':''}" onclick="selGift(this,'${o[0]}')"><b>BST ${esc(o[1])}</b><span>3 × 10ml</span></label>`).join('')}
       </div>
-      <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(ANCHOR_PRICE)}</s></div>
+      <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(anchorOf(p))}</s></div>
       <p class="t-cap" style="margin-bottom:28px">279.000đ cho 1 bộ sưu tập gồm 3 chai 10ml · Đã bao gồm VAT</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
         <div class="qty"><button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button></div>
@@ -1538,7 +1544,7 @@ function viewProductOther(p){
 
         <div class="rule" style="margin:0 0 28px"></div>
 
-        <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(ANCHOR_PRICE)}</s></div>
+        <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(anchorOf(p))}</s></div>
         <p class="t-cap" style="margin-bottom:28px">Đã bao gồm VAT · Miễn phí vận chuyển cho đơn từ 500.000đ</p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
@@ -1772,7 +1778,7 @@ function viewProduct(id){
             </label>`).join('')}
         </div>
 
-        <div class="price t-h2" style="margin-bottom:8px"><span id="pdpPrice">${money(priceOf(p,100))}</span><s>${money(ANCHOR_PRICE)}</s></div>
+        <div class="price t-h2" style="margin-bottom:8px"><span id="pdpPrice">${money(priceOf(p,100))}</span><s id="pdpAnchor">${money(anchorOf(p,100))}</s></div>
         <p class="t-cap" style="margin-bottom:28px">Đã bao gồm VAT · Miễn phí vận chuyển cho đơn từ 500.000đ</p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
@@ -1885,6 +1891,7 @@ function pickThumb(el, id, n){
 function selVariant(el, id, ml){
   $$('.variant').forEach(v => v.classList.remove('on')); el.classList.add('on');
   PDP.ml = ml; $('#pdpPrice').innerHTML = money(priceOf(prod(id), ml));
+  const a = $('#pdpAnchor'); if(a) a.innerHTML = money(anchorOf(prod(id), ml));
   /* Đổi ảnh gallery theo dung tích: 10ml → ảnh chai nhỏ (mã-2), 100ml → ảnh chai lớn (mã) */
   const n = (ml === 10) ? 2 : 1;
   const main = $('#galMain');
