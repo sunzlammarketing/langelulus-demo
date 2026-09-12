@@ -477,6 +477,20 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .modal-bg{position:absolute; inset:0; background:rgba(8,22,35,.55)}
 .modal-card{position:relative; background:var(--surface); border-radius:var(--r-lg); box-shadow:var(--sh-lg);
   width:min(430px,100%); padding:var(--s7); max-height:90vh; overflow-y:auto}
+/* Quick view chọn dung tích khi thêm nhanh nước hoa vào giỏ */
+.qv-title{font-size:26px; font-weight:400; margin-bottom:20px}
+.qv-media{border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; background:var(--surface-2); margin-bottom:18px}
+.qv-media .pshot{aspect-ratio:1/1}
+.qv-name{font-size:18px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; border-bottom:2px solid var(--ink-900); padding-bottom:10px; margin-bottom:12px}
+.qv-price{font-size:19px; font-weight:700; color:var(--ink-800); margin-bottom:22px}
+.qv-size-label{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-500); margin-bottom:10px}
+.qv-size-label b{color:var(--ink-900); font-weight:700}
+.qv-sizes{display:flex; gap:10px; margin-bottom:22px}
+.qv-size{min-width:66px; padding:11px 16px; border:1px solid var(--ink-200); background:var(--surface); color:var(--ink-500); font-size:13px; letter-spacing:.08em; cursor:pointer; border-radius:2px; transition:border-color .15s,color .15s}
+.qv-size:hover{border-color:var(--ink-400); color:var(--ink-700)}
+.qv-size.on{border:2px solid var(--ink-900); color:var(--ink-900); font-weight:700; padding:10px 15px}
+.qv-add{background:var(--navy); color:#fff; border:1px solid var(--navy); height:52px; letter-spacing:.16em; text-transform:uppercase; font-size:14px}
+.qv-add:hover{background:var(--navy-soft); border-color:var(--navy-soft); color:#fff}
 
 /* ═══════════ LANGUAGE SWITCHER ═══════════ */
 .lang-sw{display:flex; align-items:center; gap:var(--s2); padding:0 var(--s3); margin-right:var(--s1)}
@@ -1106,19 +1120,37 @@ function bottleBox(p, cls){
 }
 
 /* ── Giỏ hàng ── */
-/* Thêm nhanh vào giỏ: nước hoa thì cho chọn dung tích 10ml/100ml trước,
+/* Thêm nhanh vào giỏ: nước hoa mở "quick view" chọn dung tích — ảnh đổi theo size;
    sản phẩm khác (gift set, mỹ phẩm...) thêm thẳng như cũ */
+let QUICK_ID = null, QUICK_ML = 100;
 function quickAdd(id){
   const p = prod(id); if(!p) return;
   if(!isPerfume(p) || p.giftset){ addToCart(id); return; }
-  const btns = VARIANTS.map(v => `
-    <button class="btn btn-secondary btn-block" style="justify-content:space-between;margin-bottom:10px" onclick="pickVariant('${id}',${v.ml})">
-      <span>${v.label}</span><b>${money(priceOf(p, v.ml))}</b>
-    </button>`).join('');
-  openModal('<div class="label muted" style="margin-bottom:6px">Chọn dung tích</div>'
-    + '<h3 class="t-h3" style="margin-bottom:16px">' + esc(p.name) + '</h3>' + btns);
+  QUICK_ID = id; QUICK_ML = 100;
+  openModal(quickViewHTML(p));
 }
-function pickVariant(id, ml){ closeModal(); addToCart(id, ml); }
+function quickViewHTML(p){
+  const sizes = VARIANTS.map(v =>
+    '<button class="qv-size ' + (v.ml === 100 ? 'on' : '') + '" data-ml="' + v.ml + '" onclick="quickPick(' + v.ml + ')">' + v.label.toUpperCase() + '</button>'
+  ).join('');
+  return '<h3 class="qv-title">Chọn tùy chọn</h3>'
+    + '<div class="qv-media" id="qvMedia">' + pshot(p, '', 1) + '</div>'
+    + '<div class="qv-name">' + esc(p.name) + '</div>'
+    + '<div class="qv-price" id="qvPrice">' + money(priceOf(p, 100)) + '</div>'
+    + '<div class="qv-size-label">Size <b id="qvSizeLabel">100ML</b></div>'
+    + '<div class="qv-sizes">' + sizes + '</div>'
+    + '<button class="btn btn-block qv-add" onclick="quickConfirm()">Thêm vào giỏ hàng</button>';
+}
+function quickPick(ml){
+  const p = prod(QUICK_ID); if(!p) return;
+  QUICK_ML = ml;
+  const n = (ml === 10) ? 2 : 1;
+  const media = $('#qvMedia'); if(media){ media.innerHTML = pshot(p, '', n); translateDOM(media); }
+  const price = $('#qvPrice'); if(price) price.innerHTML = money(priceOf(p, ml));
+  const lbl = $('#qvSizeLabel'); if(lbl) lbl.textContent = ml + 'ML';
+  $$('.qv-size').forEach(b => b.classList.toggle('on', +b.dataset.ml === ml));
+}
+function quickConfirm(){ const id = QUICK_ID; closeModal(); addToCart(id, QUICK_ML); }
 
 function addToCart(id, ml, qty){
   qty = qty || 1;
