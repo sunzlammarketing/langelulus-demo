@@ -29,6 +29,7 @@
    Gold #1D9FD9 · Navy #0B2B47 · Times New Roman · Quiet luxury
    ═══════════════════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+picture{display:contents}
 
 :root{
   /* Giao diện luôn sáng — không tự tối hoá buổi tối */
@@ -1150,7 +1151,7 @@ function toast(msg){
    ═══════════════════════════════════════════ */
 const IMG_BASE = 'assets/products/';
 const BANNER_BASE = 'assets/banners/';
-const IMG_EXT = ['jpg','jpeg','png','webp','JPG','PNG'];
+const IMG_EXT = ['webp','jpg','jpeg','png','JPG','PNG'];
 
 /* Thử lần lượt các đuôi file; hết đuôi thì bỏ ảnh, giữ SVG bên dưới */
 function imgNext(el){
@@ -1309,7 +1310,7 @@ function viewHome(){
   <section class="hero">
     ${slides.map((s,i) => `
       <a class="hero-slide ${i===0?'on':''}" data-slide="${i}" href="${s.cta}" aria-label="${esc(s.alt)}">
-        <img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" ${i===0?'':'loading="lazy"'}>
+        <picture><source srcset="${BANNER_BASE}${s.img}.webp" type="image/webp"><img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" ${i===0?'':'loading="lazy"'}></picture>
       </a>`).join('')}
     <div class="hero-dots">${slides.map((_,i) => `<button class="hero-dot ${i===0?'on':''}" data-dot="${i}" aria-label="Slide ${i+1}"></button>`).join('')}</div>
   </section>
@@ -1557,7 +1558,7 @@ function dealBanner(p){
 function homeMarquee(){
   const items = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
   const card = p => '<a class="mq-card" href="#/product/' + p.id + '" style="--mqc:' + collColor(p) + '" aria-label="' + esc(p.name) + '">'
-    + '<img class="mq-img" src="' + IMG_BASE + p.id + '.jpg" alt="' + esc(p.name) + '" loading="lazy" onerror="this.remove()">'
+    + '<picture><source srcset="' + IMG_BASE + p.id + '.webp" type="image/webp"><img class="mq-img" src="' + IMG_BASE + p.id + '.jpg" alt="' + esc(p.name) + '" loading="lazy" onerror="this.closest(\'picture\').remove()"></picture>'
     + '<div class="mq-cap"><span class="mq-coll">' + esc(collLabel(p)) + '</span><b>' + esc(p.name) + '</b></div></a>';
   const set = items.map(card).join('');
   return '<section class="sec mq-sec">'
