@@ -639,11 +639,12 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* ── Hot Deal (flash sale) ── */
 /* ── Flash Sale ── */
 .flash-sec{background:linear-gradient(180deg,#EAF5FC 0%,#D9EEFB 100%); color:var(--ink-900); border-top:1px solid var(--blue-200); border-bottom:1px solid var(--blue-200); overflow:hidden}
-.flash-tabs{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px}
-.flash-tab{text-align:center; padding:9px 26px; border-radius:14px; background:rgba(255,255,255,.55); color:var(--blue-700); min-width:180px}
-.flash-tab.on{background:#fff; color:var(--blue-800); box-shadow:var(--sh-sm)}
-.flash-tab b{display:block; font-size:15px; font-weight:800; letter-spacing:.01em}
-.flash-tab span{display:block; font-size:12.5px; margin-top:2px; opacity:.85}
+.flash-tabs{display:flex; align-items:flex-end; gap:10px; flex-wrap:wrap; margin-bottom:22px}
+.flash-tab{text-align:left; padding:14px 44px 16px; border-radius:18px 18px 0 0; min-width:210px; line-height:1.2; transition:transform .15s ease-out}
+.flash-tab.on{background:linear-gradient(180deg,#1489C4 0%,#0C669F 100%); color:#fff; box-shadow:0 8px 20px rgba(8,77,137,.22)}
+.flash-tab:not(.on){background:#EEF7FD; color:var(--blue-700); border-radius:16px; padding:12px 38px; margin-bottom:3px; box-shadow:inset 0 0 0 1px var(--blue-200)}
+.flash-tab b{display:block; font-size:17px; font-weight:800; letter-spacing:.01em}
+.flash-tab span{display:block; font-size:13px; margin-top:3px; opacity:.9}
 .flash-head{display:flex; align-items:center; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; margin-bottom:20px}
 .flash-title{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .flash-title h2{font-size:30px; font-weight:800; color:var(--blue-900); margin:0; line-height:1}
