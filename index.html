@@ -658,7 +658,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .flash-all:hover{color:var(--blue-900)}
 .flash-row{scrollbar-width:none; -ms-overflow-style:none}
 .flash-row::-webkit-scrollbar{display:none; height:0}
-.flash-row .deal-off{background:#E01f1f; left:auto; right:var(--s3)}
+.flash-row .deal-off{background:#E01f1f; left:auto; right:var(--s3); top:6px}
 .flash-row .deal-brand{display:none}
 .flash-row .deal-card{flex-basis:206px}
 .flash-row .deal-body{padding:13px 14px}
@@ -1576,7 +1576,7 @@ function dealCard(p, maxSold){
   const barPct = Math.min(96, Math.max(35, Math.round(soldN / (maxSold || 1) * 100)));
   return `<article class="deal-card" data-coll="${isPerfume(p) ? p.coll : ''}">
     <a href="#/product/${p.id}" class="deal-media">
-      ${off ? '<span class="deal-off">Giảm ' + off + '%</span>' : ''}
+      ${off ? '<span class="deal-off">-' + off + '%</span>' : ''}
       ${pshot(p, '', 0, true)}
     </a>
     <div class="deal-body">
