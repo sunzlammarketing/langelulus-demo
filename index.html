@@ -271,6 +271,11 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* Dải logo chứng nhận (cGMP · ISO · Công nghệ Hàn Quốc) trong trang chi tiết */
 .cert-badges{margin:14px 0 4px}
 .cert-badges img{display:block; width:100%; max-width:216px; height:auto}
+/* Khối Hot Deal trong trang chi tiết */
+.pdp-deal{margin:4px 0 24px}
+.pdp-deal-top{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; background:var(--err-bg); border:1px solid #F3D6D2; border-radius:var(--r-md); padding:12px 16px}
+.pdp-deal-label{font-weight:700; font-size:16px; color:var(--ink-800)}
+.pdp-deal-sold{margin:16px 0 8px; font-size:14px; font-weight:600}
 .pcard-foot{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); margin-top:var(--s2)}
 .stars{color:var(--blue-600); font-size:14px; letter-spacing:1px}
 
@@ -1251,7 +1256,7 @@ function viewHome(){
             <h2 class="t-h2">Ưu đãi có hạn</h2>
           </div>
         </div>
-        <div class="hotdeal-timer" id="hotdealTimer" aria-label="Đếm ngược ưu đãi">
+        <div class="hotdeal-timer hd-countdown" id="hotdealTimer" aria-label="Đếm ngược ưu đãi">
           <div class="td-box"><b data-d>00</b><span>Ngày</span></div>
           <span class="td-sep">:</span>
           <div class="td-box"><b data-h>00</b><span>Giờ</span></div>
@@ -1470,6 +1475,22 @@ const HOT_DEAL_SVG =
   + '<text x="41" y="30" text-anchor="middle" textLength="64" lengthAdjust="spacingAndGlyphs" fill="#fff" '
   + 'font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="800" font-style="italic">HOT DEAL</text>'
   + '</svg>';
+
+/* Khối Hot Deal trong trang chi tiết: đếm ngược + đã bán + huy hiệu lửa động */
+function dealBanner(p){
+  const pct = Math.min(96, Math.max(45, Math.round((p.sold || 0) / 2600 * 100)));
+  return '<div class="pdp-deal">'
+    + '<div class="pdp-deal-top"><span class="pdp-deal-label">Kết thúc sau</span>'
+    + '<div class="hotdeal-timer hd-countdown" aria-label="Đếm ngược ưu đãi">'
+    + '<div class="td-box"><b data-d>00</b><span>Ngày</span></div><span class="td-sep">:</span>'
+    + '<div class="td-box"><b data-h>00</b><span>Giờ</span></div><span class="td-sep">:</span>'
+    + '<div class="td-box"><b data-m>00</b><span>Phút</span></div><span class="td-sep">:</span>'
+    + '<div class="td-box"><b data-s>00</b><span>Giây</span></div></div></div>'
+    + '<div class="deal-sold pdp-deal-sold"><span class="deal-flame">' + HOT_DEAL_SVG + '</span>'
+    + '<span>Đã bán ' + (p.sold || 0).toLocaleString('vi-VN') + ' sản phẩm</span></div>'
+    + '<div class="deal-bar"><i style="width:' + pct + '%"></i></div>'
+    + '</div>';
+}
 
 function dealCard(p, maxSold){
   const off = ANCHOR_PRICE > p.price ? Math.round((ANCHOR_PRICE - p.price) / ANCHOR_PRICE * 100) : 0;
@@ -1849,6 +1870,7 @@ function viewProduct(id){
           <span class="muted">·</span>
           <span class="muted">Đã bán ${p.sold.toLocaleString('vi-VN')}</span>
         </div>
+        ${dealBanner(p)}
         <div class="rule" style="margin:0 0 28px"></div>
 
         <div class="label muted" style="margin-bottom:12px">Chọn dung tích</div>
@@ -3541,7 +3563,8 @@ function route(){
   PDP = {ml:100, qty:1};
   $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === '/' + (seg[0] || '')));
   closeMega(); closeMnav();
-  if(path === '/' || path === ''){ initHero(); startHotDealTimer(); }
+  if(path === '/' || path === '') initHero();
+  if(document.querySelector('.hd-countdown')) startHotDealTimer();
 
   /* I18N: dịch giao diện + chuẩn hoá link + cập nhật SEO */
   ['#app','.hdr','.ftr','#mnav','#drawer','.chat'].forEach(s => {
@@ -3576,16 +3599,18 @@ function startHotDealTimer(){
   const CYCLE = 1000 * 60 * 60 * 24 * 2;
   const pad = n => String(n).padStart(2, '0');
   const tick = () => {
-    const el = document.getElementById('hotdealTimer');
-    if(!el){ clearInterval(hotDealTimer); return; }
+    const els = document.querySelectorAll('.hd-countdown');
+    if(!els.length){ clearInterval(hotDealTimer); return; }
     const now = Date.now();
     let diff = Math.max(0, Math.ceil((now + 1) / CYCLE) * CYCLE - now);
     const d = Math.floor(diff / 86400000); diff -= d * 86400000;
     const h = Math.floor(diff / 3600000);  diff -= h * 3600000;
     const m = Math.floor(diff / 60000);    diff -= m * 60000;
     const s = Math.floor(diff / 1000);
-    const set = (k, v) => { const n = el.querySelector('[data-' + k + ']'); if(n) n.textContent = pad(v); };
-    set('d', d); set('h', h); set('m', m); set('s', s);
+    els.forEach(el => {
+      const set = (k, v) => { const n = el.querySelector('[data-' + k + ']'); if(n) n.textContent = pad(v); };
+      set('d', d); set('h', h); set('m', m); set('s', s);
+    });
   };
   tick();
   hotDealTimer = setInterval(tick, 1000);
