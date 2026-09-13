@@ -1595,11 +1595,11 @@ function pcard(p){
   return `<article class="pcard">
     <a href="#/product/${p.id}">${pshot(p, '', 0, true)}</a>
     <div class="pcard-body">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-        <span class="pcard-col" style="color:${c.color}">${esc(c.name)}</span>
+      <span class="pcard-col" style="color:${c.color}">${esc(c.name)}</span>
+      <div class="pcard-name-row" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <h3 style="min-width:0"><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
         ${p.giftset ? '<span class="badge badge-line">3 × 10ml</span>' : (isPerfume(p) ? '<span class="badge badge-line">' + esc(p.gender) + '</span>' : (p.sub ? '<span class="badge badge-line">' + esc(subNameOf(p)) + '</span>' : ''))}
       </div>
-      <h3><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
       ${p.reviews ? '<div class="stars">' + stars(p.rating) + ' <span class="t-cap">(' + p.reviews + ')</span></div>' : ''}
       <p class="notes">${esc(p.short)}</p>
       <div class="price">${isPerfume(p) ? (p.giftset ? money(p.price) : 'từ ' + money(Math.min(...VARIANTS.map(v => v.price)))) : money(p.price)}${(!isPerfume(p) && p.old) ? '<s>' + money(p.old) + '</s>' : ''}</div>
