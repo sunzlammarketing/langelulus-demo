@@ -515,6 +515,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 /* Quick view chọn dung tích khi thêm nhanh nước hoa vào giỏ */
 .qv-title{font-size:26px; font-weight:400; margin-bottom:20px}
 .qv-media{border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; background:var(--surface-2); margin-bottom:18px}
+.qv-media .col-tag{display:none}
 .qv-media .pshot{aspect-ratio:1/1}
 .qv-name{font-size:18px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; border-bottom:2px solid var(--ink-900); padding-bottom:10px; margin-bottom:12px}
 .qv-price{font-size:19px; font-weight:700; color:var(--ink-800); margin-bottom:22px}
@@ -524,8 +525,9 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .qv-size{min-width:66px; padding:11px 16px; border:1px solid var(--ink-200); background:var(--surface); color:var(--ink-500); font-size:13px; letter-spacing:.08em; cursor:pointer; border-radius:2px; transition:border-color .15s,color .15s}
 .qv-size:hover{border-color:var(--ink-400); color:var(--ink-700)}
 .qv-size.on{border:2px solid var(--ink-900); color:var(--ink-900); font-weight:700; padding:10px 15px}
-.qv-add{background:var(--navy); color:#fff; border:1px solid var(--navy); height:52px; letter-spacing:.16em; text-transform:uppercase; font-size:14px}
-.qv-add:hover{background:var(--navy-soft); border-color:var(--navy-soft); color:#fff}
+.qv-add{background:var(--blue-500); color:#fff; border:1px solid var(--blue-500); height:52px; letter-spacing:.16em; text-transform:uppercase; font-size:14px}
+.qv-add:hover{background:var(--blue-600); border-color:var(--blue-600); color:#fff}
+.qv-buy{margin-top:10px}
 
 /* ═══════════ LANGUAGE SWITCHER ═══════════ */
 .lang-sw{display:flex; align-items:center; gap:var(--s2); padding:0 var(--s3); margin-right:var(--s1)}
@@ -1235,7 +1237,8 @@ function quickViewHTML(p){
     + '<div class="qv-price" id="qvPrice">' + money(priceOf(p, 100)) + '</div>'
     + '<div class="qv-size-label">Size <b id="qvSizeLabel">100ML</b></div>'
     + '<div class="qv-sizes">' + sizes + '</div>'
-    + '<button class="btn btn-block qv-add" onclick="quickConfirm()">Thêm vào giỏ hàng</button>';
+    + '<button class="btn btn-block qv-add" onclick="quickConfirm()">Thêm vào giỏ hàng</button>'
+    + '<button class="btn btn-block qv-add qv-buy" onclick="quickBuyNow()">Mua ngay</button>';
 }
 function quickPick(ml){
   const p = prod(QUICK_ID); if(!p) return;
@@ -1247,6 +1250,7 @@ function quickPick(ml){
   $$('.qv-size').forEach(b => b.classList.toggle('on', +b.dataset.ml === ml));
 }
 function quickConfirm(){ const id = QUICK_ID; closeModal(); addToCart(id, QUICK_ML); }
+function quickBuyNow(){ const id = QUICK_ID, ml = QUICK_ML; closeModal(); addToCart(id, ml); closeDrawer(); navigate('#/checkout'); }
 
 function addToCart(id, ml, qty){
   qty = qty || 1;
