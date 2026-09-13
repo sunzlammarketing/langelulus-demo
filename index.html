@@ -269,8 +269,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .price{font-size:20px; font-weight:700; letter-spacing:.01em}
 .price s{font-size:15px; font-weight:400; color:var(--ink-400); margin-left:var(--s2)}
 /* Dải logo chứng nhận (cGMP · ISO · Công nghệ Hàn Quốc) trong trang chi tiết */
-.cert-badges{margin:16px 0 6px}
-.cert-badges img{display:block; width:100%; max-width:370px; height:auto}
+.cert-badges{margin:14px 0 4px}
+.cert-badges img{display:block; width:100%; max-width:216px; height:auto}
 .pcard-foot{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); margin-top:var(--s2)}
 .stars{color:var(--blue-600); font-size:14px; letter-spacing:1px}
 
@@ -1574,7 +1574,7 @@ function viewGiftset(p){
         <span class="badge badge-ok">Còn hàng</span>
       </div>
       <h1 class="t-h1">${esc(p.name)}</h1>
-      <div class="cert-badges"><img src="assets/products/cert-badges.jpg" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
+      <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
       <p class="t-lg muted" style="margin:12px 0 24px">${esc(p.short || '')}</p>
       <div class="rule" style="margin:0 0 24px"></div>
       <div class="label muted" style="margin-bottom:12px">Chọn bộ sưu tập</div>
@@ -1622,7 +1622,7 @@ function viewProductOther(p){
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
         <h1 class="t-h1">${esc(p.name)}</h1>
-      <div class="cert-badges"><img src="assets/products/cert-badges.jpg" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
+      <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
         ${p.reviews ? '<div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap"><span class="stars">' + stars(p.rating) + '</span><span class="muted">' + p.rating + '/5 · ' + p.reviews + ' đánh giá</span></div>' : '<div style="margin:12px 0 20px"></div>'}
         <p class="t-lg muted" style="margin-bottom:28px">${esc(p.short || '')}</p>
 
@@ -1844,7 +1844,7 @@ function viewProduct(id){
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
         <h1 class="t-h1">${esc(p.name)}</h1>
-      <div class="cert-badges"><img src="assets/products/cert-badges.jpg" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
+      <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
         <div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap">
           <span class="stars">${stars(p.rating)}</span>
           <span class="muted">${p.rating}/5 · ${p.reviews} đánh giá</span>
