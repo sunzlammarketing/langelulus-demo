@@ -622,30 +622,33 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 
 /* ── Hot Deal (flash sale) ── */
 /* ── Flash Sale ── */
-.flash-sec{background:linear-gradient(180deg,#F5610B 0%,#EC4B08 100%); color:#fff; border:0; overflow:hidden}
-.flash-tabs{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:var(--s6)}
-.flash-tab{text-align:center; padding:11px 30px; border-radius:14px; background:rgba(255,255,255,.16); color:rgba(255,255,255,.82); min-width:200px}
-.flash-tab.on{background:#fff; color:#E24E0A}
-.flash-tab b{display:block; font-size:17px; font-weight:800; letter-spacing:.01em}
-.flash-tab span{display:block; font-size:13px; margin-top:3px; opacity:.95}
+.flash-sec{background:linear-gradient(180deg,#EAF5FC 0%,#D9EEFB 100%); color:var(--ink-900); border-top:1px solid var(--blue-200); border-bottom:1px solid var(--blue-200); overflow:hidden}
+.flash-tabs{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:var(--s5)}
+.flash-tab{text-align:center; padding:9px 26px; border-radius:14px; background:rgba(255,255,255,.55); color:var(--blue-700); min-width:180px}
+.flash-tab.on{background:#fff; color:var(--blue-800); box-shadow:var(--sh-sm)}
+.flash-tab b{display:block; font-size:15px; font-weight:800; letter-spacing:.01em}
+.flash-tab span{display:block; font-size:12.5px; margin-top:2px; opacity:.85}
 .flash-head{display:flex; align-items:center; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; margin-bottom:var(--s5)}
-.flash-title{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-.flash-title h2{font-size:38px; font-weight:800; color:#fff; margin:0; line-height:1}
+.flash-title{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.flash-title h2{font-size:30px; font-weight:800; color:var(--blue-900); margin:0; line-height:1}
 .flash-timer{display:flex; align-items:center; gap:5px}
-.flash-timer b{background:#1b1b1b; color:#fff; border-radius:7px; padding:5px 8px; font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; min-width:40px; text-align:center; display:inline-block}
-.flash-timer i{color:#fff; font-weight:800; font-style:normal; font-size:20px}
-.flash-all{color:#fff; font-weight:700; font-size:16px; white-space:nowrap}
-.flash-all:hover{color:#fff; opacity:.85}
-.flash-chips{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:var(--s6)}
-.flash-chip{border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; border-radius:999px; padding:9px 20px; font-size:15px; font-weight:600; cursor:pointer; transition:background .15s,color .15s}
-.flash-chip:hover{background:rgba(255,255,255,.16)}
-.flash-chip.on{background:#fff; color:#E24E0A; border-color:#fff}
-.flash-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.5)}
+.flash-timer b{background:var(--blue-800); color:#fff; border-radius:6px; padding:4px 7px; font-size:19px; font-weight:800; font-variant-numeric:tabular-nums; min-width:34px; text-align:center; display:inline-block}
+.flash-timer i{color:var(--blue-800); font-weight:800; font-style:normal; font-size:17px}
+.flash-all{color:var(--blue-700); font-weight:700; font-size:15px; white-space:nowrap}
+.flash-all:hover{color:var(--blue-900)}
+.flash-row::-webkit-scrollbar-thumb{background:var(--blue-300)}
 .flash-row .deal-off{background:#E01f1f}
+.flash-row .deal-card{flex-basis:206px}
+.flash-row .deal-body{padding:13px 14px}
+.flash-row .deal-name{font-size:15.5px; min-height:0}
+.flash-row .deal-now{font-size:16px}
+.flash-row .deal-old{font-size:12.5px}
+.flash-row .deal-add{margin-top:10px}
 @media (max-width:600px){
-  .flash-title h2{font-size:30px}
-  .flash-tab{min-width:0; flex:1; padding:10px 14px}
-  .flash-tab b{font-size:14px}
+  .flash-title h2{font-size:25px}
+  .flash-tab{min-width:0; flex:1; padding:9px 12px}
+  .flash-tab b{font-size:13px}
+  .flash-row .deal-card{flex-basis:168px}
 }
 .hotdeal-sec{background:var(--err-bg); border-top:1px solid #F3D6D2; border-bottom:1px solid #F3D6D2}
 .hotdeal-head{display:flex; align-items:center; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; margin-bottom:var(--s6)}
@@ -1310,10 +1313,6 @@ function viewHome(){
           </div>
         </div>
         <a href="#/products" class="flash-all">Xem tất cả →</a>
-      </div>
-      <div class="flash-chips">
-        <button class="flash-chip on" onclick="flashFilter('',this)">Tất cả</button>
-        ${Object.keys(COLLECTIONS).map(k => '<button class="flash-chip" onclick="flashFilter(\'' + k + '\',this)">' + esc(COLLECTIONS[k].name) + '</button>').join('')}
       </div>
       <div class="hotdeal-row flash-row">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
     </div>
