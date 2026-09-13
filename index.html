@@ -621,7 +621,17 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .deal-old{color:var(--ink-400); font-size:14px}
 .deal-sold{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--err); font-weight:600; margin-top:2px}
 .deal-flame{flex:0 0 auto; display:inline-flex; align-items:center; filter:drop-shadow(0 1px 2px rgba(222,47,10,.3))}
-.deal-flame svg{height:26px; width:auto; display:block}
+.deal-flame svg{height:26px; width:auto; display:block; overflow:visible}
+/* Ngọn lửa bập bùng của huy hiệu HOT DEAL */
+.hd-tongue{transform-box:fill-box; transform-origin:50% 100%; animation:hdFlicker .85s ease-in-out infinite}
+.hd-tongue.f2{animation-duration:.68s; animation-delay:-.3s}
+.hd-tongue.f3{animation-duration:1.05s; animation-delay:-.55s}
+@keyframes hdFlicker{
+  0%,100%{transform:scaleY(1) scaleX(1)}
+  30%{transform:scaleY(1.32) scaleX(.9) translateY(-1px)}
+  55%{transform:scaleY(.82) scaleX(1.08)}
+  80%{transform:scaleY(1.18) scaleX(.94)}
+}
 .deal-bar{height:7px; border-radius:99px; background:#F3D6D2; overflow:hidden; margin-top:2px}
 .deal-bar i{display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,#F26B21,#F59E0B)}
 .deal-add{margin-top:var(--s3); width:100%; justify-content:center}
@@ -1450,10 +1460,10 @@ const HOT_DEAL_SVG =
   + '<stop offset="0" stop-color="#FBB43F"/><stop offset="0.55" stop-color="#F2711C"/><stop offset="1" stop-color="#DE2F0A"/>'
   + '</linearGradient></defs>'
   + '<g fill="url(#hdg)">'
-  + '<path d="M21,3 C13,9 14,17 21,18 C28,17 29,9 21,3 Z"/>'
-  + '<path d="M41,1 C32,8 33,17 41,18 C49,17 50,8 41,1 Z"/>'
-  + '<path d="M61,3 C53,9 54,17 61,18 C68,17 69,9 61,3 Z"/>'
-  + '<rect x="3" y="13" width="76" height="24" rx="8"/></g>'
+  + '<path class="hd-tongue f1" d="M20,4 C13,10 12,15 20,17 C28,15 27,10 20,4 Z"/>'
+  + '<path class="hd-tongue f2" d="M41,1 C32,9 33,15 41,17 C49,15 50,9 41,1 Z"/>'
+  + '<path class="hd-tongue f3" d="M61,4 C54,10 53,15 61,17 C69,15 68,10 61,4 Z"/>'
+  + '<rect x="3" y="14" width="76" height="23" rx="8"/></g>'
   + '<text x="41" y="30" text-anchor="middle" textLength="64" lengthAdjust="spacingAndGlyphs" fill="#fff" '
   + 'font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="800" font-style="italic">HOT DEAL</text>'
   + '</svg>';
