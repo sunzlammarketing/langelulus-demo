@@ -636,7 +636,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .flash-timer i{color:var(--blue-800); font-weight:800; font-style:normal; font-size:17px}
 .flash-all{color:var(--blue-700); font-weight:700; font-size:15px; white-space:nowrap}
 .flash-all:hover{color:var(--blue-900)}
-.flash-row::-webkit-scrollbar-thumb{background:var(--blue-300)}
+.flash-row{scrollbar-width:none; -ms-overflow-style:none}
+.flash-row::-webkit-scrollbar{display:none; height:0}
 .flash-row .deal-off{background:#E01f1f}
 .flash-row .deal-card{flex-basis:206px}
 .flash-row .deal-body{padding:13px 14px}
@@ -1546,7 +1547,7 @@ function homeMarquee(){
   const set = items.map(card).join('');
   return '<section class="sec mq-sec">'
     + '<div class="wrap"><div class="sec-head"><div><div class="eyebrow left">Bộ sưu tập</div>'
-    + '<h2 class="t-h2">Chín hương, một hành trình</h2></div>'
+    + '<h2 class="t-h2">Sản phẩm được yêu thích</h2></div>'
     + '<a href="#/products" class="btn btn-secondary">Xem tất cả</a></div></div>'
     + '<div class="mq-viewport"><div class="mq-track">' + set + set + '</div></div>'
     + '</section>';
