@@ -621,6 +621,32 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 @media (max-width:600px){ .mq-card{width:200px; margin-right:14px} }
 
 /* ── Hot Deal (flash sale) ── */
+/* ── Flash Sale ── */
+.flash-sec{background:linear-gradient(180deg,#F5610B 0%,#EC4B08 100%); color:#fff; border:0; overflow:hidden}
+.flash-tabs{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:var(--s6)}
+.flash-tab{text-align:center; padding:11px 30px; border-radius:14px; background:rgba(255,255,255,.16); color:rgba(255,255,255,.82); min-width:200px}
+.flash-tab.on{background:#fff; color:#E24E0A}
+.flash-tab b{display:block; font-size:17px; font-weight:800; letter-spacing:.01em}
+.flash-tab span{display:block; font-size:13px; margin-top:3px; opacity:.95}
+.flash-head{display:flex; align-items:center; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; margin-bottom:var(--s5)}
+.flash-title{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.flash-title h2{font-size:38px; font-weight:800; color:#fff; margin:0; line-height:1}
+.flash-timer{display:flex; align-items:center; gap:5px}
+.flash-timer b{background:#1b1b1b; color:#fff; border-radius:7px; padding:5px 8px; font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; min-width:40px; text-align:center; display:inline-block}
+.flash-timer i{color:#fff; font-weight:800; font-style:normal; font-size:20px}
+.flash-all{color:#fff; font-weight:700; font-size:16px; white-space:nowrap}
+.flash-all:hover{color:#fff; opacity:.85}
+.flash-chips{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:var(--s6)}
+.flash-chip{border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; border-radius:999px; padding:9px 20px; font-size:15px; font-weight:600; cursor:pointer; transition:background .15s,color .15s}
+.flash-chip:hover{background:rgba(255,255,255,.16)}
+.flash-chip.on{background:#fff; color:#E24E0A; border-color:#fff}
+.flash-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.5)}
+.flash-row .deal-off{background:#E01f1f}
+@media (max-width:600px){
+  .flash-title h2{font-size:30px}
+  .flash-tab{min-width:0; flex:1; padding:10px 14px}
+  .flash-tab b{font-size:14px}
+}
 .hotdeal-sec{background:var(--err-bg); border-top:1px solid #F3D6D2; border-bottom:1px solid #F3D6D2}
 .hotdeal-head{display:flex; align-items:center; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; margin-bottom:var(--s6)}
 .hotdeal-title{display:flex; align-items:center; gap:var(--s3)}
@@ -1244,8 +1270,11 @@ function viewHome(){
   ];
   const best = PRODUCTS.filter(p => p.badges.indexOf('best') > -1);
   const news = ARTICLES.slice(0,3);
-  const deals = PRODUCTS.filter(p => p.old && p.old > p.price);
-  const maxSold = Math.max(...deals.map(p => p.sold || 0), 1);
+  const deals = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
+  const maxSold = Math.max(...deals.map(p => soldOf(p)), 1);
+  const dd2 = n => String(n).padStart(2, '0');
+  const _today = new Date(), _tmr = new Date(); _tmr.setDate(_today.getDate() + 1);
+  const dstr = d => dd2(d.getDate()) + '/' + dd2(d.getMonth() + 1);
 
   return `
   <section class="hero">
@@ -1267,30 +1296,26 @@ function viewHome(){
     </div>
   </section>
 
-  <section class="sec hotdeal-sec">
+  <section class="sec flash-sec">
     <div class="wrap">
-      <div class="hotdeal-head">
-        <div class="hotdeal-title">
-          <span class="hotdeal-live" aria-hidden="true"></span>
-          <div>
-            <div class="eyebrow left" style="color:var(--err)">Hot Deal</div>
-            <h2 class="t-h2">Ưu đãi có hạn</h2>
+      <div class="flash-tabs">
+        <div class="flash-tab on"><b>00:00 - 23:59, ${dstr(_today)}</b><span>Đang diễn ra</span></div>
+        <div class="flash-tab"><b>00:00 - 23:59, ${dstr(_tmr)}</b><span>Sắp diễn ra</span></div>
+      </div>
+      <div class="flash-head">
+        <div class="flash-title">
+          <h2>Flash Sale</h2>
+          <div class="flash-timer" id="flashTimer" aria-label="Đếm ngược flash sale">
+            <b data-fh>00</b><i>:</i><b data-fm>00</b><i>:</i><b data-fs>00</b>
           </div>
         </div>
-        <div class="hotdeal-timer hd-countdown" id="hotdealTimer" aria-label="Đếm ngược ưu đãi">
-          <div class="td-box"><b data-d>00</b><span>Ngày</span></div>
-          <span class="td-sep">:</span>
-          <div class="td-box"><b data-h>00</b><span>Giờ</span></div>
-          <span class="td-sep">:</span>
-          <div class="td-box"><b data-m>00</b><span>Phút</span></div>
-          <span class="td-sep">:</span>
-          <div class="td-box"><b data-s>00</b><span>Giây</span></div>
-        </div>
+        <a href="#/products" class="flash-all">Xem tất cả →</a>
       </div>
-      <div class="hotdeal-row">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
-      <div class="center" style="margin-top:var(--s6)">
-        <a href="#/products" class="btn btn-secondary">Xem tất cả sản phẩm</a>
+      <div class="flash-chips">
+        <button class="flash-chip on" onclick="flashFilter('',this)">Tất cả</button>
+        ${Object.keys(COLLECTIONS).map(k => '<button class="flash-chip" onclick="flashFilter(\'' + k + '\',this)">' + esc(COLLECTIONS[k].name) + '</button>').join('')}
       </div>
+      <div class="hotdeal-row flash-row">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
     </div>
   </section>
 
@@ -1532,18 +1557,20 @@ function dealCard(p, maxSold){
   const off = ANCHOR_PRICE > p.price ? Math.round((ANCHOR_PRICE - p.price) / ANCHOR_PRICE * 100) : 0;
   const pct = Math.min(96, Math.max(35, Math.round((p.sold || 0) / (maxSold || 1) * 100)));
   const name = collLabel(p);
-  return `<article class="deal-card">
+  const soldN = isPerfume(p) ? (p.sold || soldOf(p)) : (p.sold || 0);
+  const barPct = Math.min(96, Math.max(35, Math.round(soldN / (maxSold || 1) * 100)));
+  return `<article class="deal-card" data-coll="${isPerfume(p) ? p.coll : ''}">
     <a href="#/product/${p.id}" class="deal-media">
-      ${off ? '<span class="deal-off">-' + off + '%</span>' : ''}
+      ${off ? '<span class="deal-off">Giảm ' + off + '%</span>' : ''}
       ${pshot(p, '', 0, true)}
     </a>
     <div class="deal-body">
       <div class="deal-brand">${esc(name)}</div>
       <h3 class="deal-name"><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
       <div class="deal-price"><span class="deal-now">${money(p.price)}</span><s class="deal-old">${money(ANCHOR_PRICE)}</s></div>
-      <div class="deal-sold"><span class="deal-flame">${HOT_DEAL_SVG}</span><span>Đã bán ${(p.sold || 0).toLocaleString('vi-VN')}</span></div>
-      <div class="deal-bar"><i style="width:${pct}%"></i></div>
-      <button class="btn btn-primary btn-sm deal-add btn-cart" onclick="quickAdd('${p.id}')">Thêm vào giỏ</button>
+      <div class="deal-sold"><span class="deal-flame">${HOT_DEAL_SVG}</span><span>Đã bán ${soldN.toLocaleString('vi-VN')}</span></div>
+      <div class="deal-bar"><i style="width:${barPct}%"></i></div>
+      <button class="btn btn-primary btn-sm deal-add btn-cart" onclick="quickAdd('${p.id}')">+ Chọn mua</button>
     </div>
   </article>`;
 }
@@ -3600,7 +3627,7 @@ function route(){
   $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === '/' + (seg[0] || '')));
   closeMega(); closeMnav();
   if(path === '/' || path === '') initHero();
-  if(document.querySelector('.hd-countdown')) startHotDealTimer();
+  if(document.querySelector('.hd-countdown') || document.getElementById('flashTimer')) startHotDealTimer();
 
   /* I18N: dịch giao diện + chuẩn hoá link + cập nhật SEO */
   ['#app','.hdr','.ftr','#mnav','#drawer','.chat'].forEach(s => {
@@ -3636,7 +3663,20 @@ function startHotDealTimer(){
   const pad = n => String(n).padStart(2, '0');
   const tick = () => {
     const els = document.querySelectorAll('.hd-countdown');
-    if(!els.length){ clearInterval(hotDealTimer); return; }
+    const ft = document.getElementById('flashTimer');
+    if(!els.length && !ft){ clearInterval(hotDealTimer); return; }
+    /* Flash Sale: đếm ngược tới hết ngày hôm nay (23:59:59) theo HH:MM:SS */
+    if(ft){
+      const now2 = new Date();
+      const end = new Date(now2.getFullYear(), now2.getMonth(), now2.getDate(), 23, 59, 59, 999);
+      let df = Math.max(0, end.getTime() - now2.getTime());
+      const H = Math.floor(df / 3600000); df -= H * 3600000;
+      const Mn = Math.floor(df / 60000); df -= Mn * 60000;
+      const Sc = Math.floor(df / 1000);
+      const setf = (k, v) => { const n = ft.querySelector('[data-' + k + ']'); if(n) n.textContent = pad(v); };
+      setf('fh', H); setf('fm', Mn); setf('fs', Sc);
+    }
+    if(!els.length){ return; }
     const now = Date.now();
     let diff = Math.max(0, Math.ceil((now + 1) / CYCLE) * CYCLE - now);
     const d = Math.floor(diff / 86400000); diff -= d * 86400000;
@@ -3650,6 +3690,15 @@ function startHotDealTimer(){
   };
   tick();
   hotDealTimer = setInterval(tick, 1000);
+}
+
+/* Flash Sale: lọc thẻ theo bộ sưu tập */
+function flashFilter(coll, btn){
+  document.querySelectorAll('.flash-chip').forEach(c => c.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  document.querySelectorAll('.flash-row .deal-card').forEach(card => {
+    card.style.display = (!coll || card.dataset.coll === coll) ? '' : 'none';
+  });
 }
 
 /* Hero slider */
