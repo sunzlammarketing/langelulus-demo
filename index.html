@@ -285,6 +285,18 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .pdp-deal .td-sep{font-size:13px}
 .pdp-deal-sold{margin:26px 0 8px; font-size:14px; font-weight:600}
 .pcard-foot{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); margin-top:var(--s2)}
+/* Sản phẩm nổi bật: thẻ nhỏ gọn như Flash Sale */
+.feat-row{display:flex; gap:20px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none; -ms-overflow-style:none; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
+.feat-row::-webkit-scrollbar{display:none; height:0}
+.feat-row .pcard{flex:0 0 206px; scroll-snap-align:start}
+.feat-row .pcard-body{padding:13px 14px; gap:5px}
+.feat-row .pcard h3{font-size:15.5px; line-height:1.25}
+.feat-row .pcard .notes{display:none}
+.feat-row .pcard .price{font-size:16px}
+.feat-row .pcard-foot{margin-top:8px}
+.feat-row .pcard-foot .btn-sm{height:34px; font-size:13px; padding:0 12px}
+.feat-row .pcard-foot .icon-btn{width:34px; height:34px}
+@media (max-width:600px){ .feat-row .pcard{flex-basis:168px} }
 .stars{color:var(--blue-600); font-size:14px; letter-spacing:1px}
 
 /* ═══════════ SECTIONS ═══════════ */
@@ -1333,7 +1345,7 @@ function viewHome(){
         </div>
         <a href="#/products?s=best" class="btn btn-secondary">Xem thêm</a>
       </div>
-      <div class="grid g4">${best.map(pcard).join('')}</div>
+      <div class="feat-row">${best.map(pcard).join('')}</div>
     </div>
   </section>
 
