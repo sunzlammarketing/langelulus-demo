@@ -1480,9 +1480,17 @@ const HOT_DEAL_SVG =
   + 'font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="800" font-style="italic">HOT DEAL</text>'
   + '</svg>';
 
+/* Số "đã bán" — dùng p.sold; nếu 0 thì sinh số ổn định theo mã SP để không hiện "Đã bán 0" */
+function soldOf(p){
+  if(p.sold) return p.sold;
+  let h = 0; const s = String(p.id);
+  for(let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return 640 + h % 1160;
+}
 /* Khối Hot Deal trong trang chi tiết: đếm ngược + đã bán + huy hiệu lửa động */
 function dealBanner(p){
-  const pct = Math.min(96, Math.max(45, Math.round((p.sold || 0) / 2600 * 100)));
+  const sold = soldOf(p);
+  const pct = Math.min(96, Math.max(45, Math.round(sold / 2600 * 100)));
   return '<div class="pdp-deal">'
     + '<div class="pdp-deal-top"><span class="pdp-deal-label">Kết thúc sau</span>'
     + '<div class="hotdeal-timer hd-countdown" aria-label="Đếm ngược ưu đãi">'
@@ -1491,7 +1499,7 @@ function dealBanner(p){
     + '<div class="td-box"><b data-m>00</b><span>Phút</span></div><span class="td-sep">:</span>'
     + '<div class="td-box"><b data-s>00</b><span>Giây</span></div></div></div>'
     + '<div class="deal-sold pdp-deal-sold"><span class="deal-flame">' + HOT_DEAL_SVG + '</span>'
-    + '<span>Đã bán ' + (p.sold || 0).toLocaleString('vi-VN') + ' sản phẩm</span></div>'
+    + '<span>Đã bán ' + sold.toLocaleString('vi-VN') + ' sản phẩm</span></div>'
     + '<div class="deal-bar"><i style="width:' + pct + '%"></i></div>'
     + '</div>';
 }
@@ -1600,6 +1608,7 @@ function viewGiftset(p){
       </div>
       <h1 class="t-h1">${esc(p.name)}</h1>
       <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
+      ${dealBanner(p)}
       <div class="rule" style="margin:0 0 24px"></div>
       <div class="label muted" style="margin-bottom:12px">Chọn bộ sưu tập</div>
       <div class="variants" style="margin-bottom:24px">
@@ -1648,7 +1657,7 @@ function viewProductOther(p){
         <h1 class="t-h1">${esc(p.name)}</h1>
       <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
         ${p.reviews ? '<div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap"><span class="stars">' + stars(p.rating) + '</span><span class="muted">' + p.rating + '/5 · ' + p.reviews + ' đánh giá</span></div>' : '<div style="margin:12px 0 20px"></div>'}
-
+        ${dealBanner(p)}
         <div class="rule" style="margin:0 0 28px"></div>
 
         <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(anchorOf(p))}</s></div>
