@@ -1326,7 +1326,6 @@ function viewHome(){
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <div class="eyebrow left">Được yêu thích nhất</div>
           <h2 class="t-h2">Sản phẩm nổi bật</h2>
         </div>
         <a href="#/products?s=best" class="btn btn-secondary">Xem thêm</a>
@@ -1540,7 +1539,7 @@ function homeMarquee(){
     + '<div class="mq-cap"><span class="mq-coll">' + esc(collLabel(p)) + '</span><b>' + esc(p.name) + '</b></div></a>';
   const set = items.map(card).join('');
   return '<section class="sec mq-sec">'
-    + '<div class="wrap"><div class="sec-head"><div><div class="eyebrow left">Bộ sưu tập</div>'
+    + '<div class="wrap"><div class="sec-head"><div>'
     + '<h2 class="t-h2">Sản phẩm được yêu thích</h2></div>'
     + '<a href="#/products" class="btn btn-secondary">Xem tất cả</a></div></div>'
     + '<div class="mq-viewport"><div class="mq-track">' + set + set + '</div></div>'
