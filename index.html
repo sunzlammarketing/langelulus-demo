@@ -1575,7 +1575,6 @@ function viewGiftset(p){
       </div>
       <h1 class="t-h1">${esc(p.name)}</h1>
       <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
-      <p class="t-lg muted" style="margin:12px 0 24px">${esc(p.short || '')}</p>
       <div class="rule" style="margin:0 0 24px"></div>
       <div class="label muted" style="margin-bottom:12px">Chọn bộ sưu tập</div>
       <div class="variants" style="margin-bottom:24px">
@@ -1624,7 +1623,6 @@ function viewProductOther(p){
         <h1 class="t-h1">${esc(p.name)}</h1>
       <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
         ${p.reviews ? '<div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap"><span class="stars">' + stars(p.rating) + '</span><span class="muted">' + p.rating + '/5 · ' + p.reviews + ' đánh giá</span></div>' : '<div style="margin:12px 0 20px"></div>'}
-        <p class="t-lg muted" style="margin-bottom:28px">${esc(p.short || '')}</p>
 
         <div class="rule" style="margin:0 0 28px"></div>
 
@@ -1851,8 +1849,6 @@ function viewProduct(id){
           <span class="muted">·</span>
           <span class="muted">Đã bán ${p.sold.toLocaleString('vi-VN')}</span>
         </div>
-        <p class="t-lg muted" style="margin-bottom:28px">${esc(p.desc)}</p>
-
         <div class="rule" style="margin:0 0 28px"></div>
 
         <div class="label muted" style="margin-bottom:12px">Chọn dung tích</div>
