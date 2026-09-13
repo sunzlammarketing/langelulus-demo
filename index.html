@@ -30,6 +30,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
+  /* Giao diện luôn sáng — không tự tối hoá buổi tối */
+  color-scheme: light;
   /* Blue — accent / tín hiệu (brand: #1D9FD9, #084D89) */
   --blue-100:#D9EEFB; --blue-200:#AEDCF6; --blue-300:#6FC2EA; --blue-400:#1D9FD9;
   --blue-500:#1489C4; --blue-600:#0C669F; --blue-700:#084D89; --blue-800:#063A69; --blue-900:#042745;
@@ -605,20 +607,6 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms !important; animation-duration:.01ms !important; scroll-behavior:auto !important}
-}
-
-/* Chế độ tối (buổi tối / dark mode): header nền tối + logo bản sáng cho nổi bật */
-@media (prefers-color-scheme: dark){
-  .hdr{background:rgba(13,20,28,.92); border-bottom-color:rgba(255,255,255,.1)}
-  .logo-mark{content:url('assets/brand/logo-mark-light.png')}
-  .logo-word{content:url('assets/brand/logo-word-light.png')}
-  .brandname{color:#F7FAFD}
-  .brandtag{color:rgba(247,250,253,.6)}
-  .nav-link{color:#EDF3F8}
-  .nav-link.active{color:#6FC2EA}
-  .hdr .icon-btn{color:#EDF3F8}
-  .lang-btn{color:rgba(247,250,253,.55)}
-  .lang-btn.on{color:#6FC2EA}
 }
 
 /* ── Dải ảnh cuộn tự động (marquee) ── */
