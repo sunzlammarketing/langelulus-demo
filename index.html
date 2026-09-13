@@ -1300,9 +1300,7 @@ function viewHome(){
     {img:'hero-3', alt:'Bộ sưu tập Sunwood', cta:'#/products?c=sunwood'},
     {img:'hero-4', alt:'Bộ sưu tập Terrascent', cta:'#/products?c=terra'}
   ];
-  const best = PRODUCTS.filter(p => p.badges.indexOf('best') > -1)
-    .concat(PRODUCTS.filter(p => isPerfume(p) && !p.giftset && p.badges.indexOf('best') === -1))
-    .slice(0, 8);
+  const best = ['BT004','BT003','BT006','BT013','BT002','MD002'].map(id => prod(id)).filter(Boolean);
   const news = ARTICLES.slice(0,3);
   const deals = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
   const maxSold = Math.max(...deals.map(p => soldOf(p)), 1);
