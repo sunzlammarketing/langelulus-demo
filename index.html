@@ -1717,7 +1717,7 @@ function viewGiftset(p){
   <section style="padding-bottom:var(--s9)"><div class="wrap pdp">
     <div>
       <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
-      <div class="thumbs">${[1,2,3,4].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}</div>
+      <div class="thumbs">${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}</div>
     </div>
     <div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">${genuineBadge()}
@@ -1763,7 +1763,7 @@ function viewProductOther(p){
       <div>
         <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
         <div class="thumbs">
-          ${[1,2,3,4].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">
+          ${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">
             ${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}
         </div>
       </div>
@@ -1980,7 +1980,7 @@ function viewProduct(id){
       <div>
         <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
         <div class="thumbs">
-          ${[1,2,3,4].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">
+          ${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">
             ${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}
         </div>
       </div>
