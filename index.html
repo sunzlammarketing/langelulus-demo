@@ -464,6 +464,11 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 
 /* Trust strip */
 .trust{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s5); text-align:center}
+.promo2{display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); padding:var(--s5) 0 var(--s3)}
+.promo2 a{display:block; border-radius:var(--r-lg); overflow:hidden; background:var(--surface-2); box-shadow:var(--sh-sm); transition:transform .25s ease-out, box-shadow .25s ease-out}
+.promo2 a:hover{transform:translateY(-3px); box-shadow:var(--sh-md, var(--sh-sm))}
+.promo2 img{width:100%; height:auto; display:block; aspect-ratio:740/424; object-fit:cover}
+@media (max-width:640px){ .promo2{grid-template-columns:1fr; gap:var(--s4)} }
 .trust-i{font-size:26px; color:var(--blue-600); margin-bottom:var(--s2); line-height:1}
 .trust-i svg{width:30px; height:30px; display:inline-block; vertical-align:middle}
 .trust h4{font-size:16px; margin-bottom:4px}
@@ -1375,6 +1380,13 @@ function viewHome(){
         <picture><source srcset="${BANNER_BASE}${s.img}.webp" type="image/webp"><img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" ${i===0?'':'loading="lazy"'}></picture>
       </a>`).join('')}
     <div class="hero-dots">${slides.map((_,i) => `<button class="hero-dot ${i===0?'on':''}" data-dot="${i}" aria-label="Slide ${i+1}"></button>`).join('')}</div>
+  </section>
+
+  <section>
+    <div class="wrap promo2">
+      <a href="#/products" aria-label="Khám phá sản phẩm L’ANGELULUS"><picture><source srcset="${BANNER_BASE}promo-1.webp" type="image/webp"><img src="${BANNER_BASE}promo-1.jpg" alt="Khám phá sản phẩm L’ANGELULUS" loading="lazy"></picture></a>
+      <a href="#/product/GS01" aria-label="Gift set L’ANGELULUS"><picture><source srcset="${BANNER_BASE}promo-2.webp" type="image/webp"><img src="${BANNER_BASE}promo-2.jpg" alt="Gift set L’ANGELULUS" loading="lazy"></picture></a>
+    </div>
   </section>
 
   <section style="background:var(--surface);border-bottom:1px solid var(--border)">
