@@ -491,8 +491,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   border-radius:var(--r-md); font-size:14px; color:var(--blue-300); transition:.14s}
 .chan:hover{background:rgba(29,159,217,.1); border-color:var(--blue-400); color:var(--blue-300)}
 .socials{display:flex; gap:var(--s3); margin-top:var(--s5)}
-.soc{width:40px; height:40px; border-radius:9px; overflow:hidden; display:block; transition:transform .18s ease-out, box-shadow .18s ease-out}
-.soc img{width:100%; height:100%; display:block; object-fit:cover}
+.soc{width:40px; height:40px; aspect-ratio:1/1; padding:0; line-height:0; border-radius:9px; overflow:hidden; display:block; flex:0 0 40px; transition:transform .18s ease-out, box-shadow .18s ease-out}
+.soc img{width:40px; height:40px; display:block; object-fit:contain}
 .soc:hover{transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.35)}
 .ftr-bottom{margin-top:var(--s6); padding-top:var(--s4); border-top:1px solid rgba(247,250,253,.1);
   display:flex; justify-content:space-between; gap:var(--s4); font-size:13.5px; color:rgba(247,250,253,.5); flex-wrap:wrap}
