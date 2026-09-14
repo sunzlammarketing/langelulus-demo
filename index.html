@@ -510,7 +510,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .nl-form input:focus{outline:none; border-color:var(--blue-400); box-shadow:0 0 0 3px rgba(29,159,217,.18)}
 
 /* ═══════════ CHAT WIDGET ═══════════ */
-.chat{position:fixed; right:var(--s5); bottom:var(--s5); z-index:70; display:flex; flex-direction:column; align-items:flex-end; gap:var(--s3)}
+.chat{position:fixed; right:var(--s5); bottom:var(--s5); z-index:70; display:flex; flex-direction:column; align-items:flex-end; gap:var(--s3); pointer-events:none}
+.chat > *{pointer-events:auto}
 .chat-panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); box-shadow:var(--sh-lg);
   width:280px; padding:var(--s5); opacity:0; visibility:hidden; transform:translateY(8px); transition:.22s cubic-bezier(.2,.8,.2,1)}
 .chat-panel.open{opacity:1; visibility:visible; transform:translateY(0)}
@@ -712,6 +713,13 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .flash-timer i{color:var(--blue-800); font-weight:800; font-style:normal; font-size:17px}
 .flash-all{color:var(--blue-700); font-weight:700; font-size:15px; white-space:nowrap}
 .flash-all:hover{color:var(--blue-900)}
+.flash-wrap{position:relative}
+.flash-nav{position:absolute; top:calc(50% - var(--s3)); transform:translateY(-50%); z-index:2; width:44px; height:44px; border-radius:50%; border:0; background:#fff; color:var(--blue-700); display:grid; place-items:center; cursor:pointer; box-shadow:0 4px 14px rgba(8,77,137,.22); transition:opacity .18s, transform .18s, background .18s}
+.flash-nav svg{width:22px; height:22px}
+.flash-nav.prev{left:-10px} .flash-nav.next{right:-10px}
+.flash-nav:hover{background:var(--blue-500); color:#fff; transform:translateY(-50%) scale(1.06)}
+.flash-nav.off{opacity:0; pointer-events:none}
+@media (max-width:640px){ .flash-nav{width:36px; height:36px} .flash-nav.prev{left:-6px} .flash-nav.next{right:-6px} }
 .flash-row{scrollbar-width:none; -ms-overflow-style:none}
 .flash-row::-webkit-scrollbar{display:none; height:0}
 .flash-row .deal-off{background:#E01f1f; left:auto; right:6px; top:6px}
@@ -1421,7 +1429,11 @@ function viewHome(){
         </div>
         <a href="#/products" class="flash-all">Xem tất cả →</a>
       </div>
-      <div class="hotdeal-row flash-row">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
+      <div class="flash-wrap">
+        <button class="flash-nav prev" type="button" aria-label="Xem sản phẩm trước" onclick="flashScroll(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="hotdeal-row flash-row" id="flashRow" onscroll="flashNavState()">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
+        <button class="flash-nav next" type="button" aria-label="Xem thêm sản phẩm" onclick="flashScroll(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
     </div>
   </section>
 
@@ -3723,7 +3735,7 @@ function route(){
   PDP = {ml:100, qty:1};
   $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === '/' + (seg[0] || '')));
   closeMega(); closeMnav();
-  if(path === '/' || path === '') initHero();
+  if(path === '/' || path === ''){ initHero(); flashNavState(); }
   if(document.querySelector('.hd-countdown') || document.getElementById('flashTimer')) startHotDealTimer();
 
   /* I18N: dịch giao diện + chuẩn hoá link + cập nhật SEO */
@@ -3787,6 +3799,22 @@ function startHotDealTimer(){
   };
   tick();
   hotDealTimer = setInterval(tick, 1000);
+}
+
+/* Flash Sale: nút cuộn trái/phải */
+function flashScroll(dir){
+  const row = document.getElementById('flashRow'); if(!row) return;
+  const card = row.querySelector('.deal-card');
+  const step = card ? (card.getBoundingClientRect().width + 24) * 2 : row.clientWidth * .8;
+  row.scrollBy({left: dir * step, behavior: 'smooth'});
+}
+function flashNavState(){
+  const row = document.getElementById('flashRow'); if(!row) return;
+  const prev = document.querySelector('.flash-nav.prev'), next = document.querySelector('.flash-nav.next');
+  if(!prev || !next) return;
+  const max = row.scrollWidth - row.clientWidth - 2;
+  prev.classList.toggle('off', row.scrollLeft <= 2);
+  next.classList.toggle('off', row.scrollLeft >= max);
 }
 
 /* Flash Sale: lọc thẻ theo bộ sưu tập */
