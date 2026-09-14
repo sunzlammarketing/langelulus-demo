@@ -1669,7 +1669,7 @@ function pcard(p){
   const c = {color: collColor(p), name: collLabel(p)};
   const wish = S.wishlist.indexOf(p.id) > -1;
   return `<article class="pcard">
-    <a href="#/product/${p.id}">${pshot(p, '', 0)}</a>
+    <a href="#/product/${p.id}">${pshot(p, '', 0, isPerfume(p) && !p.giftset)}</a>
     <div class="pcard-body">
       <span class="pcard-col" style="color:${c.color}">${esc(c.name)}</span>
       <div class="pcard-name-row" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
