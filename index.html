@@ -3801,7 +3801,7 @@ function initHero(){
   const go = n => { i = (n + slides.length) % slides.length;
     slides.forEach((s,k) => s.classList.toggle('on', k === i));
     dots.forEach((d,k) => d.classList.toggle('on', k === i)); };
-  const restart = () => { clearInterval(heroTimer); heroTimer = setInterval(() => go(i+1), 2500); };
+  const restart = () => { clearInterval(heroTimer); heroTimer = setInterval(() => go(i+1), 3000); };
   dots.forEach((d,k) => d.onclick = () => { go(k); restart(); });
   restart();
 }
