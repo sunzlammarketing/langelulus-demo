@@ -718,7 +718,6 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .flash-nav svg{width:22px; height:22px}
 .flash-nav.prev{left:-10px} .flash-nav.next{right:-10px}
 .flash-nav:hover{background:var(--blue-500); color:#fff; transform:translateY(-50%) scale(1.06)}
-.flash-nav.off{opacity:0; pointer-events:none}
 @media (max-width:640px){ .flash-nav{width:36px; height:36px} .flash-nav.prev{left:-6px} .flash-nav.next{right:-6px} }
 .flash-row{scrollbar-width:none; -ms-overflow-style:none}
 .flash-row::-webkit-scrollbar{display:none; height:0}
@@ -3806,16 +3805,13 @@ function flashScroll(dir){
   const row = document.getElementById('flashRow'); if(!row) return;
   const card = row.querySelector('.deal-card');
   const step = card ? (card.getBoundingClientRect().width + 24) * 2 : row.clientWidth * .8;
-  row.scrollBy({left: dir * step, behavior: 'smooth'});
-}
-function flashNavState(){
-  const row = document.getElementById('flashRow'); if(!row) return;
-  const prev = document.querySelector('.flash-nav.prev'), next = document.querySelector('.flash-nav.next');
-  if(!prev || !next) return;
   const max = row.scrollWidth - row.clientWidth - 2;
-  prev.classList.toggle('off', row.scrollLeft <= 2);
-  next.classList.toggle('off', row.scrollLeft >= max);
+  /* Ở mép thì cuộn vòng sang đầu/cuối kia */
+  if(dir > 0 && row.scrollLeft >= max) row.scrollTo({left: 0, behavior: 'smooth'});
+  else if(dir < 0 && row.scrollLeft <= 2) row.scrollTo({left: max + 2, behavior: 'smooth'});
+  else row.scrollBy({left: dir * step, behavior: 'smooth'});
 }
+function flashNavState(){}
 
 /* Flash Sale: lọc thẻ theo bộ sưu tập */
 function flashFilter(coll, btn){
