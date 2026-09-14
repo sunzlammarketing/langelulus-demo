@@ -497,6 +497,10 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .ftr-bottom{margin-top:var(--s6); padding-top:var(--s4); border-top:1px solid rgba(247,250,253,.1);
   display:flex; justify-content:space-between; gap:var(--s4); font-size:13.5px; color:rgba(247,250,253,.5); flex-wrap:wrap}
 .nl-form{display:flex; gap:var(--s2); margin-top:var(--s4)}
+.ftr-contact{display:grid; gap:4px; font-size:14.5px; color:rgba(247,250,253,.7)}
+.ftr-contact div{display:flex; gap:6px; flex-wrap:wrap}
+.ftr-contact a{display:inline; padding:0; font-size:inherit}
+.ftr-contact b{color:#fff; font-weight:700}
 .nl-form input{flex:1; height:44px; padding:0 var(--s4); background:rgba(247,250,253,.06); border:1px solid rgba(247,250,253,.18);
   border-radius:var(--r-md); color:var(--ink-50)}
 .nl-form input::placeholder{color:rgba(247,250,253,.4)}
@@ -935,12 +939,12 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
           <a class="chan" href="#" onclick="return false">Shopee Mall ↗</a>
           <a class="chan" href="#" onclick="return false">TikTok Shop ↗</a>
         </div>
-        <h4 style="margin-top:20px">Nhận thư hương</h4>
-        <p style="font-size:14.5px">Ưu đãi riêng &amp; câu chuyện mùi hương mỗi tháng.</p>
-        <form class="nl-form" onsubmit="return subscribeNL(event)">
-          <input type="email" placeholder="Email của bạn" required>
-          <button class="btn btn-primary" type="submit">Đăng ký</button>
-        </form>
+        <h4 style="margin-top:20px">Liên hệ</h4>
+        <div class="ftr-contact">
+          <div><span>Hotline:</span> <a href="tel:0345987612"><b>0345 987 612</b></a></div>
+          <div><span>Email:</span> <a href="mailto:info@langelulus.com">info@langelulus.com</a></div>
+          <div><span>Website:</span> <a href="https://langelulus.com">langelulus.com</a></div>
+        </div>
       </div>
     </div>
     <div class="ftr-bottom">
