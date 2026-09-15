@@ -1669,7 +1669,7 @@ function dealBanner(p){
 function homeMarquee(){
   /* Xen kẽ: nước hoa → dầu gội xả / sữa tắm (chỉ SP đã có ảnh) → nước hoa → ... */
   const perfumes = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
-  const others = PRODUCTS.filter(p => !isPerfume(p) && (p.cat === 'dau-goi-xa' || p.cat === 'sua-tam'));
+  const others = PRODUCTS.filter(p => !isPerfume(p) && (p.cat === 'dau-goi-xa' || p.cat === 'sua-tam' || p.cat === 'bot-giat'));
   const items = []; const n = Math.max(perfumes.length, others.length);
   for(let i = 0; i < n; i++){ if(perfumes[i]) items.push(perfumes[i]); if(others[i]) items.push(others[i]); }
   const card = p => '<a class="mq-card" href="#/product/' + p.id + '" style="--mqc:' + collColor(p) + '" aria-label="' + esc(p.name) + '">'
