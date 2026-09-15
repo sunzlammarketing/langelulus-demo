@@ -391,6 +391,11 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .pdp-info-body{max-width:820px}
 .pdp-info-sec{scroll-margin-top:100px; padding-bottom:var(--s6); margin-bottom:var(--s6); border-bottom:1px solid var(--border)}
 .pdp-info-sec:last-child{border-bottom:0; margin-bottom:0}
+.lab-cert{margin:0; max-width:620px}
+.lab-cert a{display:block; border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; background:var(--surface-2); cursor:zoom-in}
+.lab-cert img{display:block; width:100%; height:auto}
+.lab-cert-empty{display:none; font-size:14px}
+.lab-cert.missing a{display:none} .lab-cert.missing .lab-cert-empty{display:block}
 @media (max-width:900px){
   .pdp-info{grid-template-columns:1fr; gap:var(--s5); min-width:0}
   .pdp-info-side{position:sticky; top:64px; z-index:5; border-radius:var(--r-md); min-width:0}
@@ -2090,6 +2095,7 @@ function viewProduct(id){
             <a href="#sec-ingredients" onclick="return pdpScrollTo('sec-ingredients')" data-sec="sec-ingredients" class="pdp-info-link">Thành phần</a>
             <a href="#sec-usage"       onclick="return pdpScrollTo('sec-usage')"       data-sec="sec-usage"       class="pdp-info-link">Hướng dẫn sử dụng</a>
             <a href="#sec-shipping"    onclick="return pdpScrollTo('sec-shipping')"    data-sec="sec-shipping"    class="pdp-info-link">Vận chuyển &amp; đổi trả</a>
+            <a href="#sec-lab"         onclick="return pdpScrollTo('sec-lab')"         data-sec="sec-lab"         class="pdp-info-link">Kết quả kiểm nghiệm</a>
           </nav>
         </div>
         <div class="pdp-info-body">
@@ -2116,6 +2122,16 @@ function viewProduct(id){
             <p style="margin-bottom:12px"><b>Vận chuyển:</b> Giao toàn quốc 2–5 ngày làm việc. Miễn phí cho đơn từ 500.000đ, dưới mức này phí cố định 30.000đ.</p>
             <p style="margin-bottom:12px"><b>Đổi trả:</b> Trong 7 ngày kể từ khi nhận hàng nếu sản phẩm lỗi, vỡ hoặc không đúng mô tả. Sản phẩm phải còn nguyên seal.</p>
             <p class="muted">Mọi thắc mắc vui lòng liên hệ hotline 1900 0000 hoặc Zalo OA L'Angelulus.</p>
+          </div>
+          <div class="pdp-info-sec" id="sec-lab">
+            <h3 class="t-h3" style="margin-bottom:12px">Kết quả kiểm nghiệm</h3>
+            <p style="margin-bottom:14px">Phiếu kết quả kiểm nghiệm sản phẩm <b>${esc(p.name)}</b> do đơn vị kiểm nghiệm độc lập cấp.</p>
+            <figure class="lab-cert">
+              <a href="assets/certs/${p.id}.jpg" target="_blank" rel="noopener" aria-label="Xem phiếu kiểm nghiệm cỡ lớn">
+                <picture><source srcset="assets/certs/${p.id}.webp" type="image/webp"><img src="assets/certs/${p.id}.jpg" alt="Phiếu kết quả kiểm nghiệm ${esc(p.name)}" loading="lazy" onerror="this.closest('.lab-cert').classList.add('missing')"></picture>
+              </a>
+              <p class="lab-cert-empty muted">Phiếu kiểm nghiệm đang được cập nhật.</p>
+            </figure>
           </div>
         </div>
       </div>
@@ -3314,7 +3330,7 @@ Object.assign(DICT, {
 'Chọn dung tích':'Select size','Tháp hương':'Fragrance pyramid','Hương đầu':'Top notes',
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
-'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns',
+'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results','Phiếu kiểm nghiệm đang được cập nhật.':'Lab test certificate is being updated.',
 'Đánh giá từ khách hàng':'Customer reviews','Viết đánh giá':'Write a review','Gửi đánh giá':'Submit review',
 'Chấm điểm *':'Rating *','Nhận xét *':'Review *','Có thể bạn cũng thích':'You may also like',
 '✓ Đã mua hàng':'✓ Verified purchase','Lưu vào yêu thích':'Save to wishlist','♡ Lưu vào yêu thích':'♡ Save to wishlist',
