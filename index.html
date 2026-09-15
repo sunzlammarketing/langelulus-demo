@@ -1202,6 +1202,9 @@ const catOf = p => CATS.find(c => c.id === p.cat);
 const subNameOf = p => { const c = catOf(p); if(!c) return ''; const s = c.subs.find(x => x.id === p.sub); return s ? s.name : c.name; };
 const collColor = p => (isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].color : 'var(--blue-500)';
 const collLabel = p => p.giftset ? 'Gift set' : ((isPerfume(p) && COLLECTIONS[p.coll]) ? COLLECTIONS[p.coll].name : (catOf(p) ? catOf(p).name : 'Sản phẩm'));
+/* Tên đầy đủ trên trang chi tiết nước hoa: 'Nước hoa Nam Blue Horizon' */
+const perfumeTitle = p => !(isPerfume(p) && !p.giftset && p.gender) ? p.name
+  : (L === 'vi' ? 'Nước hoa ' + p.gender + ' ' + p.name : p.name + ' ' + (p.gender === 'Unisex' ? 'Unisex' : p.gender + "'s") + ' Perfume');
 /* Giá đồng bộ: nước hoa 100ml = giá thật của sản phẩm (giống Flash Sale); 10ml = giá bản mini */
 const priceOf = (p, ml) => !isPerfume(p) ? p.price : (p.giftset ? p.price : (ml === 10 ? vari(10).price : p.price));
 /* Nhãn "Chính hãng" đặt phía trên tên sản phẩm ở trang chi tiết */
@@ -2053,7 +2056,7 @@ function viewProduct(id){
           ${p.badges.indexOf('new')>-1 ? '<span class="badge badge-gold">Mới</span>' : ''}
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
-        <h1 class="t-h1">${esc(p.name)}</h1>
+        <h1 class="t-h1">${esc(perfumeTitle(p))}</h1>
       <div class="cert-badges"><picture><source srcset="assets/products/cert-badges.webp" type="image/webp"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015" loading="lazy"></picture></div>
         <div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap">
           <span class="stars">${stars(p.rating)}</span>
@@ -3332,7 +3335,8 @@ Object.assign(DICT, {
 'Chọn dung tích':'Select size','Tháp hương':'Fragrance pyramid','Hương đầu':'Top notes',
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
-'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results','Phiếu kết quả kiểm nghiệm dòng nước hoa L’ANGELULUS do Trung tâm tiêu chuẩn đo lường chất lượng 3 thuộc Ủy ban tiêu chuẩn đo lường chất lượng quốc gia cấp.':'Lab test certificate for the L’ANGELULUS perfume line issued by the Quality Assurance and Testing Center 3 (QUATEST 3) under the National Committee for Standards, Metrology and Quality.','Phiếu kiểm nghiệm đang được cập nhật.':'Lab test certificate is being updated.',
+'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results',
+'Nước hoa Nam Blue Horizon':"Blue Horizon Men's Perfume",'Nước hoa Unisex Silent Moss':"Silent Moss Unisex Perfume",'Nước hoa Nữ Honey Jasmine':"Honey Jasmine Women's Perfume",'Nước hoa Nam Midnight Bamboo':"Midnight Bamboo Men's Perfume",'Nước hoa Unisex Woody Amber':"Woody Amber Unisex Perfume",'Nước hoa Nữ Rose Velvet':"Rose Velvet Women's Perfume",'Nước hoa Nam Root Man':"Root Man Men's Perfume",'Nước hoa Unisex Mist Theory':"Mist Theory Unisex Perfume",'Nước hoa Nữ Lily\'s Secret':"Lily's Secret Women's Perfume",'Phiếu kết quả kiểm nghiệm dòng nước hoa L’ANGELULUS do Trung tâm tiêu chuẩn đo lường chất lượng 3 thuộc Ủy ban tiêu chuẩn đo lường chất lượng quốc gia cấp.':'Lab test certificate for the L’ANGELULUS perfume line issued by the Quality Assurance and Testing Center 3 (QUATEST 3) under the National Committee for Standards, Metrology and Quality.','Phiếu kiểm nghiệm đang được cập nhật.':'Lab test certificate is being updated.',
 'Đánh giá từ khách hàng':'Customer reviews','Viết đánh giá':'Write a review','Gửi đánh giá':'Submit review',
 'Chấm điểm *':'Rating *','Nhận xét *':'Review *','Có thể bạn cũng thích':'You may also like',
 '✓ Đã mua hàng':'✓ Verified purchase','Lưu vào yêu thích':'Save to wishlist','♡ Lưu vào yêu thích':'♡ Save to wishlist',
@@ -3771,7 +3775,7 @@ function route(){
   $$('.lang-btn').forEach(b => b.classList.toggle('on', b.dataset.lang === L));
   const p = seg[0] === 'product' ? prod(seg[1]) : null;
   applySEO(seg[0] || '', p ? {
-    title: (isPerfume(p) && !p.giftset) ? (p.name + (L === 'vi' ? ' — Nước hoa ' + p.gender + " | L'ANGELULUS" : " — " + p.gender + "'s Fragrance | L'ANGELULUS")) : (p.name + " | L'ANGELULUS"),
+    title: (isPerfume(p) && !p.giftset) ? (L === 'vi' ? perfumeTitle(p) + " | L'ANGELULUS" : p.name + " — " + p.gender + "'s Fragrance | L'ANGELULUS") : (p.name + " | L'ANGELULUS"),
     desc: p.short, slug: p.slug
   } : null);
   window.scrollTo(0, 0);
