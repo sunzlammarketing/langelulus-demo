@@ -1714,7 +1714,7 @@ function pcard(p){
     <div class="pcard-body">
       <span class="pcard-col" style="color:${c.color}">${esc(c.name)}</span>
       <div class="pcard-name-row" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-        <h3 style="min-width:0"><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
+        <h3 style="min-width:0"><a href="#/product/${p.id}">${esc(perfumeTitle(p))}</a></h3>
         ${p.giftset ? '<span class="badge badge-line">3 × 10ml</span>' : (isPerfume(p) ? '<span class="badge badge-line">' + esc(p.gender) + '</span>' : (p.sub ? '<span class="badge badge-line">' + esc(subNameOf(p)) + '</span>' : ''))}
       </div>
       ${p.reviews ? '<div class="stars">' + stars(p.rating) + ' <span class="t-cap">(' + p.reviews + ')</span></div>' : ''}
