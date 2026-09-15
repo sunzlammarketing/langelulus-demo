@@ -1093,6 +1093,10 @@ const PRODUCTS = [
     short:'Chiết xuất sen thuần chay — sạch dịu, dưỡng ẩm, hương sen thanh khiết.',
     desc:'Sữa tắm thuần chay chiết xuất hoa sen làm sạch dịu nhẹ, dưỡng ẩm và lưu hương sen thanh khiết trên da. Không xà phòng, không paraben.',
     price:189000, old:269000, rating:0, reviews:0, sold:1120, badges:[], stock:100},
+   {id:'ST03', slug:'sua-tam-huong-nuoc-hoa', name:'Sữa tắm hương nước hoa', cat:'sua-tam', sub:'huong-nuoc-hoa',
+    short:'Hương nước hoa thuần chay — sạch dịu, dưỡng ẩm, lưu hương thơm lâu.',
+    desc:'Sữa tắm thuần chay hương nước hoa làm sạch dịu nhẹ, dưỡng ẩm và lưu hương thơm sang trọng trên da suốt ngày dài. Không xà phòng, không paraben.',
+    price:189000, old:269000, rating:0, reviews:0, sold:0, badges:[], stock:100},
    {id:'ST02', slug:'sua-tam-vitamin', name:'Sữa tắm Vitamin', cat:'sua-tam', sub:'vitamin',
     short:'Bổ sung vitamin — da sáng mịn, mềm mại và thơm mát cả ngày.',
     desc:'Sữa tắm giàu vitamin B5 và E giúp làm sạch, dưỡng ẩm và nuôi dưỡng làn da mềm mịn, tươi sáng. Bọt mịn, hương thơm dễ chịu.',
@@ -1833,7 +1837,7 @@ function viewProductOther(p){
         ${dealBanner(p)}
         <div class="rule" style="margin:0 0 28px"></div>
 
-        <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(anchorOf(p))}</s></div>
+        <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}${p.old > p.price ? '<s>' + money(p.old) + '</s>' : ''}</div>
         <p class="t-cap" style="margin-bottom:28px">Đã bao gồm VAT · Miễn phí vận chuyển cho đơn từ 500.000đ</p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
