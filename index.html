@@ -1765,7 +1765,7 @@ function viewGiftset(p){
   const wish = S.wishlist.indexOf(p.id) > -1;
   return `
   <div class="wrap"><div class="crumb"><a href="#/">Trang chủ</a> <span>/</span> <a href="#/products">Sản phẩm</a> <span>/</span> <span>${esc(p.name)}</span></div></div>
-  <section style="padding-bottom:40px"><div class="wrap pdp">
+  <section style="padding-bottom:20px"><div class="wrap pdp">
     <div>
       <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
       <div class="thumbs">${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}</div>
@@ -1809,7 +1809,7 @@ function viewProductOther(p){
     ${cat ? '<a href="#/products?cat=' + cat.id + '">' + esc(cat.name) + '</a> <span>/</span> ' : ''}<span>${esc(p.name)}</span>
   </div></div>
 
-  <section style="padding-bottom:40px">
+  <section style="padding-bottom:20px">
     <div class="wrap pdp">
       <div>
         <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
@@ -2026,7 +2026,7 @@ function viewProduct(id){
     <a href="#/products?c=${p.coll}">${esc(c.name)}</a> <span>/</span> <span>${esc(p.name)}</span>
   </div></div>
 
-  <section style="padding-bottom:40px">
+  <section style="padding-bottom:20px">
     <div class="wrap pdp">
       <div>
         <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
