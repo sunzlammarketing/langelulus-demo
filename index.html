@@ -1674,7 +1674,7 @@ function homeMarquee(){
   for(let i = 0; i < n; i++){ if(perfumes[i]) items.push(perfumes[i]); if(others[i]) items.push(others[i]); }
   const card = p => '<a class="mq-card" href="#/product/' + p.id + '" style="--mqc:' + collColor(p) + '" aria-label="' + esc(p.name) + '">'
     + '<picture><source srcset="' + IMG_BASE + p.id + '.webp" type="image/webp"><img class="mq-img" src="' + IMG_BASE + p.id + '.jpg" alt="' + esc(p.name) + '" loading="lazy" onerror="this.closest(\'picture\').remove()"></picture>'
-    + '<div class="mq-cap"><span class="mq-coll">' + esc(collLabel(p)) + '</span><b>' + esc(p.name) + '</b></div></a>';
+    + '<div class="mq-cap"><span class="mq-coll">' + esc(collLabel(p)) + '</span><b>' + esc(perfumeTitle(p)) + '</b></div></a>';
   const set = items.map(card).join('');
   return '<section class="sec mq-sec">'
     + '<div class="wrap"><div class="sec-head"><div>'
@@ -1698,7 +1698,7 @@ function dealCard(p, maxSold){
     </a>
     <div class="deal-body">
       <div class="deal-brand">${esc(name)}</div>
-      <h3 class="deal-name"><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
+      <h3 class="deal-name"><a href="#/product/${p.id}">${esc(perfumeTitle(p))}</a></h3>
       <div class="deal-price"><span class="deal-now">${money(p.price)}</span>${anchor > p.price ? '<s class="deal-old">' + money(anchor) + '</s>' : ''}</div>
       <div class="deal-sold"><span class="deal-flame">${HOT_DEAL_SVG}</span><span>Đã bán ${soldN.toLocaleString('vi-VN')}</span></div>
       <div class="deal-bar"><i style="width:${barPct}%"></i></div>
