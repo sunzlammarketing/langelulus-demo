@@ -281,7 +281,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .price.t-h2 s{font-size:22px}
 /* Dải logo chứng nhận (cGMP · ISO · Công nghệ Hàn Quốc) trong trang chi tiết */
 .cert-badges{margin:14px 0 4px}
-.cert-badges img{display:block; width:100%; max-width:170px; height:auto}
+.cert-badges img{display:block; width:100%; max-width:120px; height:auto}
 /* Khối Hot Deal trong trang chi tiết */
 .pdp-deal{margin:4px 0 24px}
 .pdp-deal-top{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; background:var(--err-bg); border:1px solid #F3D6D2; border-radius:var(--r-md); padding:8px 14px}
@@ -1771,7 +1771,7 @@ function viewGiftset(p){
         <span class="badge badge-ok">Còn hàng</span>
       </div>
       <h1 class="t-h1">${esc(p.name)}</h1>
-      <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
+      <div class="cert-badges"><picture><source srcset="assets/products/cert-badges.webp" type="image/webp"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015" loading="lazy"></picture></div>
       ${dealBanner(p)}
       <div class="rule" style="margin:0 0 24px"></div>
       <div class="label muted" style="margin-bottom:12px">Chọn bộ sưu tập</div>
@@ -2039,7 +2039,7 @@ function viewProduct(id){
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
         <h1 class="t-h1">${esc(p.name)}</h1>
-      <div class="cert-badges"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015 · Công nghệ Hàn Quốc" loading="lazy"></div>
+      <div class="cert-badges"><picture><source srcset="assets/products/cert-badges.webp" type="image/webp"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015" loading="lazy"></picture></div>
         <div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap">
           <span class="stars">${stars(p.rating)}</span>
           <span class="muted">${p.rating}/5 · ${p.reviews} đánh giá</span>
