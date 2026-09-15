@@ -1658,7 +1658,11 @@ function dealBanner(p){
 
 /* Dải ảnh cuộn tự động (marquee) ở cuối trang chủ — dùng ảnh 9 hương nước hoa */
 function homeMarquee(){
-  const items = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
+  /* Xen kẽ: nước hoa → dầu gội xả / sữa tắm (chỉ SP đã có ảnh) → nước hoa → ... */
+  const perfumes = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
+  const others = PRODUCTS.filter(p => !isPerfume(p) && (p.cat === 'dau-goi-xa' || p.cat === 'sua-tam'));
+  const items = []; const n = Math.max(perfumes.length, others.length);
+  for(let i = 0; i < n; i++){ if(perfumes[i]) items.push(perfumes[i]); if(others[i]) items.push(others[i]); }
   const card = p => '<a class="mq-card" href="#/product/' + p.id + '" style="--mqc:' + collColor(p) + '" aria-label="' + esc(p.name) + '">'
     + '<picture><source srcset="' + IMG_BASE + p.id + '.webp" type="image/webp"><img class="mq-img" src="' + IMG_BASE + p.id + '.jpg" alt="' + esc(p.name) + '" loading="lazy" onerror="this.closest(\'picture\').remove()"></picture>'
     + '<div class="mq-cap"><span class="mq-coll">' + esc(collLabel(p)) + '</span><b>' + esc(p.name) + '</b></div></a>';
