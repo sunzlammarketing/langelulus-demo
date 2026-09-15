@@ -1389,7 +1389,7 @@ function viewHome(){
     {img:'hero-3', alt:'Bộ sưu tập Sunwood', cta:'#/products?c=sunwood'},
     {img:'hero-4', alt:'Bộ sưu tập Terrascent', cta:'#/products?c=terra'}
   ];
-  const best = ['BT004','BT003','BT006','BT013','BT002','MD002'].map(id => prod(id)).filter(Boolean);
+  const best = ['BT004','DG05','ST02','BT013','DG03','MD002'].map(id => prod(id)).filter(Boolean);
   const news = ARTICLES.slice(0,3);
   const FLASH_SWAP = {MD002:'DG01', BT001:'ST01'};   /* Flash Sale: thay 2 slot nước hoa bằng SP hoá mỹ phẩm */
   const deals = PRODUCTS.filter(p => isPerfume(p) && !p.giftset).map(p => FLASH_SWAP[p.id] ? (prod(FLASH_SWAP[p.id]) || p) : p);
