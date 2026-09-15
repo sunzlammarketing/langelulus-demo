@@ -719,6 +719,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .flash-nav svg{width:22px; height:22px}
 .flash-nav.prev{left:-10px} .flash-nav.next{right:-10px}
 .flash-nav:hover{background:var(--blue-500); color:#fff; transform:translateY(-50%) scale(1.06)}
+.flash-wrap:has(.feat-row) .flash-nav{top:calc(50% - 2px)}
 @media (max-width:640px){ .flash-nav{width:36px; height:36px} .flash-nav.prev{left:-6px} .flash-nav.next{right:-6px} }
 .flash-row{scrollbar-width:none; -ms-overflow-style:none}
 .flash-row::-webkit-scrollbar{display:none; height:0}
@@ -1430,9 +1431,9 @@ function viewHome(){
         <a href="#/products" class="flash-all">Xem tất cả →</a>
       </div>
       <div class="flash-wrap">
-        <button class="flash-nav prev" type="button" aria-label="Xem sản phẩm trước" onclick="flashScroll(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="hotdeal-row flash-row" id="flashRow" onscroll="flashNavState()">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
-        <button class="flash-nav next" type="button" aria-label="Xem thêm sản phẩm" onclick="flashScroll(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button class="flash-nav prev" type="button" aria-label="Xem sản phẩm trước" onclick="rowScroll(this,-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="hotdeal-row flash-row" id="flashRow">${deals.map(p => dealCard(p, maxSold)).join('')}</div>
+        <button class="flash-nav next" type="button" aria-label="Xem thêm sản phẩm" onclick="rowScroll(this,1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </div>
   </section>
@@ -1445,7 +1446,11 @@ function viewHome(){
         </div>
         <a href="#/products?s=best" class="btn btn-secondary">Xem thêm</a>
       </div>
-      <div class="feat-row">${best.map(pcard).join('')}</div>
+      <div class="flash-wrap">
+        <button class="flash-nav prev" type="button" aria-label="Xem sản phẩm trước" onclick="rowScroll(this,-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="feat-row" id="featRow">${best.map(pcard).join('')}</div>
+        <button class="flash-nav next" type="button" aria-label="Xem thêm sản phẩm" onclick="rowScroll(this,1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
     </div>
   </section>
 
@@ -3801,17 +3806,20 @@ function startHotDealTimer(){
   hotDealTimer = setInterval(tick, 1000);
 }
 
-/* Flash Sale: nút cuộn trái/phải */
-function flashScroll(dir){
-  const row = document.getElementById('flashRow'); if(!row) return;
-  const card = row.querySelector('.deal-card');
-  const step = card ? (card.getBoundingClientRect().width + 24) * 2 : row.clientWidth * .8;
+/* Nút cuộn trái/phải cho hàng sản phẩm (Flash Sale, Nổi bật) */
+function rowScroll(btn, dir){
+  const wrap = btn.closest('.flash-wrap'); if(!wrap) return;
+  const row = wrap.querySelector('.hotdeal-row, .feat-row'); if(!row) return;
+  const card = row.querySelector('.deal-card, .pcard');
+  const gap = parseFloat(getComputedStyle(row).gap) || 20;
+  const step = card ? (card.getBoundingClientRect().width + gap) * 2 : row.clientWidth * .8;
   const max = row.scrollWidth - row.clientWidth - 2;
   /* Ở mép thì cuộn vòng sang đầu/cuối kia */
   if(dir > 0 && row.scrollLeft >= max) row.scrollTo({left: 0, behavior: 'smooth'});
   else if(dir < 0 && row.scrollLeft <= 2) row.scrollTo({left: max + 2, behavior: 'smooth'});
   else row.scrollBy({left: dir * step, behavior: 'smooth'});
 }
+function flashScroll(dir){ const b = document.querySelector('#flashRow') && document.querySelector('#flashRow').closest('.flash-wrap').querySelector('.flash-nav'); if(b) rowScroll(b, dir); }
 function flashNavState(){}
 
 /* Flash Sale: lọc thẻ theo bộ sưu tập */
