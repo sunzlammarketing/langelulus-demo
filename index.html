@@ -1070,7 +1070,7 @@ const PRODUCTS = [
    {id:'DG01', slug:'dau-goi-thuan-chay-buoi', name:'Dầu gội thuần chay chiết xuất bưởi', cat:'dau-goi-xa', sub:'thuan-chay',
     short:'Chiết xuất bưởi thuần chay — sạch gàu, kích thích mọc tóc, hương tươi mát.',
     desc:'Dầu gội thuần chay với tinh dầu vỏ bưởi làm sạch nhẹ nhàng, giảm gàu và hỗ trợ mọc tóc. Không sulfate, không silicone, phù hợp cả da đầu nhạy cảm.',
-    price:179000, old:0, rating:0, reviews:0, sold:0, badges:[], stock:100},
+    price:179000, old:249000, rating:0, reviews:0, sold:860, badges:[], stock:100},
    {id:'DG02', slug:'dau-xa-thuan-chay-bo', name:'Dầu xả thuần chay chiết xuất bơ', cat:'dau-goi-xa', sub:'thuan-chay',
     short:'Bơ thuần chay dưỡng sâu — tóc mềm mượt, giảm khô xơ chẻ ngọn.',
     desc:'Dầu xả chiết xuất bơ giàu vitamin E phục hồi tóc khô xơ, khoá ẩm và giữ tóc mềm mượt suốt ngày dài. Thành phần thuần chay, lành tính.',
@@ -1092,7 +1092,7 @@ const PRODUCTS = [
    {id:'ST01', slug:'sua-tam-thuan-chay-sen', name:'Sữa tắm thuần chay chiết xuất sen', cat:'sua-tam', sub:'sen',
     short:'Chiết xuất sen thuần chay — sạch dịu, dưỡng ẩm, hương sen thanh khiết.',
     desc:'Sữa tắm thuần chay chiết xuất hoa sen làm sạch dịu nhẹ, dưỡng ẩm và lưu hương sen thanh khiết trên da. Không xà phòng, không paraben.',
-    price:189000, old:0, rating:0, reviews:0, sold:0, badges:[], stock:100},
+    price:189000, old:269000, rating:0, reviews:0, sold:1120, badges:[], stock:100},
    {id:'ST02', slug:'sua-tam-vitamin', name:'Sữa tắm Vitamin', cat:'sua-tam', sub:'vitamin',
     short:'Bổ sung vitamin — da sáng mịn, mềm mại và thơm mát cả ngày.',
     desc:'Sữa tắm giàu vitamin B5 và E giúp làm sạch, dưỡng ẩm và nuôi dưỡng làn da mềm mịn, tươi sáng. Bọt mịn, hương thơm dễ chịu.',
@@ -1387,7 +1387,8 @@ function viewHome(){
   ];
   const best = ['BT004','BT003','BT006','BT013','BT002','MD002'].map(id => prod(id)).filter(Boolean);
   const news = ARTICLES.slice(0,3);
-  const deals = PRODUCTS.filter(p => isPerfume(p) && !p.giftset);
+  const FLASH_SWAP = {MD002:'DG01', BT001:'ST01'};   /* Flash Sale: thay 2 slot nước hoa bằng SP hoá mỹ phẩm */
+  const deals = PRODUCTS.filter(p => isPerfume(p) && !p.giftset).map(p => FLASH_SWAP[p.id] ? (prod(FLASH_SWAP[p.id]) || p) : p);
   const maxSold = Math.max(...deals.map(p => soldOf(p)), 1);
   const dd2 = n => String(n).padStart(2, '0');
   const _today = new Date(), _tmr = new Date(); _tmr.setDate(_today.getDate() + 1);
@@ -1671,7 +1672,8 @@ function homeMarquee(){
 }
 
 function dealCard(p, maxSold){
-  const off = ANCHOR_PRICE > p.price ? Math.round((ANCHOR_PRICE - p.price) / ANCHOR_PRICE * 100) : 0;
+  const anchor = isPerfume(p) ? ANCHOR_PRICE : (p.old || 0);
+  const off = anchor > p.price ? Math.round((anchor - p.price) / anchor * 100) : 0;
   const pct = Math.min(96, Math.max(35, Math.round((p.sold || 0) / (maxSold || 1) * 100)));
   const name = collLabel(p);
   const soldN = isPerfume(p) ? (p.sold || soldOf(p)) : (p.sold || 0);
@@ -1684,7 +1686,7 @@ function dealCard(p, maxSold){
     <div class="deal-body">
       <div class="deal-brand">${esc(name)}</div>
       <h3 class="deal-name"><a href="#/product/${p.id}">${esc(p.name)}</a></h3>
-      <div class="deal-price"><span class="deal-now">${money(p.price)}</span><s class="deal-old">${money(ANCHOR_PRICE)}</s></div>
+      <div class="deal-price"><span class="deal-now">${money(p.price)}</span>${anchor > p.price ? '<s class="deal-old">' + money(anchor) + '</s>' : ''}</div>
       <div class="deal-sold"><span class="deal-flame">${HOT_DEAL_SVG}</span><span>Đã bán ${soldN.toLocaleString('vi-VN')}</span></div>
       <div class="deal-bar"><i style="width:${barPct}%"></i></div>
       <button class="btn btn-primary btn-sm deal-add btn-cart" onclick="quickAdd('${p.id}')">+ Chọn mua</button>
