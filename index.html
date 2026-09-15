@@ -75,6 +75,7 @@ button{cursor:pointer; background:none; border:none}
 h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .t-hero{font-size:clamp(38px,6vw,64px); line-height:1.05; letter-spacing:.02em; text-transform:uppercase; font-weight:700}
 .t-h1{font-size:clamp(30px,4.4vw,44px); line-height:1.12}
+.pdp-title{font-size:clamp(26px,3.5vw,35px)}
 .t-h2{font-size:clamp(25px,3.2vw,32px); line-height:1.2}
 .t-h3{font-size:24px; line-height:1.3}
 .t-lg{font-size:19px; line-height:1.7}
@@ -1788,7 +1789,7 @@ function viewGiftset(p){
         <span class="badge" style="background:var(--blue-100);color:var(--blue-800);border-color:var(--blue-300)">Gift set · 3 chai 10ml</span>
         <span class="badge badge-ok">Còn hàng</span>
       </div>
-      <h1 class="t-h1">${esc(p.name)}</h1>
+      <h1 class="t-h1 pdp-title">${esc(p.name)}</h1>
       <div class="cert-badges"><picture><source srcset="assets/products/cert-badges.webp" type="image/webp"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015" loading="lazy"></picture></div>
       ${dealBanner(p)}
       <div class="rule" style="margin:0 0 24px"></div>
@@ -1836,7 +1837,7 @@ function viewProductOther(p){
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">${genuineBadge()}
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
-        <h1 class="t-h1">${esc(p.name)}</h1>
+        <h1 class="t-h1 pdp-title">${esc(p.name)}</h1>
         ${p.reviews ? '<div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap"><span class="stars">' + stars(p.rating) + '</span><span class="muted">' + p.rating + '/5 · ' + p.reviews + ' đánh giá</span></div>' : '<div style="margin:12px 0 20px"></div>'}
         ${dealBanner(p)}
         <div class="rule" style="margin:0 0 28px"></div>
@@ -2056,7 +2057,7 @@ function viewProduct(id){
           ${p.badges.indexOf('new')>-1 ? '<span class="badge badge-gold">Mới</span>' : ''}
           ${p.stock > 10 ? '<span class="badge badge-ok">Còn hàng</span>' : '<span class="badge badge-out">Chỉ còn ' + p.stock + '</span>'}
         </div>
-        <h1 class="t-h1">${esc(perfumeTitle(p))}</h1>
+        <h1 class="t-h1 pdp-title">${esc(perfumeTitle(p))}</h1>
       <div class="cert-badges"><picture><source srcset="assets/products/cert-badges.webp" type="image/webp"><img src="assets/products/cert-badges.png" alt="Chứng nhận cGMP · ISO 9001:2015" loading="lazy"></picture></div>
         <div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px;flex-wrap:wrap">
           <span class="stars">${stars(p.rating)}</span>
