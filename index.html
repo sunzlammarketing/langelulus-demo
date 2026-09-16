@@ -370,6 +370,18 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .hist-media{position:relative; aspect-ratio:4/3; border-radius:var(--r-md); overflow:hidden; background:linear-gradient(150deg,var(--blue-100),var(--blue-200)); box-shadow:var(--sh-sm)}
 .hist-media{background:linear-gradient(150deg,#EEF4F9,#DDE9F3)}
 .hist-media img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; padding:10px; box-sizing:border-box; filter:drop-shadow(0 4px 10px rgba(8,22,35,.18))}
+/* Ô ngoài dạng 2–3 tờ xếp chồng */
+.hist-fan .hist-ph{display:none}
+.hist-fan .fan-card{position:absolute; top:7%; height:86%; aspect-ratio:1/1.4; border-radius:4px; overflow:hidden; background:#fff; box-shadow:0 8px 22px rgba(8,22,35,.22); transition:transform .3s ease-out}
+.hist-fan .fan-card img{position:static; width:100%; height:100%; object-fit:cover; padding:0; filter:none}
+.hist-fan.n3 .fan-0{left:8%; transform:rotate(-7deg); z-index:1}
+.hist-fan.n3 .fan-1{left:50%; transform:translateX(-50%) translateY(-3%); z-index:3}
+.hist-fan.n3 .fan-2{right:8%; transform:rotate(7deg); z-index:2}
+.hist-fan.n2 .fan-0{left:16%; transform:rotate(-5deg); z-index:1}
+.hist-fan.n2 .fan-1{right:16%; transform:rotate(5deg) translateY(-2%); z-index:2}
+.hist-item:hover .hist-fan.n3 .fan-0{transform:rotate(-10deg) translateX(-3%)}
+.hist-item:hover .hist-fan.n3 .fan-2{transform:rotate(10deg) translateX(3%)}
+.hist-item:hover .hist-fan.n3 .fan-1{transform:translateX(-50%) translateY(-6%)}
 .hist-pages{position:absolute; right:10px; bottom:10px; background:rgba(8,22,35,.72); color:#fff; font-size:12px; padding:3px 9px; border-radius:999px}
 .hist-gal .hist-gal-img{position:absolute; inset:0 0 48px 0}
 .hist-gal .hist-gal-img img{padding:16px}
@@ -1572,7 +1584,7 @@ const HISTORY = [
    detail:['Thực hiện cổ phần hóa và chính thức hoạt động với tên Công ty Cổ phần Mỹ phẩm Nam Phát, mở ra giai đoạn phát triển mới.']},
   {year:'2005', tag:'Củng cố nền tảng', title:'Hoàn thiện cơ sở pháp lý và sản xuất', pages:['2005-1'],
    detail:['Hoàn thiện cơ sở pháp lý đối với nhà xưởng và công trình tại Khu công nghiệp Tân Tạo, củng cố nền tảng cho hoạt động lâu dài.']},
-  {year:'2008', span:'2008 – 2014', tag:'Mở rộng xuất khẩu', title:'Đưa nước hoa Việt Nam đến thị trường Trung Quốc', pages:['2008-1','2008-2','2008-3','2008-4','2008-5'],
+  {year:'2008', span:'2008 – 2014', tag:'Mở rộng xuất khẩu', title:'Đưa nước hoa Việt Nam đến thị trường Trung Quốc', pages:['2008-1','2008-2','2008-3','2008-4','2008-5'], covers:['2008-3','2008-1','2008-5'],
    detail:['Duy trì hoạt động xuất khẩu chính ngạch nước hoa thương hiệu Queen sang Trung Quốc, với nhiều lô hàng quy mô hàng vạn chai, tích lũy kinh nghiệm trong sản xuất và thương mại quốc tế.']},
   {year:'2026', tag:'Bước tiến mới', title:'Củng cố tiềm lực – Mở rộng định hướng phát triển', pages:['2026-1'],
    detail:['Nâng vốn điều lệ lên 100 tỷ đồng, đồng thời sử dụng tên giao dịch quốc tế Cosmetic Napha JSC, tạo nền tảng cho giai đoạn phát triển mới và mở rộng hoạt động trong nước và quốc tế.']}
@@ -1581,6 +1593,10 @@ function histPic(name, alt){
   return `<picture><source srcset="assets/history/${name}.webp" type="image/webp"><img src="assets/history/${name}.jpg" alt="${esc(alt)}" loading="lazy" onerror="this.closest('.hist-media').classList.add('nopic'); this.closest('picture').remove()"></picture>`;
 }
 function histMedia(h){
+  /* covers: 2–3 ảnh xếp chồng kiểu xoè quạt cho ô ngoài timeline */
+  if(h.covers && h.covers.length > 1){
+    return `<div class="hist-media hist-fan n${h.covers.length}"><span class="hist-ph">${h.span || h.year}</span>${h.covers.map((c,k) => `<div class="fan-card fan-${k}">${histPic(c, h.title)}</div>`).join('')}</div>`;
+  }
   const first = h.cover || (h.pages && h.pages[0]);   /* cover: ảnh cắt riêng cho ô ngoài timeline */
   return `<div class="hist-media ${first ? '' : 'nopic'}"><span class="hist-ph">${h.span || h.year}</span>${first ? histPic(first, h.title) : ''}</div>`;
 }
