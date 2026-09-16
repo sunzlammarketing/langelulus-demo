@@ -346,7 +346,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 
 /* Lịch sử hình thành — timeline giữa, mốc xen kẽ trái/phải (kiểu Shiseido) */
 .hist-intro{background:linear-gradient(180deg,#EAF5FC 0%,#D9EEFB 100%); border-top:1px solid var(--blue-200); border-bottom:1px solid var(--blue-200); padding:56px 0}
-.hist-intro .t-h2{color:var(--blue-900)}
+.hist-intro .t-h2, .hist-intro .t-h1{color:var(--blue-900)}
 .hist-motto{font-size:clamp(24px,3.2vw,39px); line-height:1.25; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--blue-800)}
 .hist-intro.center-intro p{text-wrap:balance}
 .hist-intro .wrap-narrow{max-width:900px}
@@ -1830,10 +1830,9 @@ function viewAbout(sub){
   </div></section>`;
 
   const S0 = `
-  <section class="sec-sm"><div class="wrap-narrow center">
-    <div class="eyebrow">Doanh nghiệp</div>
-    <h2 class="t-h1" style="margin:20px 0">Công ty Cổ phần<br>Mỹ phẩm Nam Phát</h2>
-    <p class="t-lg muted">Nam Phát JSC là đơn vị sản xuất và thương mại đứng sau thương hiệu L'Angelulus — nghiên cứu, điều chế và sản xuất nước hoa, mỹ phẩm đạt chuẩn, đưa sản phẩm Việt chất lượng cao đến người tiêu dùng.</p>
+  <section class="sec hist-intro center-intro"><div class="wrap-narrow center">
+    <h2 class="t-h1" style="margin:0 0 20px">Công ty Cổ phần Mỹ phẩm Nam Phát</h2>
+    <p class="t-lg" style="color:var(--ink-900)">Nam Phát JSC là đơn vị sản xuất và thương mại đứng sau thương hiệu L'Angelulus — nghiên cứu, điều chế và sản xuất nước hoa, mỹ phẩm đạt chuẩn, đưa sản phẩm Việt chất lượng cao đến người tiêu dùng.</p>
   </div></section>
 
   <section class="sec fac-sec"><div class="wrap">
