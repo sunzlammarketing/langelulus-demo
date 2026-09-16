@@ -376,7 +376,12 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .hist-gal-bar{position:absolute; left:0; right:0; bottom:0; height:48px; display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,255,255,.85); border-top:1px solid var(--border); font-size:14px}
 .hist-gal-bar button{width:32px; height:32px; border-radius:50%; border:1px solid var(--border); background:#fff; font-size:20px; line-height:1; cursor:pointer; color:var(--blue-700)}
 .hist-gal-bar button:hover{background:var(--blue-500); color:#fff}
-.hist-gal-open{margin-left:12px; color:var(--blue-700); font-weight:600}
+.hist-gal-open{margin-left:0; color:var(--blue-700); font-weight:600}
+.hist-arrow{position:absolute; top:calc(50% - 24px); transform:translateY(-50%); z-index:3; width:48px; height:48px; border-radius:50%; border:0; background:rgba(255,255,255,.92); color:var(--ink-900); display:grid; place-items:center; cursor:pointer; box-shadow:0 4px 14px rgba(8,22,35,.22); transition:background .15s, transform .15s}
+.hist-arrow svg{width:24px; height:24px}
+.hist-arrow.prev{left:14px} .hist-arrow.next{right:14px}
+.hist-arrow:hover{background:var(--blue-500); color:#fff; transform:translateY(-50%) scale(1.06)}
+@media (max-width:860px){ .hist-arrow{width:40px; height:40px} .hist-arrow.prev{left:8px} .hist-arrow.next{right:8px} }
 .hist-ph{position:absolute; inset:0; display:grid; place-items:center; font-size:clamp(40px,7vw,96px); font-weight:800; color:rgba(8,77,137,.18); letter-spacing:-.02em; user-select:none}
 .hist-media:not(.nopic) .hist-ph{display:none}
 /* Modal chi tiết */
@@ -1607,8 +1612,9 @@ function openHistory(i){
       <div class="hist-media hist-gal ${h.pages && h.pages.length ? '' : 'nopic'}" id="histGal">
         <span class="hist-ph">${h.span || h.year}</span>
         ${h.pages && h.pages.length ? `<div class="hist-gal-img">${histPic(h.pages[0], h.title)}</div>
+        ${h.pages.length > 1 ? '<button type="button" class="hist-arrow prev" onclick="histGo(' + i + ',-1)" aria-label="Ảnh trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="hist-arrow next" onclick="histGo(' + i + ',1)" aria-label="Ảnh sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>' : ''}
         <div class="hist-gal-bar">
-          ${h.pages.length > 1 ? '<button type="button" onclick="histGo(' + i + ',-1)" aria-label="Trang trước">‹</button><span class="hist-gal-n">1 / ' + h.pages.length + '</span><button type="button" onclick="histGo(' + i + ',1)" aria-label="Trang sau">›</button>' : ''}
+          ${h.pages.length > 1 ? '<span class="hist-gal-n">1 / ' + h.pages.length + '</span>' : ''}
           <a class="hist-gal-open" href="assets/history/${h.pages[0]}.jpg" target="_blank" rel="noopener">Xem lớn ↗</a>
         </div>` : ''}
       </div>
