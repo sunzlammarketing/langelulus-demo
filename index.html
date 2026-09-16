@@ -1417,7 +1417,8 @@ function quickViewHTML(p){
     '<button class="qv-size ' + (v.ml === 100 ? 'on' : '') + '" data-ml="' + v.ml + '" onclick="quickPick(' + v.ml + ')">' + v.label.toUpperCase() + '</button>'
   ).join('');
   const price = priceOf(p, 100), anchor = anchorOf(p, 100), off = qvOffOf(price, anchor);
-  return '<div class="qv2">'
+  return '<button class="hist-close" onclick="closeModal()" aria-label="Đóng">×</button>'
+    + '<div class="qv2">'
     + '<div class="qv2-left">'
     +   '<h3 class="qv2-title">Chọn sản phẩm</h3>'
     +   '<div class="qv2-media" id="qvMedia">' + pshot(p, '', 1) + '</div>'
