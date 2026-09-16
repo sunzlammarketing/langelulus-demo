@@ -345,6 +345,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 
 
 /* Lịch sử hình thành — timeline giữa, mốc xen kẽ trái/phải (kiểu Shiseido) */
+.hist-intro{background:linear-gradient(180deg,#EAF5FC 0%,#D9EEFB 100%); border-top:1px solid var(--blue-200); border-bottom:1px solid var(--blue-200); padding:56px 0}
+.hist-intro .t-h2{color:var(--blue-900)}
 .hist{padding:24px 0 64px}
 .hist-line{position:relative; padding:24px 0}
 .hist-line::before{content:''; position:absolute; left:50%; top:0; bottom:0; width:3px; margin-left:-1.5px; background:var(--blue-500)}
@@ -1646,7 +1648,7 @@ function viewAbout(sub){
   </div></section>`;
 
   const S2 = `
-  <section class="sec"><div class="wrap-narrow center">
+  <section class="sec hist-intro"><div class="wrap-narrow center">
     <h2 class="t-h2" style="margin:0 0 16px">Hơn 30 năm xây dựng nền tảng<br>Vững bước cùng ngành mỹ phẩm Việt Nam</h2>
     <p class="t-lg muted" style="margin-bottom:14px">Công ty Cổ phần Mỹ phẩm Nam Phát (Cosmetic Napha JSC) có tiền thân từ năm 1992, khởi đầu là doanh nghiệp Nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại TP. Hồ Chí Minh.</p>
     <p class="muted">Trải qua hơn 30 năm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu, đồng thời mở rộng thị trường quốc tế và tích lũy kinh nghiệm trong lĩnh vực mỹ phẩm, nước hoa và hóa mỹ phẩm.</p>
