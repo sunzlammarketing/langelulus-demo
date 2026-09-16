@@ -360,14 +360,22 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .hist-more{display:inline-block; font-weight:700; color:var(--blue-700); border-bottom:2px solid var(--blue-300); padding-bottom:2px; transition:color .15s, border-color .15s}
 .hist-more:hover{color:var(--blue-900); border-color:var(--blue-700)}
 .hist-media{position:relative; aspect-ratio:4/3; border-radius:var(--r-md); overflow:hidden; background:linear-gradient(150deg,var(--blue-100),var(--blue-200)); box-shadow:var(--sh-sm)}
-.hist-media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.hist-media{background:linear-gradient(150deg,#EEF4F9,#DDE9F3)}
+.hist-media img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; padding:10px; box-sizing:border-box; filter:drop-shadow(0 4px 10px rgba(8,22,35,.18))}
+.hist-pages{position:absolute; right:10px; bottom:10px; background:rgba(8,22,35,.72); color:#fff; font-size:12px; padding:3px 9px; border-radius:999px}
+.hist-gal .hist-gal-img{position:absolute; inset:0 0 48px 0}
+.hist-gal .hist-gal-img img{padding:16px}
+.hist-gal-bar{position:absolute; left:0; right:0; bottom:0; height:48px; display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,255,255,.85); border-top:1px solid var(--border); font-size:14px}
+.hist-gal-bar button{width:32px; height:32px; border-radius:50%; border:1px solid var(--border); background:#fff; font-size:20px; line-height:1; cursor:pointer; color:var(--blue-700)}
+.hist-gal-bar button:hover{background:var(--blue-500); color:#fff}
+.hist-gal-open{margin-left:12px; color:var(--blue-700); font-weight:600}
 .hist-ph{position:absolute; inset:0; display:grid; place-items:center; font-size:clamp(40px,7vw,96px); font-weight:800; color:rgba(8,77,137,.18); letter-spacing:-.02em; user-select:none}
-.hist-media:not(.nopic) img ~ .hist-ph, .hist-media img + .hist-ph{display:none}
+.hist-media:not(.nopic) .hist-ph{display:none}
 /* Modal chi tiết */
 .modal-card.hist-wide{width:min(1040px,100%); padding:0; overflow:hidden}
 .hist-modal{display:grid; grid-template-columns:1.05fr 1fr; min-height:420px}
 .hist-modal-text{padding:48px 44px 40px}
-.hist-modal .hist-media{aspect-ratio:auto; border-radius:0; box-shadow:none; min-height:320px}
+.hist-modal .hist-media{aspect-ratio:auto; border-radius:0; box-shadow:none; min-height:560px}
 .hist-close{position:absolute; top:12px; right:14px; z-index:2; width:40px; height:40px; border-radius:50%; border:0; background:rgba(255,255,255,.92); color:var(--ink-900); font-size:26px; line-height:1; cursor:pointer; box-shadow:var(--sh-sm)}
 @media (max-width:860px){
   .hist-line::before{left:14px; margin-left:0}
@@ -1537,31 +1545,41 @@ function viewHome(){
 
 /* Lịch sử hình thành Nam Phát — mỗi mốc: năm, nhãn, tóm tắt, nội dung chi tiết, ảnh assets/history/<img>.jpg */
 const HISTORY = [
-  {year:'1992', tag:'Khởi nguồn', title:'Đặt nền móng trong ngành hóa mỹ phẩm', img:'1992',
+  {year:'1992', tag:'Khởi nguồn', title:'Đặt nền móng trong ngành hóa mỹ phẩm', pages:['1992-1','1992-2'],
    detail:['Thành lập Công ty Dịch vụ Hóa Mỹ phẩm, hoạt động trong lĩnh vực sản xuất mỹ phẩm, bao bì và kinh doanh vật tư – nguyên liệu ngành hóa mỹ phẩm.',
            'Đây là tiền thân của Công ty Cổ phần Mỹ phẩm Nam Phát, khởi đầu là doanh nghiệp Nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại TP. Hồ Chí Minh.']},
-  {year:'1995', tag:'Kết nối quốc tế', title:'Bước tiến mới trong hoạt động xuất nhập khẩu', img:'1995',
+  {year:'1995', tag:'Kết nối quốc tế', title:'Bước tiến mới trong hoạt động xuất nhập khẩu', pages:['1995-1'],
    detail:['Được Bộ Thương mại cho phép xuất nhập khẩu trực tiếp, mở rộng hoạt động kinh doanh và kết nối với thị trường quốc tế.']},
-  {year:'1996', tag:'Mở rộng thị trường', title:'Hiện diện tại Liên bang Nga', img:'1996',
+  {year:'1996', tag:'Mở rộng thị trường', title:'Hiện diện tại Liên bang Nga', pages:['1996-1','1996-2'],
    detail:['Được phép đặt Văn phòng đại diện tại Liên bang Nga, đánh dấu bước tiến trong hoạt động xúc tiến thương mại và mở rộng thị trường nước ngoài.']},
-  {year:'1999', span:'1999 – 2000', tag:'Phát triển năng lực sản xuất, xuất khẩu', title:'Mở rộng năng lực xuất nhập khẩu và xây dựng nền tảng sản xuất', img:'1999',
+  {year:'1999', span:'1999 – 2000', tag:'Phát triển năng lực sản xuất, xuất khẩu', title:'Mở rộng năng lực xuất nhập khẩu và xây dựng nền tảng sản xuất', pages:['1999-1','2000-1','2000-2','2000-3'],
    detail:['Ngày 05/03/1999, Nam Phát được Tổng cục Hải quan cấp Giấy chứng nhận đăng ký mã số doanh nghiệp xuất nhập khẩu số 0008327, tiếp tục củng cố năng lực giao thương quốc tế.',
            'Cùng năm, Công ty ký hợp đồng thuê 1.922 m² đất tại Khu công nghiệp Tân Tạo để đầu tư mở rộng cơ sở sản xuất.',
            'Năm 2000, dự án xây dựng nhà xưởng được phê duyệt, bao gồm nhà xưởng, nhà kho, trạm biến thế và hệ thống phục vụ sản xuất; đồng thời tiếp nhận dây chuyền sản xuất mỹ phẩm do UNDP tài trợ.']},
-  {year:'2003', tag:'Cột mốc chuyển đổi', title:'Chính thức mang tên Công ty Cổ phần Mỹ phẩm Nam Phát', img:'2003',
+  {year:'2003', tag:'Cột mốc chuyển đổi', title:'Chính thức mang tên Công ty Cổ phần Mỹ phẩm Nam Phát', pages:['2003-1','2003-2','2003-3'],
    detail:['Thực hiện cổ phần hóa và chính thức hoạt động với tên Công ty Cổ phần Mỹ phẩm Nam Phát, mở ra giai đoạn phát triển mới.']},
-  {year:'2005', tag:'Củng cố nền tảng', title:'Hoàn thiện cơ sở pháp lý và sản xuất', img:'2005',
+  {year:'2005', tag:'Củng cố nền tảng', title:'Hoàn thiện cơ sở pháp lý và sản xuất', pages:['2005-1'],
    detail:['Hoàn thiện cơ sở pháp lý đối với nhà xưởng và công trình tại Khu công nghiệp Tân Tạo, củng cố nền tảng cho hoạt động lâu dài.']},
-  {year:'2008', span:'2008 – 2014', tag:'Mở rộng xuất khẩu', title:'Đưa nước hoa Việt Nam đến thị trường Trung Quốc', img:'2008',
+  {year:'2008', span:'2008 – 2014', tag:'Mở rộng xuất khẩu', title:'Đưa nước hoa Việt Nam đến thị trường Trung Quốc', pages:['2008-1'],
    detail:['Duy trì hoạt động xuất khẩu chính ngạch nước hoa thương hiệu Queen sang Trung Quốc, với nhiều lô hàng quy mô hàng vạn chai, tích lũy kinh nghiệm trong sản xuất và thương mại quốc tế.']},
-  {year:'2026', tag:'Bước tiến mới', title:'Củng cố tiềm lực – Mở rộng định hướng phát triển', img:'2026',
+  {year:'2026', tag:'Bước tiến mới', title:'Củng cố tiềm lực – Mở rộng định hướng phát triển', pages:['2026-1'],
    detail:['Nâng vốn điều lệ lên 100 tỷ đồng, đồng thời sử dụng tên giao dịch quốc tế Cosmetic Napha JSC, tạo nền tảng cho giai đoạn phát triển mới và mở rộng hoạt động trong nước và quốc tế.']}
 ];
-function histImg(h, cls){
-  return `<img class="${cls||''}" src="assets/history/${h.img}.jpg" alt="${esc(h.title)}" loading="lazy" onerror="this.closest('.hist-media').classList.add('nopic'); this.remove()">`;
+function histPic(name, alt){
+  return `<picture><source srcset="assets/history/${name}.webp" type="image/webp"><img src="assets/history/${name}.jpg" alt="${esc(alt)}" loading="lazy" onerror="this.closest('.hist-media').classList.add('nopic'); this.closest('picture').remove()"></picture>`;
 }
 function histMedia(h){
-  return `<div class="hist-media"><span class="hist-ph">${h.span || h.year}</span>${histImg(h)}</div>`;
+  const first = h.pages && h.pages[0];
+  return `<div class="hist-media ${first ? '' : 'nopic'}"><span class="hist-ph">${h.span || h.year}</span>${first ? histPic(first, h.title) : ''}${h.pages && h.pages.length > 1 ? '<span class="hist-pages">' + h.pages.length + ' trang</span>' : ''}</div>`;
+}
+/* Gallery lật trang trong popup */
+let HIST_PG = 0;
+function histGo(i, d){
+  const h = HISTORY[i]; HIST_PG = (HIST_PG + d + h.pages.length) % h.pages.length;
+  const box = $('#histGal'); if(!box) return;
+  box.querySelector('.hist-gal-img').innerHTML = histPic(h.pages[HIST_PG], h.title);
+  box.querySelector('.hist-gal-n').textContent = (HIST_PG + 1) + ' / ' + h.pages.length;
+  box.querySelector('.hist-gal-open').href = 'assets/history/' + h.pages[HIST_PG] + '.jpg';
 }
 function openHistory(i){
   const h = HISTORY[i]; if(!h) return;
@@ -1579,8 +1597,16 @@ function openHistory(i){
           ${i < HISTORY.length-1 ? '<button class="btn btn-secondary btn-sm" onclick="openHistory(' + (i+1) + ')">' + esc(HISTORY[i+1].span || HISTORY[i+1].year) + ' →</button>' : ''}
         </div>
       </div>
-      ${histMedia(h)}
+      <div class="hist-media hist-gal ${h.pages && h.pages.length ? '' : 'nopic'}" id="histGal">
+        <span class="hist-ph">${h.span || h.year}</span>
+        ${h.pages && h.pages.length ? `<div class="hist-gal-img">${histPic(h.pages[0], h.title)}</div>
+        <div class="hist-gal-bar">
+          ${h.pages.length > 1 ? '<button type="button" onclick="histGo(' + i + ',-1)" aria-label="Trang trước">‹</button><span class="hist-gal-n">1 / ' + h.pages.length + '</span><button type="button" onclick="histGo(' + i + ',1)" aria-label="Trang sau">›</button>' : ''}
+          <a class="hist-gal-open" href="assets/history/${h.pages[0]}.jpg" target="_blank" rel="noopener">Xem lớn ↗</a>
+        </div>` : ''}
+      </div>
     </div>`;
+  HIST_PG = 0;
   translateDOM($('#modalCard'));
   modal.classList.add('open');
 }
@@ -3449,6 +3475,7 @@ Object.assign(DICT, {
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
 'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results',
+'Xem lớn ↗':'View full size ↗','2 trang':'2 pages','3 trang':'3 pages','4 trang':'4 pages',
 '1999 – 2000':'1999 – 2000',
 '2008 – 2014':'2008 – 2014',
 'Đây là tiền thân của Công ty Cổ phần Mỹ phẩm Nam Phát, khởi đầu là doanh nghiệp Nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại TP. Hồ Chí Minh.':'This was the forerunner of Nam Phat Cosmetics JSC, beginning as a state-owned enterprise in the cosmetics and household-chemical sector in Ho Chi Minh City.',
