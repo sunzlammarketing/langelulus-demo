@@ -3886,6 +3886,11 @@ function closeMega(){ mega.classList.remove('open'); }
 $('#megaTrigger').addEventListener('mouseenter', openMega);
 $('.hdr').addEventListener('mouseleave', closeMega);
 mega.addEventListener('mouseleave', closeMega);
+/* Rê chuột sang mục menu khác (Về chúng tôi, Tin tức, icon...) → đóng mega ngay, tránh đè lên dropdown */
+$$('.hdr .nav-link, .hdr .has-dd, .hdr .icon-btn, .hdr .lang-sw, .hdr .brandmark').forEach(el => {
+  if(el.id === 'megaTrigger' || el.closest('.has-mega')) return;
+  el.addEventListener('mouseenter', closeMega);
+});
 
 /* Mobile nav */
 const mnav = $('#mnav');
