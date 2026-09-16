@@ -1413,16 +1413,16 @@ function viewHome(){
     ${slides.map((s,i) => `
       <a class="hero-slide ${i===0?'on':''}" data-slide="${i}" href="${s.cta}" aria-label="${esc(s.alt)}">
         ${i===0
-          ? `<picture><source srcset="${BANNER_BASE}${s.img}.webp" type="image/webp"><img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" fetchpriority="high"></picture>`
-          : `<img class="hero-img" data-src="${BANNER_BASE}${s.img}.webp" data-fallback="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}">`}
+          ? `<picture><source srcset="${BANNER_BASE}m/${s.img}.webp 800w, ${BANNER_BASE}${s.img}.webp 2070w" sizes="100vw" type="image/webp"><img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" fetchpriority="high"></picture>`
+          : `<img class="hero-img" data-srcset="${BANNER_BASE}m/${s.img}.webp 800w, ${BANNER_BASE}${s.img}.webp 2070w" sizes="100vw" data-fallback="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" onerror="if(this.dataset.fallback){this.removeAttribute('srcset');this.src=this.dataset.fallback;delete this.dataset.fallback}">`}
       </a>`).join('')}
     <div class="hero-dots">${slides.map((_,i) => `<button class="hero-dot ${i===0?'on':''}" data-dot="${i}" aria-label="Slide ${i+1}"></button>`).join('')}</div>
   </section>
 
   <section>
     <div class="wrap promo2">
-      <a href="#/products" aria-label="Khám phá sản phẩm L’ANGELULUS"><picture><source srcset="${BANNER_BASE}promo-1.webp" type="image/webp"><img src="${BANNER_BASE}promo-1.jpg" alt="Khám phá sản phẩm L’ANGELULUS" loading="lazy"></picture></a>
-      <a href="#/products" aria-label="Gift set L’ANGELULUS"><picture><source srcset="${BANNER_BASE}promo-2.webp" type="image/webp"><img src="${BANNER_BASE}promo-2.jpg" alt="Gift set L’ANGELULUS" loading="lazy"></picture></a>
+      <a href="#/products" aria-label="Khám phá sản phẩm L’ANGELULUS"><picture><source srcset="${BANNER_BASE}m/promo-1.webp 800w, ${BANNER_BASE}promo-1.webp 1705w" sizes="(max-width:640px) 100vw, 600px" type="image/webp"><img src="${BANNER_BASE}promo-1.jpg" alt="Khám phá sản phẩm L’ANGELULUS" loading="lazy"></picture></a>
+      <a href="#/products" aria-label="Gift set L’ANGELULUS"><picture><source srcset="${BANNER_BASE}m/promo-2.webp 800w, ${BANNER_BASE}promo-2.webp 1705w" sizes="(max-width:640px) 100vw, 600px" type="image/webp"><img src="${BANNER_BASE}promo-2.jpg" alt="Gift set L’ANGELULUS" loading="lazy"></picture></a>
     </div>
   </section>
 
@@ -3987,7 +3987,7 @@ function initHero(){
   if(!slides.length) return;
   let i = 0;
   /* Tải ảnh slide theo nhu cầu: slide đang xem + slide kế tiếp */
-  const load = k => { const im = slides[(k + slides.length) % slides.length].querySelector('img[data-src]'); if(im){ im.src = im.dataset.src; im.removeAttribute('data-src'); } };
+  const load = k => { const im = slides[(k + slides.length) % slides.length].querySelector('img[data-srcset]'); if(im){ im.srcset = im.dataset.srcset; im.removeAttribute('data-srcset'); } };
   const go = n => { i = (n + slides.length) % slides.length;
     load(i); load(i + 1);
     slides.forEach((s,k) => s.classList.toggle('on', k === i));
