@@ -1570,7 +1570,7 @@ function histPic(name, alt){
 }
 function histMedia(h){
   const first = h.pages && h.pages[0];
-  return `<div class="hist-media ${first ? '' : 'nopic'}"><span class="hist-ph">${h.span || h.year}</span>${first ? histPic(first, h.title) : ''}${h.pages && h.pages.length > 1 ? '<span class="hist-pages">' + h.pages.length + ' trang</span>' : ''}</div>`;
+  return `<div class="hist-media ${first ? '' : 'nopic'}"><span class="hist-ph">${h.span || h.year}</span>${first ? histPic(first, h.title) : ''}</div>`;
 }
 /* Gallery lật trang trong popup */
 let HIST_PG = 0;
