@@ -1227,11 +1227,14 @@ function toast(msg){
    Chưa có ảnh thì tự động dùng hình vẽ SVG thay thế.
    ═══════════════════════════════════════════ */
 const IMG_BASE = 'assets/products/';
+const IMG_BASE_S = 'assets/products/s/';   /* bản 600px cho thẻ/dải cuộn/thumbnail */
 const BANNER_BASE = 'assets/banners/';
 const IMG_EXT = ['webp','jpg','jpeg','png','JPG','PNG'];
 
 /* Thử lần lượt các đuôi file; hết đuôi thì bỏ ảnh, giữ SVG bên dưới */
 function imgNext(el){
+  /* Thiếu bản nhỏ → dùng bản gốc */
+  if(el.dataset.dir === IMG_BASE_S){ el.dataset.dir = IMG_BASE; el.dataset.i = 0; el.src = IMG_BASE + el.dataset.base + '.' + IMG_EXT[0]; return; }
   const i = (+el.dataset.i || 0) + 1;
   if(i < IMG_EXT.length){
     el.dataset.i = i;
@@ -1280,11 +1283,12 @@ function bottleSVG(p){
 function pshot(p, extra, n, hover){
   const c = {color: collColor(p), name: collLabel(p)};
   const base = n && n > 1 ? p.id + '-' + n : p.id;
+  const dir = n ? IMG_BASE : IMG_BASE_S;   /* n=0: thẻ sản phẩm → ảnh nhỏ; n>=1: gallery trang chi tiết → ảnh gốc */
   return `<div class="pshot ${extra||''}">
     <span class="col-tag" style="background:${c.color}">${esc(c.name)}</span>
     ${bottleSVG(p)}
-    ${photoLayer(base, p.name)}
-    ${hover ? photoLayer(p.id + '-2', p.name, IMG_BASE, 'hover-img') : ''}
+    ${photoLayer(base, p.name, dir)}
+    ${hover ? photoLayer(p.id + '-2', p.name, dir, 'hover-img') : ''}
   </div>`;
 }
 /* Chai lớn ở hero / trang giới thiệu */
@@ -1407,7 +1411,9 @@ function viewHome(){
   <section class="hero">
     ${slides.map((s,i) => `
       <a class="hero-slide ${i===0?'on':''}" data-slide="${i}" href="${s.cta}" aria-label="${esc(s.alt)}">
-        <picture><source srcset="${BANNER_BASE}${s.img}.webp" type="image/webp"><img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" ${i===0?'':'loading="lazy"'}></picture>
+        ${i===0
+          ? `<picture><source srcset="${BANNER_BASE}${s.img}.webp" type="image/webp"><img class="hero-img" src="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" fetchpriority="high"></picture>`
+          : `<img class="hero-img" data-src="${BANNER_BASE}${s.img}.webp" data-fallback="${BANNER_BASE}${s.img}.jpg" alt="${esc(s.alt)}" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}">`}
       </a>`).join('')}
     <div class="hero-dots">${slides.map((_,i) => `<button class="hero-dot ${i===0?'on':''}" data-dot="${i}" aria-label="Slide ${i+1}"></button>`).join('')}</div>
   </section>
@@ -1673,7 +1679,7 @@ function homeMarquee(){
   const items = []; const n = Math.max(perfumes.length, others.length);
   for(let i = 0; i < n; i++){ if(perfumes[i]) items.push(perfumes[i]); if(others[i]) items.push(others[i]); }
   const card = p => '<a class="mq-card" href="#/product/' + p.id + '" style="--mqc:' + collColor(p) + '" aria-label="' + esc(p.name) + '">'
-    + '<picture><source srcset="' + IMG_BASE + p.id + '.webp" type="image/webp"><img class="mq-img" src="' + IMG_BASE + p.id + '.jpg" alt="' + esc(p.name) + '" loading="lazy" onerror="this.closest(\'picture\').remove()"></picture>'
+    + '<img class="mq-img" src="' + IMG_BASE_S + p.id + '.webp" alt="' + esc(p.name) + '" loading="lazy" onerror="if(this.src.indexOf(IMG_BASE_S)>-1){this.src=IMG_BASE+\'' + p.id + '.jpg\'}else{this.remove()}">'
     + '<div class="mq-cap"><span class="mq-coll">' + esc(collLabel(p)) + '</span><b>' + esc(perfumeTitle(p)) + '</b></div></a>';
   const set = items.map(card).join('');
   return '<section class="sec mq-sec">'
@@ -1782,7 +1788,7 @@ function viewGiftset(p){
   <section style="padding-bottom:20px"><div class="wrap pdp">
     <div>
       <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
-      <div class="thumbs">${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}</div>
+      <div class="thumbs">${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '', IMG_BASE_S)}</div>`).join('')}</div>
     </div>
     <div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">${genuineBadge()}
@@ -1829,7 +1835,7 @@ function viewProductOther(p){
         <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
         <div class="thumbs">
           ${[1,2].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">
-            ${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}
+            ${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '', IMG_BASE_S)}</div>`).join('')}
         </div>
       </div>
 
@@ -2046,7 +2052,7 @@ function viewProduct(id){
         <div class="gallery-main" id="galMain">${pshot(p, '', 1)}</div>
         <div class="thumbs">
           ${[1,2,3].map(i => `<div class="thumb ${i===1?'on':''}" onclick="pickThumb(this,'${p.id}',${i})">
-            ${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '')}</div>`).join('')}
+            ${bottleSVG(p)}${photoLayer(i > 1 ? p.id + '-' + i : p.id, '', IMG_BASE_S)}</div>`).join('')}
         </div>
       </div>
 
@@ -3863,9 +3869,13 @@ function initHero(){
   const slides = $$('.hero-slide'), dots = $$('.hero-dot');
   if(!slides.length) return;
   let i = 0;
+  /* Tải ảnh slide theo nhu cầu: slide đang xem + slide kế tiếp */
+  const load = k => { const im = slides[(k + slides.length) % slides.length].querySelector('img[data-src]'); if(im){ im.src = im.dataset.src; im.removeAttribute('data-src'); } };
   const go = n => { i = (n + slides.length) % slides.length;
+    load(i); load(i + 1);
     slides.forEach((s,k) => s.classList.toggle('on', k === i));
     dots.forEach((d,k) => d.classList.toggle('on', k === i)); };
+  load(1);
   const restart = () => { clearInterval(heroTimer); heroTimer = setInterval(() => go(i+1), 3000); };
   dots.forEach((d,k) => d.onclick = () => { go(k); restart(); });
   restart();
