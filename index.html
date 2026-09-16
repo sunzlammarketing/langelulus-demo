@@ -3749,7 +3749,17 @@ function applyDataLang(){
 }
 
 /* Dịch text node + placeholder + title theo từ điển */
+/* Khôi phục bản tiếng Việt gốc cho các khối tĩnh (header/footer/menu) trước khi dịch lại */
+function restoreDOM(root){
+  const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let n;
+  while((n = walk.nextNode())){ if(n.__vi !== undefined && n.nodeValue !== n.__vi) n.nodeValue = n.__vi; }
+  root.querySelectorAll('[data-vi-placeholder]').forEach(el => el.setAttribute('placeholder', el.dataset.viPlaceholder));
+  root.querySelectorAll('[data-vi-title]').forEach(el => el.setAttribute('title', el.dataset.viTitle));
+  root.querySelectorAll('option').forEach(el => { if(el.__vi !== undefined) el.textContent = el.__vi; });
+}
 function translateDOM(root){
+  restoreDOM(root);
   if(L === 'vi') return;
   const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const jobs = [];
@@ -3762,15 +3772,15 @@ function translateDOM(root){
     DICT_RE.forEach(rule => { rule[0].lastIndex = 0; out = out.replace(rule[0], rule[1]); });
     if(out !== raw) jobs.push([n, out]);
   }
-  jobs.forEach(j => j[0].nodeValue = j[1]);
+  jobs.forEach(j => { if(j[0].__vi === undefined) j[0].__vi = j[0].nodeValue; j[0].nodeValue = j[1]; });
   root.querySelectorAll('[placeholder]').forEach(el => {
-    const v = el.getAttribute('placeholder'); if(DICT[v]) el.setAttribute('placeholder', DICT[v]);
+    const v = el.getAttribute('placeholder'); if(DICT[v]){ if(!el.dataset.viPlaceholder) el.dataset.viPlaceholder = v; el.setAttribute('placeholder', DICT[v]); }
   });
   root.querySelectorAll('[title]').forEach(el => {
-    const v = el.getAttribute('title'); if(DICT[v]) el.setAttribute('title', DICT[v]);
+    const v = el.getAttribute('title'); if(DICT[v]){ if(!el.dataset.viTitle) el.dataset.viTitle = v; el.setAttribute('title', DICT[v]); }
   });
   root.querySelectorAll('option').forEach(el => {
-    const v = el.textContent.trim(); if(DICT[v]) el.textContent = DICT[v];
+    const v = el.textContent.trim(); if(DICT[v]){ if(el.__vi === undefined) el.__vi = el.textContent; el.textContent = DICT[v]; }
   });
 }
 
