@@ -411,8 +411,8 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   .hist-item.left .hist-text, .hist-item.right .hist-text{grid-column:1; grid-row:auto; text-align:left; padding:0}
   .hist-item.left .hist-media, .hist-item.right .hist-media{grid-column:1; grid-row:auto}
   .hist-item.left .hist-sum{margin-left:0}
-  .hist-modal{grid-template-columns:1fr}
-  .hist-modal .hist-media{order:-1; min-height:220px; aspect-ratio:16/9}
+  .hist-modal{grid-template-columns:minmax(0,1fr); min-height:0}
+  .hist-modal .hist-media{order:-1; width:100%; min-height:0; aspect-ratio:4/3}
   .hist-modal-text{padding:28px 22px 26px}
 }
 
