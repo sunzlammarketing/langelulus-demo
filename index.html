@@ -414,6 +414,28 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
   .hist-modal-text{padding:28px 22px 26px}
 }
 
+
+/* Hệ thống cơ sở Nam Phát */
+.fac-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
+.fac-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; transition:transform .25s ease-out, box-shadow .25s ease-out}
+.fac-card:hover{transform:translateY(-4px); box-shadow:var(--sh-md)}
+.fac-media{position:relative; aspect-ratio:16/11; background:linear-gradient(150deg,var(--blue-100),var(--blue-200)); display:grid; place-items:center; overflow:hidden}
+.fac-icon{width:64px; height:64px; color:var(--blue-500); opacity:.8}
+.fac-media.haspic .fac-icon{display:none}
+.fac-pic{position:absolute; inset:0; opacity:0; transition:opacity .6s ease}
+.fac-pic.on{opacity:1}
+.fac-pic img{width:100%; height:100%; object-fit:cover; display:block}
+.fac-dots{position:absolute; bottom:10px; left:0; right:0; display:flex; justify-content:center; gap:6px; z-index:2}
+.fac-dots button{width:8px; height:8px; border-radius:50%; border:0; background:rgba(255,255,255,.55); cursor:pointer; padding:0}
+.fac-dots button.on{background:#fff; width:20px; border-radius:999px}
+.fac-body{padding:18px 18px 20px; display:flex; flex-direction:column; gap:6px; flex:1}
+.fac-name{font-size:19px; font-weight:700; line-height:1.3; color:var(--ink-900)}
+.fac-addr{font-size:14.5px; line-height:1.55; color:var(--ink-700); flex:1}
+.fac-map{display:inline-block; margin-top:8px; font-weight:700; color:var(--blue-700); border-bottom:2px solid var(--blue-300); padding-bottom:2px; align-self:flex-start}
+.fac-map:hover{color:var(--blue-900); border-color:var(--blue-700)}
+@media (max-width:1080px){ .fac-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){ .fac-grid{grid-template-columns:1fr} }
+
 /* Breadcrumb */
 .crumb{font-size:14px; color:var(--text-muted); padding:var(--s5) 0; display:flex; gap:var(--s2); flex-wrap:wrap}
 .crumb a:hover{color:var(--accent)}
@@ -1640,6 +1662,53 @@ function openHistory(i){
   modal.classList.add('open');
 }
 
+
+/* Hệ thống cơ sở Nam Phát — ảnh assets/facilities/<img>.jpg (thẻ có nhiều ảnh → mini-slider) */
+const FACILITIES = [
+  {id:'hq',       kind:'Trụ sở chính',                 name:'Tổ hợp cao ốc văn phòng', addr:'13 - 15 - 19/1A Kinh Dương Vương, Phường Phú Lâm, TP. Hồ Chí Minh', imgs:['hq-1','hq-2'],
+   icon:'M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01'},
+  {id:'factory',  kind:'Nhà máy sản xuất',             name:'Khu công nghiệp Tân Tạo',  addr:'Lô 38, Đường số 2, Khu công nghiệp Tân Tạo, TP. Hồ Chí Minh', imgs:['factory'],
+   icon:'M3 21h18M4 21V10l5 3V10l5 3V10l5 3v8M8 21v-4h3v4M14 21v-4h3v4'},
+  {id:'office',   kind:'Tổ hợp văn phòng',             name:'Hồng Bàng',                addr:'743 Hồng Bàng, Phường Bình Tây, TP. Hồ Chí Minh', imgs:['office'],
+   icon:'M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M4 21h16M8 7h4M8 11h4M8 15h4M16 10h3a1 1 0 0 1 1 1v10'},
+  {id:'showroom', kind:'Văn phòng giới thiệu sản phẩm', name:'Bạch Vân',                addr:'137 Bạch Vân, Phường An Đông, TP. Hồ Chí Minh', imgs:['showroom'],
+   icon:'M3 9l1.5-5h15L21 9M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0V9M5 13v8h14v-8M10 21v-5h4v5'}
+];
+function facMap(addr){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr); }
+function facCard(f, i){
+  const many = f.imgs.length > 1;
+  return `<article class="fac-card" data-fac="${i}">
+    <div class="fac-media ${many ? 'many' : ''}">
+      <svg class="fac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${f.icon}"/></svg>
+      ${f.imgs.map((im,k) => `<picture class="fac-pic ${k===0?'on':''}"><source srcset="assets/facilities/${im}.webp" type="image/webp"><img src="assets/facilities/${im}.jpg" alt="${esc(f.kind)} — ${esc(f.name)}" loading="lazy" onload="this.closest('.fac-media').classList.add('haspic')" onerror="this.closest('picture').remove()"></picture>`).join('')}
+      ${many ? `<div class="fac-dots">${f.imgs.map((_,k) => `<button type="button" class="${k===0?'on':''}" onclick="facGo(${i},${k})" aria-label="Ảnh ${k+1}"></button>`).join('')}</div>` : ''}
+    </div>
+    <div class="fac-body">
+      <div class="label" style="color:var(--accent)">${esc(f.kind)}</div>
+      <h3 class="fac-name">${esc(f.name)}</h3>
+      <p class="fac-addr">${esc(f.addr)}</p>
+      <a class="fac-map" href="${facMap(f.addr)}" target="_blank" rel="noopener">Chỉ đường ↗</a>
+    </div>
+  </article>`;
+}
+function facGo(i, k){
+  const card = document.querySelector('.fac-card[data-fac="' + i + '"]'); if(!card) return;
+  card.querySelectorAll('.fac-pic').forEach((p,j) => p.classList.toggle('on', j === k));
+  card.querySelectorAll('.fac-dots button').forEach((b,j) => b.classList.toggle('on', j === k));
+  card.dataset.k = k;
+}
+let facTimer = null;
+function initFacilities(){
+  clearInterval(facTimer);
+  if(!document.querySelector('.fac-card .many')) return;
+  facTimer = setInterval(() => {
+    document.querySelectorAll('.fac-card').forEach((card,i) => {
+      const n = card.querySelectorAll('.fac-pic').length; if(n < 2) return;
+      facGo(i, ((+card.dataset.k || 0) + 1) % n);
+    });
+  }, 3500);
+}
+
 function viewAbout(sub){
   const S1 = `
   <section class="sec-sm"><div class="wrap-narrow center">
@@ -1756,6 +1825,14 @@ function viewAbout(sub){
     <p class="t-lg muted">Nam Phát JSC là đơn vị sản xuất và thương mại đứng sau thương hiệu L'Angelulus — nghiên cứu, điều chế và sản xuất nước hoa, mỹ phẩm đạt chuẩn, đưa sản phẩm Việt chất lượng cao đến người tiêu dùng.</p>
   </div></section>
 
+  <section class="sec fac-sec"><div class="wrap">
+    <div class="center" style="margin-bottom:40px">
+      <div class="eyebrow">Hệ thống cơ sở</div>
+      <h2 class="t-h2" style="margin-top:16px">Tài sản &amp; cơ sở tại TP. Hồ Chí Minh</h2>
+    </div>
+    <div class="fac-grid">${FACILITIES.map(facCard).join('')}</div>
+  </div></section>
+
   <section style="background:var(--navy);color:var(--ink-50);padding:var(--s9) 0">
     <div class="wrap split">
       <div>
@@ -1766,10 +1843,10 @@ function viewAbout(sub){
       </div>
       <div>
         <div class="stats">
-          <div><div class="stat-n">100%</div><div class="stat-l">Công bố mỹ phẩm</div></div>
-          <div><div class="stat-n">5.000</div><div class="stat-l">m² nhà xưởng</div></div>
-          <div><div class="stat-n">200k</div><div class="stat-l">Chai/năm</div></div>
-          <div><div class="stat-n">18</div><div class="stat-l">Bước kiểm soát QC</div></div>
+          <div><div class="stat-n">30+</div><div class="stat-l">Năm hình thành</div></div>
+          <div><div class="stat-n">4</div><div class="stat-l">Cơ sở tại TP.HCM</div></div>
+          <div><div class="stat-n">1.922</div><div class="stat-l">m² đất KCN Tân Tạo</div></div>
+          <div><div class="stat-n">100 tỷ</div><div class="stat-l">Vốn điều lệ (VNĐ)</div></div>
         </div>
       </div>
     </div>
@@ -3505,6 +3582,26 @@ Object.assign(DICT, {
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
 'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results',
+'Hệ thống cơ sở':'Our facilities',
+'Tài sản & cơ sở tại TP. Hồ Chí Minh':'Assets & facilities in Ho Chi Minh City',
+'Trụ sở chính':'Head office',
+'Nhà máy sản xuất':'Manufacturing plant',
+'Tổ hợp văn phòng':'Office complex',
+'Văn phòng giới thiệu sản phẩm':'Product showroom',
+'Tổ hợp cao ốc văn phòng':'Office tower complex',
+'Khu công nghiệp Tân Tạo':'Tan Tao Industrial Park',
+'Hồng Bàng':'Hong Bang',
+'Bạch Vân':'Bach Van',
+'13 - 15 - 19/1A Kinh Dương Vương, Phường Phú Lâm, TP. Hồ Chí Minh':'13 - 15 - 19/1A Kinh Duong Vuong, Phu Lam Ward, Ho Chi Minh City',
+'Lô 38, Đường số 2, Khu công nghiệp Tân Tạo, TP. Hồ Chí Minh':'Lot 38, Road No. 2, Tan Tao Industrial Park, Ho Chi Minh City',
+'743 Hồng Bàng, Phường Bình Tây, TP. Hồ Chí Minh':'743 Hong Bang, Binh Tay Ward, Ho Chi Minh City',
+'137 Bạch Vân, Phường An Đông, TP. Hồ Chí Minh':'137 Bach Van, An Dong Ward, Ho Chi Minh City',
+'Chỉ đường ↗':'Directions ↗',
+'Năm hình thành':'Years of history',
+'Cơ sở tại TP.HCM':'Facilities in HCMC',
+'m² đất KCN Tân Tạo':'m² land at Tan Tao IP',
+'Vốn điều lệ (VNĐ)':'Charter capital (VND)',
+'100 tỷ':'100 bn',
 'Nam Phát hơn 30 năm xây dựng nền tảng':'Nam Phat – over 30 years of building foundations','Vững bước cùng ngành mỹ phẩm Việt Nam':"Growing with Vietnam's cosmetics industry",
 'Xem lớn ↗':'View full size ↗','2 trang':'2 pages','3 trang':'3 pages','4 trang':'4 pages',
 '1999 – 2000':'1999 – 2000',
@@ -4099,6 +4196,7 @@ function route(){
   $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === '/' + (seg[0] || '')));
   closeMega(); closeMnav();
   if(path === '/' || path === ''){ initHero(); flashNavState(); }
+  initFacilities();
   if(document.querySelector('.hd-countdown') || document.getElementById('flashTimer')) startHotDealTimer();
 
   /* I18N: dịch giao diện + chuẩn hoá link + cập nhật SEO */
