@@ -289,7 +289,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .pdp-deal-label{font-weight:700; font-size:14px; color:var(--ink-800)}
 .pdp-deal .td-box{min-width:38px; padding:4px 7px}
 .pdp-deal .td-box b{font-size:15px}
-.pdp-deal .td-box span{font-size:8px; margin-top:2px}
+.pdp-deal .td-box span{font-size:9.5px; margin-top:2px}
 .pdp-deal .td-sep{font-size:13px}
 .pdp-deal-sold{margin:26px 0 8px; font-size:14px; font-weight:600}
 .pcard-foot{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); margin-top:var(--s2)}
@@ -768,7 +768,10 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 }
 @media (max-width:600px){
   .g3,.g4,.g2{grid-template-columns:1fr}
-  .ftr-grid{grid-template-columns:1fr; gap:var(--s6)}
+  .ftr-grid{grid-template-columns:1fr 1fr; gap:var(--s5) var(--s4)}
+  .ftr-grid > div:first-child, .ftr-grid > div:last-child{grid-column:1 / -1}
+  .pdp-actions .btn-lg{flex:1 1 100%; min-width:0}   /* nút Thêm vào giỏ / Mua ngay full chiều ngang */
+  .pdp-actions .qty{flex:1 1 100%; justify-content:center}
   .brandtag{display:none}
   .hdr-in{height:66px; gap:var(--s2)}
   .logo-mark{height:32px}
@@ -825,7 +828,7 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .flash-nav.prev{left:-10px} .flash-nav.next{right:-10px}
 .flash-nav:hover{background:var(--blue-500); color:#fff; transform:translateY(-50%) scale(1.06)}
 .flash-wrap:has(.feat-row) .flash-nav{top:calc(50% - 2px)}
-@media (max-width:640px){ .flash-nav{width:36px; height:36px} .flash-nav.prev{left:-6px} .flash-nav.next{right:-6px} }
+@media (max-width:640px){ .flash-nav{display:none} }   /* mobile: vuốt tay, không cần mũi tên */
 .flash-row{scrollbar-width:none; -ms-overflow-style:none}
 .flash-row::-webkit-scrollbar{display:none; height:0}
 .flash-row .deal-off{background:#E01f1f; left:auto; right:6px; top:6px}
@@ -2055,7 +2058,7 @@ function viewGiftset(p){
       </div>
       <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}<s>${money(anchorOf(p))}</s></div>
       <p class="t-cap" style="margin-bottom:28px">279.000đ cho 1 bộ sưu tập gồm 3 chai 10ml · Đã bao gồm VAT</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
+      <div class="pdp-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
         <div class="qty"><button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button></div>
         <button class="btn btn-primary btn-lg btn-cart" style="flex:1;min-width:200px" onclick="giftAdd('${p.id}',false)">Thêm vào giỏ hàng</button>
         <button class="btn btn-secondary btn-lg" onclick="giftAdd('${p.id}',true)">Mua ngay</button>
@@ -2101,7 +2104,7 @@ function viewProductOther(p){
         <div class="price t-h2" style="margin-bottom:8px">${money(p.price)}${p.old > p.price ? '<s>' + money(p.old) + '</s>' : ''}</div>
         <p class="t-cap" style="margin-bottom:28px">Đã bao gồm VAT · Miễn phí vận chuyển cho đơn từ 500.000đ</p>
 
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
+        <div class="pdp-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
           <div class="qty">
             <button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button>
           </div>
@@ -2335,7 +2338,7 @@ function viewProduct(id){
         <div class="price t-h2" style="margin-bottom:8px"><span id="pdpPrice">${money(priceOf(p,100))}</span><s id="pdpAnchor">${money(anchorOf(p,100))}</s></div>
         <p class="t-cap" style="margin-bottom:28px">Đã bao gồm VAT · Miễn phí vận chuyển cho đơn từ 500.000đ</p>
 
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
+        <div class="pdp-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
           <div class="qty">
             <button onclick="pdpQty(-1)">−</button><span id="pdpQty">1</span><button onclick="pdpQty(1)">+</button>
           </div>
