@@ -2188,11 +2188,13 @@ function viewProducts(q){
     const cat = CATS.find(c => c.id === q.cat);
     if(cat) return viewCategory(cat, q);
   }
-  let list = PRODUCTS.filter(p => isPerfume(p));
+  /* Không lọc theo BST/dòng → hiện TẤT CẢ sản phẩm (nước hoa + mỹ phẩm + hoá phẩm xanh) */
+  const perfumeOnly = !!(q.c || q.g || q.s);
+  let list = perfumeOnly ? PRODUCTS.filter(p => isPerfume(p)) : PRODUCTS.slice();
   if(q.c) list = list.filter(p => p.coll === q.c);
   if(q.g) list = list.filter(p => p.gender === q.g || p.giftset);
-  if(q.s === 'best') list = list.filter(p => p.badges.indexOf('best') > -1);
-  if(q.s === 'new')  list = list.filter(p => p.badges.indexOf('new') > -1);
+  if(q.s === 'best') list = list.filter(p => (p.badges||[]).indexOf('best') > -1);
+  if(q.s === 'new')  list = list.filter(p => (p.badges||[]).indexOf('new') > -1);
   if(q.max) list = list.filter(p => p.price <= +q.max);
   if(q.q){
     const k = q.q.toLowerCase();
@@ -2201,11 +2203,11 @@ function viewProducts(q){
   const sort = q.sort || 'pop';
   if(sort === 'asc')  list.sort((a,b) => a.price - b.price);
   if(sort === 'desc') list.sort((a,b) => b.price - a.price);
-  if(sort === 'rate') list.sort((a,b) => b.rating - a.rating);
-  if(sort === 'pop')  list.sort((a,b) => b.sold - a.sold);
+  if(sort === 'rate') list.sort((a,b) => (b.rating||0) - (a.rating||0));
+  if(sort === 'pop')  list.sort((a,b) => (b.sold||0) - (a.sold||0));
 
   const title = q.c ? COLLECTIONS[q.c].name : q.g ? 'Nước hoa ' + q.g : q.s === 'best' ? 'Bán chạy nhất' : q.s === 'new' ? 'Ra mắt mới' : 'Tất cả sản phẩm';
-  const sub = q.c ? COLLECTIONS[q.c].story : 'Chín hương thơm, ba bộ sưu tập — mỗi chai là một vùng đất Việt Nam.';
+  const sub = q.c ? COLLECTIONS[q.c].story : perfumeOnly ? 'Chín hương thơm, ba bộ sưu tập — mỗi chai là một vùng đất Việt Nam.' : 'Nước hoa, mỹ phẩm chăm sóc và hoá phẩm xanh — trọn bộ sản phẩm L\'Angelulus.';
 
   const chip = (label, href, on) => `<a href="${href}" class="badge ${on ? 'badge-gold' : 'badge-line'}" style="margin:0 6px 6px 0">${label}</a>`;
   const base = extra => {
@@ -2220,13 +2222,19 @@ function viewProducts(q){
   <section class="sec-sm" style="padding-top:0">
     <div class="wrap">
       <div style="max-width:660px;margin-bottom:40px">
-        <div class="eyebrow left">${q.c ? esc(COLLECTIONS[q.c].theme) : 'Bộ sưu tập'}</div>
+        <div class="eyebrow left">${q.c ? esc(COLLECTIONS[q.c].theme) : perfumeOnly ? 'Bộ sưu tập' : 'Danh mục'}</div>
         <h1 class="t-h1" style="margin:14px 0 12px">${esc(title)}</h1>
         <p class="t-lg muted">${esc(sub)}</p>
       </div>
 
       <div class="shop">
         <aside>
+          <div class="filter-grp">
+            <h4>Danh mục</h4>
+            ${chip('Tất cả', '#/products', !perfumeOnly)}
+            ${chip('Nước hoa', '#/products?cat=nuoc-hoa', false)}
+            ${CATS.filter(c => c.id !== 'nuoc-hoa').map(c => chip(c.name, '#/products?cat=' + c.id, false)).join('')}
+          </div>
           <div class="filter-grp">
             <h4>Tìm kiếm</h4>
             <input class="input" id="fq" placeholder="Tên hương, nốt hương…" value="${esc(q.q||'')}"
@@ -2250,7 +2258,7 @@ function viewProducts(q){
 
         <div>
           <div class="toolbar">
-            <div class="muted">Hiển thị <b>${list.length}</b> / ${PRODUCTS.filter(p => isPerfume(p)).length} sản phẩm</div>
+            <div class="muted">Hiển thị <b>${list.length}</b> / ${(perfumeOnly ? PRODUCTS.filter(p => isPerfume(p)) : PRODUCTS).length} sản phẩm</div>
             <div style="display:flex;align-items:center;gap:12px">
               <span class="label muted">Sắp xếp</span>
               <select class="select" style="width:auto;height:40px" onchange="sortBy(this.value)">
@@ -2261,8 +2269,7 @@ function viewProducts(q){
               </select>
             </div>
           </div>
-          ${list.length ? '<div class="grid g3">' + list.map(pcard).join('') + '</div>' +
-            '<div class="pagination"><span class="pg on">1</span><a class="pg" href="#/products">2</a><a class="pg" href="#/products">›</a></div>'
+          ${list.length ? '<div class="grid g3">' + list.map(pcard).join('') + '</div>'
           : `<div class="card card-p center" style="padding:64px 24px">
                <div class="t-h3" style="margin-bottom:8px">Không tìm thấy sản phẩm phù hợp</div>
                <p class="muted" style="margin-bottom:24px">Thử bỏ bớt bộ lọc hoặc xem toàn bộ danh mục.</p>
@@ -3595,6 +3602,7 @@ Object.assign(DICT, {
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
 'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results',
+'Nước hoa, mỹ phẩm chăm sóc và hoá phẩm xanh — trọn bộ sản phẩm L\'Angelulus.':'Perfume, personal care and green home care — the complete L\'Angelulus range.',
 'Hệ thống cơ sở':'Our facilities',
 'Tài sản & cơ sở tại TP. Hồ Chí Minh':'Assets & facilities in Ho Chi Minh City',
 'Trụ sở chính':'Head office',
