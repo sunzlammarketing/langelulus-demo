@@ -355,7 +355,10 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .hist-item.right .hist-text{grid-column:2; grid-row:1; text-align:left; padding-left:8px}
 .hist-item.right .hist-media{grid-column:1; grid-row:1}
 .hist-year{font-family:var(--font-head, inherit); font-size:clamp(44px,6vw,76px); font-weight:800; line-height:1; color:var(--ink-900); letter-spacing:-.02em}
-.hist-sum{font-size:19px; line-height:1.5; color:var(--ink-800); margin:22px 0 20px; max-width:440px}
+.hist-title{font-size:20px; font-weight:700; line-height:1.35; color:var(--ink-900); margin:0 0 12px; max-width:460px}
+.hist-item.left .hist-title{margin-left:auto}
+.hist-sum{font-size:16px; line-height:1.6; color:var(--ink-700); margin:0 0 18px; max-width:460px}
+.hist-sum p + p{margin-top:10px}
 .hist-item.left .hist-sum{margin-left:auto}
 .hist-more{display:inline-block; font-weight:700; color:var(--blue-700); border-bottom:2px solid var(--blue-300); padding-bottom:2px; transition:color .15s, border-color .15s}
 .hist-more:hover{color:var(--blue-900); border-color:var(--blue-700)}
@@ -1546,8 +1549,7 @@ function viewHome(){
 /* Lịch sử hình thành Nam Phát — mỗi mốc: năm, nhãn, tóm tắt, nội dung chi tiết, ảnh assets/history/<img>.jpg */
 const HISTORY = [
   {year:'1992', tag:'Khởi nguồn', title:'Đặt nền móng trong ngành hóa mỹ phẩm', pages:['1992-1','1992-2'],
-   detail:['Thành lập Công ty Dịch vụ Hóa Mỹ phẩm, hoạt động trong lĩnh vực sản xuất mỹ phẩm, bao bì và kinh doanh vật tư – nguyên liệu ngành hóa mỹ phẩm.',
-           'Đây là tiền thân của Công ty Cổ phần Mỹ phẩm Nam Phát, khởi đầu là doanh nghiệp Nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại TP. Hồ Chí Minh.']},
+   detail:['Thành lập Công ty Dịch vụ Hóa Mỹ phẩm, hoạt động trong lĩnh vực sản xuất mỹ phẩm, bao bì và kinh doanh vật tư – nguyên liệu ngành hóa mỹ phẩm.']},
   {year:'1995', tag:'Kết nối quốc tế', title:'Bước tiến mới trong hoạt động xuất nhập khẩu', pages:['1995-1'],
    detail:['Được Bộ Thương mại cho phép xuất nhập khẩu trực tiếp, mở rộng hoạt động kinh doanh và kết nối với thị trường quốc tế.']},
   {year:'1996', tag:'Mở rộng thị trường', title:'Hiện diện tại Liên bang Nga', pages:['1996-1','1996-2'],
@@ -1656,7 +1658,9 @@ function viewAbout(sub){
       <div class="hist-item ${i % 2 ? 'right' : 'left'}">
         <div class="hist-text">
           <div class="hist-year">${esc(h.span || h.year)}</div>
-          <p class="hist-sum">${esc(h.title)}</p>
+          <div class="label" style="color:var(--accent);margin:10px 0 6px">${esc(h.tag)}</div>
+          <h3 class="hist-title">${esc(h.title)}</h3>
+          <div class="hist-sum">${h.detail.map(t => '<p>' + esc(t) + '</p>').join('')}</div>
           <a href="#" class="hist-more" onclick="openHistory(${i});return false">Chi tiết</a>
         </div>
         ${histMedia(h)}
