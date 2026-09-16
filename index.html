@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L'ANGELULUS — Nước hoa Botanical Việt</title>
-<meta name="description" content="L'ANGELULUS — nước hoa botanical Việt. 9 hương thơm kể câu chuyện đất Việt: biển và rêu, nắng và tre gỗ, đất và rừng.">
-<meta property="og:title" content="L'ANGELULUS — Nước hoa Botanical Việt">
+<title>L'ANGELULUS</title>
+<meta name="description" content="L'Angelulus là thương hiệu nước hoa - hoá mỹ phẩm thuần Việt, được sản xuất và thương mại bởi Công ty Cổ phần Mỹ phẩm Nam Phát.">
+<meta property="og:title" content="L'ANGELULUS">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/brand/logo-full.png">
+<meta property="og:image" content="https://langelulus.com/assets/brand/logo-full.png">
 <link rel="icon" type="image/png" href="assets/brand/favicon.png">
 <link rel="icon" type="image/png" href="assets/brand/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
@@ -3668,8 +3668,8 @@ function translateDOM(root){
 
 /* SEO đa ngôn ngữ — canonical + hreflang + title/description theo trang */
 const SEO = {
-  '':            [['L\'ANGELULUS — Nước hoa Botanical Việt','Chín hương thơm kể câu chuyện đất Việt. Mua chính hãng tại website L\'Angelulus.'],
-                  ['L\'ANGELULUS — Vietnamese Botanical Perfume','Nine fragrances telling the story of Vietnam. Shop authentic at the official L\'Angelulus site.']],
+  '':            [['L\'ANGELULUS','L\'Angelulus là thương hiệu nước hoa - hoá mỹ phẩm thuần Việt, được sản xuất và thương mại bởi Công ty Cổ phần Mỹ phẩm Nam Phát.'],
+                  ['L\'ANGELULUS','L\'Angelulus is a Vietnamese perfume and cosmetics brand, produced and distributed by Nam Phat Cosmetics JSC.']],
   'products':    [['Tất cả sản phẩm — L\'ANGELULUS','9 chai nước hoa thuộc 3 bộ sưu tập Mist and Moss, Sunwood, Terrascent.'],
                   ['All Products — L\'ANGELULUS','Nine fragrances across the Mist and Moss, Sunwood and Terrascent collections.']],
   'about':       [['Về chúng tôi — L\'ANGELULUS','Câu chuyện thương hiệu, giá trị cốt lõi và năng lực sản xuất của L\'Angelulus.'],
@@ -3687,7 +3687,7 @@ function applySEO(key, extra){
   let title, desc;
   if(extra){ title = extra.title; desc = extra.desc; }
   else if(pair){ title = pair[LI()][0]; desc = pair[LI()][1]; }
-  else { title = L === 'vi' ? "L'ANGELULUS — Nước hoa Botanical Việt" : "L'ANGELULUS — Vietnamese Botanical Perfume"; desc = ''; }
+  else { title = "L'ANGELULUS"; desc = ''; }
   document.documentElement.lang = L;
   document.title = title;
   setMeta('name', 'description', desc);
