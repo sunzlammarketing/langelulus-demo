@@ -425,6 +425,9 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .fac-pic{position:absolute; inset:0; opacity:0; transition:opacity .6s ease}
 .fac-pic.on{opacity:1}
 .fac-pic img{width:100%; height:100%; object-fit:cover; display:block}
+.fac-pic.portrait{display:block}
+.fac-pic.portrait::before{content:''; position:absolute; inset:-14px; background:var(--fac-bg) center/cover no-repeat; filter:blur(14px) brightness(.8)}
+.fac-pic.portrait img{position:relative; z-index:1; object-fit:contain}
 .fac-dots{position:absolute; bottom:10px; left:0; right:0; display:flex; justify-content:center; gap:6px; z-index:2}
 .fac-dots button{width:8px; height:8px; border-radius:50%; border:0; background:rgba(255,255,255,.55); cursor:pointer; padding:0}
 .fac-dots button.on{background:#fff; width:20px; border-radius:999px}
@@ -1680,7 +1683,7 @@ function facCard(f, i){
   return `<article class="fac-card" data-fac="${i}">
     <div class="fac-media ${many ? 'many' : ''}">
       <svg class="fac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${f.icon}"/></svg>
-      ${f.imgs.map((im,k) => `<picture class="fac-pic ${k===0?'on':''}"><source srcset="assets/facilities/${im}.webp" type="image/webp"><img src="assets/facilities/${im}.jpg" alt="${esc(f.kind)} — ${esc(f.name)}" loading="lazy" onload="this.closest('.fac-media').classList.add('haspic')" onerror="this.closest('picture').remove()"></picture>`).join('')}
+      ${f.imgs.map((im,k) => `<picture class="fac-pic ${k===0?'on':''}"><source srcset="assets/facilities/${im}.webp" type="image/webp"><img src="assets/facilities/${im}.jpg" alt="${esc(f.kind)} — ${esc(f.name)}" loading="lazy" onload="facLoaded(this)" onerror="this.closest('picture').remove()"></picture>`).join('')}
       ${many ? `<div class="fac-dots">${f.imgs.map((_,k) => `<button type="button" class="${k===0?'on':''}" onclick="facGo(${i},${k})" aria-label="Ảnh ${k+1}"></button>`).join('')}</div>` : ''}
     </div>
     <div class="fac-body">
@@ -1690,6 +1693,14 @@ function facCard(f, i){
       <a class="fac-map" href="${facMap(f.addr)}" target="_blank" rel="noopener">Chỉ đường ↗</a>
     </div>
   </article>`;
+}
+/* Ảnh dọc: hiện trọn (contain) trên nền chính ảnh đó làm mờ */
+function facLoaded(img){
+  img.closest('.fac-media').classList.add('haspic');
+  if(img.naturalHeight > img.naturalWidth){
+    const pic = img.closest('picture'); pic.classList.add('portrait');
+    pic.style.setProperty('--fac-bg', 'url("' + (img.currentSrc || img.src) + '")');
+  }
 }
 function facGo(i, k){
   const card = document.querySelector('.fac-card[data-fac="' + i + '"]'); if(!card) return;
