@@ -1610,24 +1610,27 @@ function viewHome(){
 
 /* Lịch sử hình thành Nam Phát — mỗi mốc: năm, nhãn, tóm tắt, nội dung chi tiết, ảnh assets/history/<img>.jpg */
 const HISTORY = [
-  {year:'1992', tag:'Khởi nguồn', title:'Đặt nền móng trong ngành hóa mỹ phẩm', pages:['1992-3','1992-1','1992-2'], cover:'1992-1',
-   detail:['Thành lập Công ty Dịch vụ Hóa Mỹ phẩm, hoạt động trong lĩnh vực sản xuất mỹ phẩm, bao bì và kinh doanh vật tư – nguyên liệu ngành hóa mỹ phẩm.']},
+  {year:'1992', tag:'Khởi nguồn', title:'Bước chân đầu tiên vào ngành hóa mỹ phẩm', pages:['1992-3','1992-1','1992-2'], cover:'1992-1',
+   detail:['Công ty Dịch vụ Hóa Mỹ phẩm được thành lập theo Quyết định của UBND Thành phố Hồ Chí Minh số: 25/QĐ-UB ngày 30/09/1992, hoạt động trong lĩnh vực sản xuất mỹ phẩm, bao bì và kinh doanh vật tư – nguyên liệu ngành hóa mỹ phẩm.']},
   {year:'1995', tag:'Kết nối quốc tế', title:'Bước tiến mới trong hoạt động xuất nhập khẩu', pages:['1995-1'],
-   detail:['Được Bộ Thương mại cho phép xuất nhập khẩu trực tiếp, mở rộng hoạt động kinh doanh và kết nối với thị trường quốc tế.']},
+   detail:['Công ty Dịch vụ Hóa Mỹ phẩm được Bộ Thương mại cho phép xuất nhập khẩu trực tiếp, mở rộng hoạt động kinh doanh và kết nối với thị trường quốc tế tại công văn số: 5305/TM-XNK ngày 28/04/1995.']},
   {year:'1996', tag:'Mở rộng thị trường', title:'Hiện diện tại Liên bang Nga', pages:['1996-3','1996-1','1996-2'], cover:'1996-1',
    detail:['Được phép đặt Văn phòng đại diện tại Liên bang Nga, đánh dấu bước tiến trong hoạt động xúc tiến thương mại và mở rộng thị trường nước ngoài.']},
   {year:'1999', span:'1999 – 2000', tag:'Phát triển năng lực sản xuất, xuất khẩu', title:'Mở rộng năng lực xuất nhập khẩu và xây dựng nền tảng sản xuất', pages:['1999-1','2000-1','2000-2','2000-3'], covers:['2000-1','1999-1','2000-3'],
    detail:['Ngày 05/03/1999, Nam Phát được Tổng cục Hải quan cấp Giấy chứng nhận đăng ký mã số doanh nghiệp xuất nhập khẩu số 0008327, tiếp tục củng cố năng lực giao thương quốc tế.',
-           'Cùng năm, Công ty ký hợp đồng thuê 1.922 m² đất tại Khu công nghiệp Tân Tạo để đầu tư mở rộng cơ sở sản xuất.',
-           'Năm 2000, dự án xây dựng nhà xưởng được phê duyệt, bao gồm nhà xưởng, nhà kho, trạm biến thế và hệ thống phục vụ sản xuất; đồng thời tiếp nhận dây chuyền sản xuất mỹ phẩm do UNDP tài trợ.']},
+           'Năm 2000, Công ty được phê duyệt và đã đầu tư xây dựng nhà xưởng tại Khu Công nghiệp Tân Tạo với tổng mức đầu tư: 1.191.000.000 đồng.']},
   {year:'2003', tag:'Cột mốc chuyển đổi', title:'Chính thức mang tên Công ty Cổ phần Mỹ phẩm Nam Phát', pages:['2003-1','2003-2','2003-3'],
-   detail:['Thực hiện cổ phần hóa và chính thức hoạt động với tên Công ty Cổ phần Mỹ phẩm Nam Phát, mở ra giai đoạn phát triển mới.']},
+   detail:['Công ty Cổ phần Mỹ phẩm Nam Phát là đơn vị được UBND Thành phố Hồ Chí Minh làm đơn vị đầu ngành để triển khai Cổ phần hóa doanh nghiệp theo Quyết định số: 4204/QĐ-UB ngày 06/10/2003, mở ra giai đoạn phát triển mới.']},
   {year:'2005', tag:'Củng cố nền tảng', title:'Hoàn thiện cơ sở pháp lý và sản xuất', pages:['2005-1'],
-   detail:['Hoàn thiện cơ sở pháp lý đối với nhà xưởng và công trình tại Khu công nghiệp Tân Tạo, củng cố nền tảng cho hoạt động lâu dài.']},
-  {year:'2008', span:'2008 – 2014', tag:'Mở rộng xuất khẩu', title:'Đưa nước hoa Việt Nam đến thị trường Trung Quốc', pages:['2008-1','2008-2','2008-3','2008-4','2008-5'], covers:['2008-3','2008-1','2008-5'],
-   detail:['Duy trì hoạt động xuất khẩu chính ngạch nước hoa thương hiệu Queen sang Trung Quốc, với nhiều lô hàng quy mô hàng vạn chai, tích lũy kinh nghiệm trong sản xuất và thương mại quốc tế.']},
-  {year:'2026', tag:'Bước tiến mới', title:'Củng cố tiềm lực – Mở rộng định hướng phát triển', pages:['2026-1'],
-   detail:['Nâng vốn điều lệ lên 100 tỷ đồng, đồng thời sử dụng tên giao dịch quốc tế Cosmetic Napha JSC, tạo nền tảng cho giai đoạn phát triển mới và mở rộng hoạt động trong nước và quốc tế.']}
+   detail:['Cơ sở pháp lý đối với nhà xưởng và công trình tại Khu công nghiệp Tân Tạo được hoàn thiện, củng cố nền tảng cho hoạt động lâu dài.',
+           'Công ty Cổ phần Mỹ phẩm Nam Phát là 1 trong 5 đơn vị đầu tiên tại Thành phố Hồ Chí Minh được thí điểm chuyển thể từ đất thuê 50 năm thành đất ổn định lâu dài.']},
+  {year:'2008', span:'2008 – 2018', tag:'Bước đột phá chinh phục thị trường tỷ dân', title:'Mở rộng thị trường – Khẳng định kinh nghiệm thương mại quốc tế', pages:['2008-1','2008-2'], covers:['2008-1','2008-2'],
+   detail:['Chủ động thích ứng trước các biến động thương mại tại khu vực Đông Âu, Nam Phát dịch chuyển trọng tâm xuất khẩu sang thị trường Trung Quốc và gặt hái được nhiều thành công bứt phá. Thương hiệu nước hoa Queen của công ty liên tục xuất khẩu chính ngạch sang quốc gia này với các lô hàng quy mô lớn (hàng vạn đơn vị sản phẩm/lô), tạo dựng nền tảng kinh nghiệm thực tế sâu sắc trong chuỗi cung ứng và thương mại quốc tế.']},
+  {year:'2019', span:'2019 – 2025', tag:'Tái cấu trúc chiến lược vượt qua thách thức toàn cầu', title:'Vững vàng trước biến động – Chuẩn bị cho một chương mới', pages:[],
+   detail:['Giai đoạn này chứng kiến những biến động chưa từng có của nền kinh tế thế giới. Đại dịch COVID-19 bùng nổ, kết hợp với các cuộc xung đột địa chính trị tại Ukraine và khu vực Trung Đông (Biển Đỏ) đã gây ra cuộc khủng hoảng logistics nghiêm trọng, đẩy giá nguyên liệu đầu vào tăng cao và làm đứt gãy chuỗi cung ứng xuất khẩu toàn cầu.',
+           'Trước những tác động tiêu cực bủa vây, Ban lãnh đạo Nam Phát đã chủ động thực hiện một bước lùi chiến lược: tập trung tái cấu trúc lại bộ máy vận hành, tối ưu hóa chi phí và bảo toàn nguồn lực. Đây là giai đoạn "Luyện kim trong lửa", giúp công ty tích lũy nội lực, chuẩn bị cho một chương mới bứt phá hơn.']},
+  {year:'2026', tag:'Vững nội lực – Vươn quốc tế', title:'Củng cố tiềm lực – Mở ra chương phát triển mới', pages:['2026-1'],
+   detail:['Hoàn tất giai đoạn tái cấu trúc, Nam Phát bước vào kỷ nguyên mới với tâm thế của người dẫn đầu. Công ty thực hiện bước ngoặt lớn khi tăng vốn điều lệ lên mức 100 tỷ đồng và chuyển đổi tên giao dịch quốc tế thành Cosmetic Napha JSC. Đây là cột mốc quan trọng giúp tối ưu hóa năng lực cạnh tranh, mở rộng thị phần trong nước và gia tăng sự hiện diện thương mại tại các thị trường toàn cầu.']}
 ];
 function histPic(name, alt, small){
   const dir = small ? 'assets/history/s/' : 'assets/history/';   /* small: bản 700px cho ô ngoài timeline */
@@ -1793,7 +1796,7 @@ function viewAbout(sub){
   <section class="sec hist-intro center-intro"><div class="wrap-narrow center">
     <h2 class="t-h2" style="margin:0 0 12px">Trên 30 năm hình thành và phát triển<br>Vững bước cùng ngành mỹ phẩm Việt Nam</h2>
     <p class="t-lg" style="margin-bottom:14px;color:var(--ink-900)">Công ty Cổ phần Mỹ phẩm Nam Phát tiền thân là Công ty Dịch vụ Hoá mỹ phẩm, được thành lập từ năm 1992, khởi đầu là doanh nghiệp Nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại TP. Hồ Chí Minh.</p>
-    <p class="t-lg" style="color:var(--ink-900)">Trải qua hơn 30 năm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu, đồng thời mở rộng thị trường quốc tế và tích lũy kinh nghiệm trong lĩnh vực nước hoa - hóa mỹ phẩm.</p>
+    <p class="t-lg" style="color:var(--ink-900)">Trải qua hơn 30 năm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu, đồng thời mở rộng ra thị trường quốc tế và tích lũy kinh nghiệm trong lĩnh vực nước hoa và hóa mỹ phẩm.</p>
   </div></section>
 
   <section class="hist"><div class="wrap">
@@ -1805,7 +1808,7 @@ function viewAbout(sub){
           <div class="label" style="color:var(--accent);margin:10px 0 6px">${esc(h.tag)}</div>
           <h3 class="hist-title">${esc(h.title)}</h3>
           <div class="hist-sum">${h.detail.map(t => '<p>' + esc(t) + '</p>').join('')}</div>
-          <a href="#" class="hist-more" onclick="openHistory(${i});return false">Chi tiết</a>
+          ${h.pages && h.pages.length ? `<a href="#" class="hist-more" onclick="openHistory(${i});return false">Chi tiết</a>` : ''}
         </div>
         ${histMedia(h)}
       </div>`).join('')}
@@ -1814,9 +1817,9 @@ function viewAbout(sub){
 
   <section class="hist-intro" style="padding:40px 0">
     <div class="wrap-narrow">
-      <h2 class="t-h2" style="margin:0 0 20px">Hơn 30 năm – từ nền tảng hóa mỹ phẩm đến hành trình vươn ra thị trường quốc tế.</h2>
-      <p class="t-lg" style="color:var(--ink-900);margin-bottom:14px">Từ một doanh nghiệp hoạt động trong lĩnh vực hóa mỹ phẩm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu và phát triển thị trường, với dấu ấn tại Liên bang Nga và Trung Quốc.</p>
-      <p class="t-lg" style="color:var(--ink-900);margin-bottom:24px">Những nền tảng được tích lũy qua hơn ba thập kỷ là tiền đề để Nam Phát tiếp tục đổi mới, nâng cao năng lực và phát triển các sản phẩm mỹ phẩm – nước hoa, hướng tới những giá trị bền vững trong tương lai.</p>
+      <h2 class="t-h2" style="margin:0 0 20px">Hơn 30 năm – từ nền tảng hóa mỹ phẩm trong nước đến hành trình vươn ra thị trường quốc tế.</h2>
+      <p class="t-lg" style="color:var(--ink-900);margin-bottom:14px">Từ một doanh nghiệp nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại Việt Nam, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu và vươn mình ra quốc tế với dấu ấn tại Liên bang Nga và Trung Quốc.</p>
+      <p class="t-lg" style="color:var(--ink-900);margin-bottom:24px">Những nền tảng được tích lũy qua hơn ba thập kỷ là tiền đề để Nam Phát tiếp tục đổi mới, nâng cao năng lực và phát triển các sản phẩm hóa mỹ phẩm – nước hoa, hướng tới những giá trị bền vững trong tương lai.</p>
       <p class="hist-motto">Nam Phát – Hơn 30 năm hành trình, vững nền tảng – hướng tương lai.</p>
     </div>
   </section>`;
@@ -3628,8 +3631,27 @@ Object.assign(DICT, {
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
 'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results',
+'Bước chân đầu tiên vào ngành hóa mỹ phẩm':'First steps into the cosmetics industry',
+'Công ty Dịch vụ Hóa Mỹ phẩm được thành lập theo Quyết định của UBND Thành phố Hồ Chí Minh số: 25/QĐ-UB ngày 30/09/1992, hoạt động trong lĩnh vực sản xuất mỹ phẩm, bao bì và kinh doanh vật tư – nguyên liệu ngành hóa mỹ phẩm.':'The Cosmetics & Chemicals Service Company was founded under HCMC People\'s Committee Decision No. 25/QĐ-UB dated 30 Sep 1992, manufacturing cosmetics and packaging and trading materials and ingredients for the industry.',
+'Công ty Dịch vụ Hóa Mỹ phẩm được Bộ Thương mại cho phép xuất nhập khẩu trực tiếp, mở rộng hoạt động kinh doanh và kết nối với thị trường quốc tế tại công văn số: 5305/TM-XNK ngày 28/04/1995.':'The company was licensed by the Ministry of Trade for direct import and export under Official Letter No. 5305/TM-XNK dated 28 Apr 1995, expanding operations and connecting with international markets.',
+'Năm 2000, Công ty được phê duyệt và đã đầu tư xây dựng nhà xưởng tại Khu Công nghiệp Tân Tạo với tổng mức đầu tư: 1.191.000.000 đồng.':'In 2000 the company was approved for and invested in building its factory at Tan Tao Industrial Park, with total investment of VND 1,191,000,000.',
+'Công ty Cổ phần Mỹ phẩm Nam Phát là đơn vị được UBND Thành phố Hồ Chí Minh làm đơn vị đầu ngành để triển khai Cổ phần hóa doanh nghiệp theo Quyết định số: 4204/QĐ-UB ngày 06/10/2003, mở ra giai đoạn phát triển mới.':'Nam Phat Cosmetics JSC was chosen by the HCMC People\'s Committee as the sector\'s pilot unit for equitisation under Decision No. 4204/QĐ-UB dated 6 Oct 2003, opening a new phase of growth.',
+'Cơ sở pháp lý đối với nhà xưởng và công trình tại Khu công nghiệp Tân Tạo được hoàn thiện, củng cố nền tảng cho hoạt động lâu dài.':'The legal framework for the factory and facilities at Tan Tao Industrial Park was completed, securing a foundation for long-term operations.',
+'Công ty Cổ phần Mỹ phẩm Nam Phát là 1 trong 5 đơn vị đầu tiên tại Thành phố Hồ Chí Minh được thí điểm chuyển thể từ đất thuê 50 năm thành đất ổn định lâu dài.':'Nam Phat Cosmetics JSC was one of the first five enterprises in Ho Chi Minh City piloted to convert a 50-year land lease into long-term stable land use.',
+'2008 – 2018':'2008 – 2018',
+'2019 – 2025':'2019 – 2025',
+'Bước đột phá chinh phục thị trường tỷ dân':'Breakthrough into a billion-person market',
+'Mở rộng thị trường – Khẳng định kinh nghiệm thương mại quốc tế':'Expanding markets – Proving international trade experience',
+'Chủ động thích ứng trước các biến động thương mại tại khu vực Đông Âu, Nam Phát dịch chuyển trọng tâm xuất khẩu sang thị trường Trung Quốc và gặt hái được nhiều thành công bứt phá. Thương hiệu nước hoa Queen của công ty liên tục xuất khẩu chính ngạch sang quốc gia này với các lô hàng quy mô lớn (hàng vạn đơn vị sản phẩm/lô), tạo dựng nền tảng kinh nghiệm thực tế sâu sắc trong chuỗi cung ứng và thương mại quốc tế.':'Adapting proactively to trade shifts in Eastern Europe, Nam Phat moved its export focus to China and achieved breakthrough success. The company\'s Queen perfume brand was exported officially and continuously to China in large shipments (tens of thousands of units per lot), building deep hands-on experience in supply chains and international trade.',
+'Tái cấu trúc chiến lược vượt qua thách thức toàn cầu':'Strategic restructuring through global challenges',
+'Vững vàng trước biến động – Chuẩn bị cho một chương mới':'Steady through turbulence – Preparing for a new chapter',
+'Giai đoạn này chứng kiến những biến động chưa từng có của nền kinh tế thế giới. Đại dịch COVID-19 bùng nổ, kết hợp với các cuộc xung đột địa chính trị tại Ukraine và khu vực Trung Đông (Biển Đỏ) đã gây ra cuộc khủng hoảng logistics nghiêm trọng, đẩy giá nguyên liệu đầu vào tăng cao và làm đứt gãy chuỗi cung ứng xuất khẩu toàn cầu.':'This period saw unprecedented upheaval in the world economy. The COVID-19 pandemic, combined with geopolitical conflicts in Ukraine and the Middle East (Red Sea), caused a severe logistics crisis, drove up input costs and disrupted global export supply chains.',
+'Trước những tác động tiêu cực bủa vây, Ban lãnh đạo Nam Phát đã chủ động thực hiện một bước lùi chiến lược: tập trung tái cấu trúc lại bộ máy vận hành, tối ưu hóa chi phí và bảo toàn nguồn lực. Đây là giai đoạn "Luyện kim trong lửa", giúp công ty tích lũy nội lực, chuẩn bị cho một chương mới bứt phá hơn.':'Facing these headwinds, Nam Phat\'s leadership took a deliberate strategic step back: restructuring operations, optimising costs and preserving resources. This "forged in fire" period built internal strength in preparation for a stronger new chapter.',
+'Vững nội lực – Vươn quốc tế':'Strong within – Reaching abroad',
+'Củng cố tiềm lực – Mở ra chương phát triển mới':'Strengthening resources – Opening a new chapter',
+'Hoàn tất giai đoạn tái cấu trúc, Nam Phát bước vào kỷ nguyên mới với tâm thế của người dẫn đầu. Công ty thực hiện bước ngoặt lớn khi tăng vốn điều lệ lên mức 100 tỷ đồng và chuyển đổi tên giao dịch quốc tế thành Cosmetic Napha JSC. Đây là cột mốc quan trọng giúp tối ưu hóa năng lực cạnh tranh, mở rộng thị phần trong nước và gia tăng sự hiện diện thương mại tại các thị trường toàn cầu.':'With restructuring complete, Nam Phat enters a new era with the mindset of a leader. The company raised its charter capital to VND 100 billion and adopted the international trading name Cosmetic Napha JSC — a key milestone for sharpening competitiveness, growing domestic market share and expanding its commercial presence in global markets.',
 'Công ty Cổ phần Mỹ phẩm Nam Phát tiền thân là Công ty Dịch vụ Hoá mỹ phẩm, được thành lập từ năm 1992, khởi đầu là doanh nghiệp Nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại TP. Hồ Chí Minh.':'Nam Phat Cosmetics JSC, formerly the Cosmetics & Chemicals Service Company, was founded in 1992 as a state-owned enterprise in the cosmetics and household-chemical sector in Ho Chi Minh City.',
-'Trải qua hơn 30 năm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu, đồng thời mở rộng thị trường quốc tế và tích lũy kinh nghiệm trong lĩnh vực nước hoa - hóa mỹ phẩm.':'Over more than 30 years, Nam Phat has steadily built its manufacturing, trading and import–export capabilities, expanded into international markets and accumulated deep experience in perfume and household chemicals.',
+'Trải qua hơn 30 năm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu, đồng thời mở rộng ra thị trường quốc tế và tích lũy kinh nghiệm trong lĩnh vực nước hoa và hóa mỹ phẩm.':'Over more than 30 years, Nam Phat has steadily built its manufacturing, trading and import–export capabilities, expanded into international markets and accumulated deep experience in perfume and household chemicals.',
 'Xem ảnh lớn':'View larger',
 'Mở trong Google Maps ↗':'Open in Google Maps ↗',
 'Nước hoa, mỹ phẩm chăm sóc và hoá phẩm xanh — trọn bộ sản phẩm L\'Angelulus.':'Perfume, personal care and green home care — the complete L\'Angelulus range.',
@@ -3696,9 +3718,9 @@ Object.assign(DICT, {
 'Củng cố tiềm lực – Mở rộng định hướng phát triển':'Strengthening resources – Broadening direction',
 'Nâng vốn điều lệ lên 100 tỷ đồng, đồng thời sử dụng tên giao dịch quốc tế Cosmetic Napha JSC, tạo nền tảng cho giai đoạn phát triển mới và mở rộng hoạt động trong nước và quốc tế.':'Charter capital raised to VND 100 billion and the international trading name Cosmetic Napha JSC adopted, laying the groundwork for a new phase of domestic and international growth.',
 'Nam Phát hôm nay':'Nam Phat today',
-'Hơn 30 năm – từ nền tảng hóa mỹ phẩm đến hành trình vươn ra thị trường quốc tế.':'Over 30 years – from a cosmetics foundation to international markets.',
-'Từ một doanh nghiệp hoạt động trong lĩnh vực hóa mỹ phẩm, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu và phát triển thị trường, với dấu ấn tại Liên bang Nga và Trung Quốc.':'From a household-chemicals business, Nam Phat has steadily developed its manufacturing, trading, import–export and market-development capabilities, with footprints in Russia and China.',
-'Những nền tảng được tích lũy qua hơn ba thập kỷ là tiền đề để Nam Phát tiếp tục đổi mới, nâng cao năng lực và phát triển các sản phẩm mỹ phẩm – nước hoa, hướng tới những giá trị bền vững trong tương lai.':'The foundations built over three decades enable Nam Phat to keep innovating, raising capability and developing cosmetics and perfume products for lasting value.',
+'Hơn 30 năm – từ nền tảng hóa mỹ phẩm trong nước đến hành trình vươn ra thị trường quốc tế.':'Over 30 years – from a cosmetics foundation to international markets.',
+'Từ một doanh nghiệp nhà nước hoạt động trong lĩnh vực hóa mỹ phẩm tại Việt Nam, Nam Phát từng bước phát triển năng lực sản xuất, kinh doanh, xuất nhập khẩu và vươn mình ra quốc tế với dấu ấn tại Liên bang Nga và Trung Quốc.':'From a household-chemicals business, Nam Phat has steadily developed its manufacturing, trading, import–export and market-development capabilities, with footprints in Russia and China.',
+'Những nền tảng được tích lũy qua hơn ba thập kỷ là tiền đề để Nam Phát tiếp tục đổi mới, nâng cao năng lực và phát triển các sản phẩm hóa mỹ phẩm – nước hoa, hướng tới những giá trị bền vững trong tương lai.':'The foundations built over three decades enable Nam Phat to keep innovating, raising capability and developing cosmetics and perfume products for lasting value.',
 'Nam Phát – Hơn 30 năm hành trình, vững nền tảng – hướng tương lai.':'Nam Phat – Over 30 years of journey, solid foundations – facing the future.',
 'Về chúng tôi ▾':'About us ▾',
 'Về Nam Phát JSC':'About Nam Phat JSC',
