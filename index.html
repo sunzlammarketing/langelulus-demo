@@ -1629,16 +1629,17 @@ const HISTORY = [
   {year:'2026', tag:'Bước tiến mới', title:'Củng cố tiềm lực – Mở rộng định hướng phát triển', pages:['2026-1'],
    detail:['Nâng vốn điều lệ lên 100 tỷ đồng, đồng thời sử dụng tên giao dịch quốc tế Cosmetic Napha JSC, tạo nền tảng cho giai đoạn phát triển mới và mở rộng hoạt động trong nước và quốc tế.']}
 ];
-function histPic(name, alt){
-  return `<picture><source srcset="assets/history/${name}.webp" type="image/webp"><img src="assets/history/${name}.jpg" alt="${esc(alt)}" loading="lazy" onerror="this.closest('.hist-media').classList.add('nopic'); this.closest('picture').remove()"></picture>`;
+function histPic(name, alt, small){
+  const dir = small ? 'assets/history/s/' : 'assets/history/';   /* small: bản 700px cho ô ngoài timeline */
+  return `<picture><source srcset="${dir}${name}.webp" type="image/webp"><img src="assets/history/${name}.jpg" alt="${esc(alt)}" loading="lazy" onerror="this.closest('.hist-media').classList.add('nopic'); this.closest('picture').remove()"></picture>`;
 }
 function histMedia(h){
   /* covers: 2–3 ảnh xếp chồng kiểu xoè quạt cho ô ngoài timeline */
   if(h.covers && h.covers.length > 1){
-    return `<div class="hist-media hist-fan n${h.covers.length}"><span class="hist-ph">${h.span || h.year}</span>${h.covers.map((c,k) => `<div class="fan-card fan-${k}">${histPic(c, h.title)}</div>`).join('')}</div>`;
+    return `<div class="hist-media hist-fan n${h.covers.length}"><span class="hist-ph">${h.span || h.year}</span>${h.covers.map((c,k) => `<div class="fan-card fan-${k}">${histPic(c, h.title, true)}</div>`).join('')}</div>`;
   }
   const first = h.cover || (h.pages && h.pages[0]);   /* cover: ảnh cắt riêng cho ô ngoài timeline */
-  return `<div class="hist-media ${first ? '' : 'nopic'}"><span class="hist-ph">${h.span || h.year}</span>${first ? histPic(first, h.title) : ''}</div>`;
+  return `<div class="hist-media ${first ? '' : 'nopic'}"><span class="hist-ph">${h.span || h.year}</span>${first ? histPic(first, h.title, true) : ''}</div>`;
 }
 /* Gallery lật trang trong popup */
 let HIST_PG = 0;
