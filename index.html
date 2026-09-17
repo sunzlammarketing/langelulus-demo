@@ -438,6 +438,15 @@ h1,h2,h3,h4{font-weight:700; line-height:1.2}
 .fac-addr{font-size:14.5px; line-height:1.55; color:var(--ink-700); flex:1}
 .fac-map{display:inline-block; margin-top:8px; font-weight:700; color:var(--blue-700); border-bottom:2px solid var(--blue-300); padding-bottom:2px; align-self:flex-start}
 .fac-map:hover{color:var(--blue-900); border-color:var(--blue-700)}
+/* Lightbox */
+.fac-media[role=button]{cursor:zoom-in}
+.modal-card.fac-wide{width:min(1100px,100%); padding:0; overflow:hidden; background:#0E1A26}
+.fac-lb{position:relative; background:#0E1A26; display:grid; place-items:center; min-height:320px; max-height:78vh}
+.fac-lb-img img{display:block; max-width:100%; max-height:78vh; width:auto; height:auto; margin:0 auto}
+.fac-lb .hist-arrow{top:50%}
+.fac-lb-cap{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 20px; background:var(--surface); color:var(--ink-900)}
+.fac-lb-n{font-size:14px; color:var(--ink-500); white-space:nowrap}
+@media (max-width:640px){ .fac-lb{min-height:220px} .fac-lb-cap{flex-direction:column; align-items:flex-start} }
 @media (max-width:1080px){ .fac-grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px){ .fac-grid{grid-template-columns:1fr} }
 
@@ -1642,7 +1651,7 @@ function histGo(i, d){
 }
 function openHistory(i){
   const h = HISTORY[i]; if(!h) return;
-  $('#modalCard').classList.remove('qv-wide'); $('#modalCard').classList.add('hist-wide');
+  $('#modalCard').classList.remove('qv-wide'); $('#modalCard').classList.remove('fac-wide'); $('#modalCard').classList.add('hist-wide');
   $('#modalCard').innerHTML = `
     <button class="hist-close" onclick="closeModal()" aria-label="Đóng">×</button>
     <div class="hist-modal">
@@ -1687,7 +1696,7 @@ function facMap(addr){ return 'https://www.google.com/maps/search/?api=1&query='
 function facCard(f, i){
   const many = f.imgs.length > 1;
   return `<article class="fac-card" data-fac="${i}">
-    <div class="fac-media ${many ? 'many' : ''}">
+    <div class="fac-media ${many ? 'many' : ''}" onclick="if(!event.target.closest('.fac-dots')) openFacility(${i}, +this.closest('.fac-card').dataset.k || 0)" role="button" tabindex="0" aria-label="Xem ảnh lớn">
       <svg class="fac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${f.icon}"/></svg>
       ${f.imgs.map((im,k) => `<picture class="fac-pic ${k===0?'on':''}"><source srcset="assets/facilities/${im}.webp" type="image/webp"><img src="assets/facilities/${im}.jpg" alt="${esc(f.kind)} — ${esc(f.name)}" loading="lazy" onload="facLoaded(this)" onerror="this.closest('picture').remove()"></picture>`).join('')}
       ${many ? `<div class="fac-dots">${f.imgs.map((_,k) => `<button type="button" class="${k===0?'on':''}" onclick="facGo(${i},${k})" aria-label="Ảnh ${k+1}"></button>`).join('')}</div>` : ''}
@@ -1713,6 +1722,27 @@ function facGo(i, k){
   card.querySelectorAll('.fac-pic').forEach((p,j) => p.classList.toggle('on', j === k));
   card.querySelectorAll('.fac-dots button').forEach((b,j) => b.classList.toggle('on', j === k));
   card.dataset.k = k;
+}
+/* Lightbox ảnh mặt bằng: gom toàn bộ ảnh của 4 cơ sở, lướt ‹ › */
+const FAC_ALL = () => FACILITIES.flatMap(f => f.imgs.map(im => ({img:im, f})));
+let FAC_LB = 0;
+function openFacility(i, k){
+  const all = FAC_ALL(); FAC_LB = all.findIndex(x => x.f === FACILITIES[i] && x.img === FACILITIES[i].imgs[k||0]); if(FAC_LB < 0) FAC_LB = 0;
+  const mc = $('#modalCard'); mc.classList.remove('qv-wide'); mc.classList.add('fac-wide');
+  mc.innerHTML = `<button class="hist-close" onclick="closeModal()" aria-label="Đóng">×</button>
+    <div class="fac-lb">
+      <button type="button" class="hist-arrow prev" onclick="facLb(-1)" aria-label="Ảnh trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="fac-lb-img" id="facLbImg"></div>
+      <button type="button" class="hist-arrow next" onclick="facLb(1)" aria-label="Ảnh sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="fac-lb-cap" id="facLbCap"></div>`;
+  facLb(0); translateDOM(mc); modal.classList.add('open');
+}
+function facLb(d){
+  const all = FAC_ALL(); FAC_LB = (FAC_LB + d + all.length) % all.length; const x = all[FAC_LB];
+  $('#facLbImg').innerHTML = `<picture><source srcset="assets/facilities/${x.img}.webp" type="image/webp"><img src="assets/facilities/${x.img}.jpg" alt="${esc(x.f.kind)}"></picture>`;
+  $('#facLbCap').innerHTML = `<div><div class="label" style="color:var(--accent)">${esc(x.f.kind)}</div><b>${esc(x.f.name)}</b><div class="muted" style="font-size:14px;margin-top:2px">${esc(x.f.addr)}</div></div><div class="fac-lb-n">${FAC_LB + 1} / ${all.length}</div>`;
+  translateDOM($('#facLbCap'));
 }
 let facTimer = null;
 function initFacilities(){
@@ -3597,6 +3627,7 @@ Object.assign(DICT, {
 'Hương giữa':'Heart notes','Hương cuối':'Base notes','Còn hàng':'In stock','Mới':'New',
 '★ Best seller':'★ Best seller','Mô tả chi tiết':'Description','Thành phần':'Ingredients',
 'Hướng dẫn sử dụng':'How to use','Vận chuyển & đổi trả':'Shipping & returns','Kết quả kiểm nghiệm':'Lab test results',
+'Xem ảnh lớn':'View larger',
 'Mở trong Google Maps ↗':'Open in Google Maps ↗',
 'Nước hoa, mỹ phẩm chăm sóc và hoá phẩm xanh — trọn bộ sản phẩm L\'Angelulus.':'Perfume, personal care and green home care — the complete L\'Angelulus range.',
 'Hệ thống cơ sở':'Our facilities',
@@ -4384,13 +4415,14 @@ $('#chatFab').onclick = () => $('#chatPanel').classList.toggle('open');
 /* Modal */
 const modal = $('#modal');
 function openModal(html){
-  $('#modalCard').classList.remove('qv-wide'); $('#modalCard').classList.remove('hist-wide');
+  $('#modalCard').classList.remove('qv-wide'); $('#modalCard').classList.remove('hist-wide'); $('#modalCard').classList.remove('fac-wide');
   $('#modalCard').innerHTML = html + '<button class="btn btn-ghost btn-block" style="margin-top:16px" onclick="closeModal()">Đóng</button>';
   modal.classList.add('open');
 }
-function closeModal(){ modal.classList.remove('open'); setTimeout(() => $('#modalCard').classList.remove('hist-wide'), 300); }
+function closeModal(){ modal.classList.remove('open'); setTimeout(() => { $('#modalCard').classList.remove('hist-wide'); $('#modalCard').classList.remove('fac-wide'); }, 300); }
 $$('[data-modal-close]').forEach(e => e.onclick = closeModal);
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeModal(); closeDrawer(); closeMnav(); closeMega(); } });
+document.addEventListener('keydown', e => { if($('#modalCard').classList.contains('fac-wide') && modal.classList.contains('open')){ if(e.key === 'ArrowLeft') facLb(-1); if(e.key === 'ArrowRight') facLb(1); } });
 
 function openLeadModal(){
   openModal(`<h3 class="t-h3" style="margin-bottom:8px">Nhận catalogue &amp; chứng nhận</h3>
